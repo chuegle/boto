@@ -26,16 +26,16 @@ VERSION="0.2"
 
 
 CLOUD_INIT_SCRIPT = """#!/usr/bin/env python
-f = open("/etc/boto.cfg", "w")
+f = open("/etc/boto2.cfg", "w")
 f.write(\"\"\"%s\"\"\")
 f.close()
 """
-import boto.pyami.config
-import boto.utils
+import boto2.pyami.config
+import boto2.utils
 import re, os
 import ConfigParser
 
-class Config(boto.pyami.config.Config):
+class Config(boto2.pyami.config.Config):
     """A special config class that also adds import abilities
     Directly in the config file. To have a config file import
     another config file, simply use "#import <path>" where <path>
@@ -55,7 +55,7 @@ class Config(boto.pyami.config.Config):
                 file_url = os.path.join(os.getcwd(), file_url)
             file_url = "file://%s" % file_url
         (base_url, file_name) = file_url.rsplit("/", 1)
-        base_config = boto.utils.fetch_file(file_url)
+        base_config = boto2.utils.fetch_file(file_url)
         base_config.seek(0)
         for line in base_config.readlines():
             match = re.match("^#import[\s\t]*([^\s^\t]*)[\s\t]*$", line)
@@ -92,7 +92,7 @@ def scripts_callback(option, opt, value, parser):
 def add_script(scr_url):
     """Read a script and any scripts that are added using #import"""
     base_url = '/'.join(scr_url.split('/')[:-1]) + '/'
-    script_raw = boto.utils.fetch_file(scr_url)
+    script_raw = boto2.utils.fetch_file(scr_url)
     script_content = ''
     for line in script_raw.readlines():
         match = re.match("^#import[\s\t]*([^\s^\t]*)[\s\t]*$", line)
@@ -112,10 +112,10 @@ if __name__ == "__main__":
         pass
     import sys
     import time
-    import boto
-    from boto.ec2 import regions
+    import boto2
+    from boto2.ec2 import regions
     from optparse import OptionParser
-    from boto.mashups.iobject import IObject
+    from boto2.mashups.iobject import IObject
     parser = OptionParser(version=VERSION, usage="%prog [options] config_url")
     parser.add_option("-c", "--max-count", help="Maximum number of this type of instance to launch", dest="max_count", default="1")
     parser.add_option("--min-count", help="Minimum number of this type of instance to launch", dest="min_count", default="1")
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     else:
         print "Region %s not found." % options.region
         sys.exit(1)
-    ec2 = boto.connect_ec2(region=region)
+    ec2 = boto2.connect_ec2(region=region)
     if not options.nocred:
         cfg.add_creds(ec2)
 
@@ -208,7 +208,7 @@ if __name__ == "__main__":
                 except Exception, e:
                     pass
 
-            user_data = boto.utils.write_mime_multipart(scriptuples, compress=True)
+            user_data = boto2.utils.write_mime_multipart(scriptuples, compress=True)
 
     shutdown_proc = "terminate"
     if options.save_ebs:

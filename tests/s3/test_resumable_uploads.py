@@ -38,13 +38,13 @@ import tempfile
 import time
 import unittest
 
-import boto
-from boto.exception import GSResponseError
-from boto.gs.resumable_upload_handler import ResumableUploadHandler
-from boto.exception import InvalidUriError
-from boto.exception import ResumableTransferDisposition
-from boto.exception import ResumableUploadException
-from boto.exception import StorageResponseError
+import boto2
+from boto2.exception import GSResponseError
+from boto2.gs.resumable_upload_handler import ResumableUploadHandler
+from boto2.exception import InvalidUriError
+from boto2.exception import ResumableTransferDisposition
+from boto2.exception import ResumableUploadException
+from boto2.exception import StorageResponseError
 from cb_test_harnass import CallbackTestHarnass
 
 # We don't use the OAuth2 authentication plugin directly; importing it here
@@ -82,7 +82,7 @@ class ResumableUploadTests(unittest.TestCase):
         hostname = socket.gethostname().split('.')[0]
         uri_base_str = 'gs://res-upload-test-%s-%s-%s' % (
             hostname, os.getpid(), int(time.time()))
-        return boto.storage_uri('%s-dst' % uri_base_str)
+        return boto2.storage_uri('%s-dst' % uri_base_str)
 
     def get_dst_key_uri(self):
         """A key to test."""

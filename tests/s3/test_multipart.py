@@ -35,7 +35,7 @@ Some unit tests for the S3 MultiPartUpload
 import unittest
 import time
 import StringIO
-from boto.s3.connection import S3Connection
+from boto2.s3.connection import S3Connection
 
 class S3MultiPartUploadTest (unittest.TestCase):
 

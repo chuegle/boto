@@ -30,9 +30,9 @@ import os
 import urllib
 import urlparse
 import httplib
-from boto.s3.connection import S3Connection
-from boto.s3.bucket import Bucket
-from boto.exception import S3PermissionsError, S3ResponseError
+from boto2.s3.connection import S3Connection
+from boto2.s3.bucket import Bucket
+from boto2.exception import S3PermissionsError, S3ResponseError
 
 class S3ConnectionTest (unittest.TestCase):
 

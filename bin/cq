@@ -21,9 +21,9 @@
 # IN THE SOFTWARE.
 #
 import getopt, sys
-import boto.sqs
-from boto.sqs.connection import SQSConnection
-from boto.exception import SQSError
+import boto2.sqs
+from boto2.sqs.connection import SQSConnection
+from boto2.exception import SQSError
 
 def usage():
     print 'cq [-c] [-q queue_name] [-o output_file] [-t timeout] [-r region]'
@@ -56,7 +56,7 @@ def main():
         if o in ('-r', '--region'):
             region = a
     if region:
-        c = boto.sqs.connect_to_region(region)
+        c = boto2.sqs.connect_to_region(region)
     else:
         c = SQSConnection()
     if queue_name:

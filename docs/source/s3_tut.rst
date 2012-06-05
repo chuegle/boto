@@ -6,14 +6,14 @@ An Introduction to boto's S3 interface
 
 This tutorial focuses on the boto interface to the Simple Storage Service
 from Amazon Web Services.  This tutorial assumes that you have already
-downloaded and installed boto.
+downloaded and installed boto2.
 
 Creating a Connection
 ---------------------
 The first step in accessing S3 is to create a connection to the service.
-There are two ways to do this in boto.  The first is:
+There are two ways to do this in boto2.  The first is:
 
->>> from boto.s3.connection import S3Connection
+>>> from boto2.s3.connection import S3Connection
 >>> conn = S3Connection('<aws access key>', '<aws secret key>')
 
 At this point the variable conn will point to an S3Connection object.  In
@@ -30,8 +30,8 @@ and then call the constructor without any arguments, like this:
 There is also a shortcut function in the boto package, called connect_s3
 that may provide a slightly easier means of creating a connection:
 
->>> import boto
->>> conn = boto.connect_s3()
+>>> import boto2
+>>> conn = boto2.connect_s3()
 
 In either case, conn will point to an S3Connection object which we will
 use throughout the remainder of this tutorial.
@@ -51,7 +51,7 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in ?
   File "boto/connection.py", line 285, in create_bucket
     raise S3CreateError(response.status, response.reason)
-boto.exception.S3CreateError: S3Error[409]: Conflict
+boto2.exception.S3CreateError: S3Error[409]: Conflict
 
 Whoa.  What happended there?  Well, the thing you have to know about
 buckets is that they are kind of like domain names.  It's one flat name
@@ -72,9 +72,9 @@ Creating a Bucket In Another Location
 The example above assumes that you want to create a bucket in the
 standard US region.  However, it is possible to create buckets in
 other locations.  To do so, first import the Location object from the
-boto.s3.connection module, like this:
+boto2.s3.connection module, like this:
 
->>> from boto.s3.connection import Location
+>>> from boto2.s3.connection import Location
 >>> dir(Location)
 ['DEFAULT', 'EU', 'USWest', 'APSoutheast', '__doc__', '__module__']
 >>>
@@ -101,7 +101,7 @@ within your bucket.
 The Key object is used in boto to keep track of data stored in S3.  To store
 new data in S3, start by creating a new Key object:
 
->>> from boto.s3.key import Key
+>>> from boto2.s3.key import Key
 >>> k = Key(bucket)
 >>> k.key = 'foobar'
 >>> k.set_contents_from_string('This is a test of S3')
@@ -110,10 +110,10 @@ The net effect of these statements is to create a new object in S3 with a
 key of "foobar" and a value of "This is a test of S3".  To validate that
 this worked, quit out of the interpreter and start it up again.  Then:
 
->>> import boto
->>> c = boto.connect_s3()
+>>> import boto2
+>>> c = boto2.connect_s3()
 >>> b = c.create_bucket('mybucket') # substitute your bucket name here
->>> from boto.s3.key import Key
+>>> from boto2.s3.key import Key
 >>> k = Key(b)
 >>> k.key = 'foobar'
 >>> k.get_contents_as_string()
@@ -196,18 +196,18 @@ by S3 and creates a set of Python objects that represent the ACL.
 
 >>> acp = b.get_acl()
 >>> acp
-<boto.acl.Policy instance at 0x2e6940>
+<boto2.acl.Policy instance at 0x2e6940>
 >>> acp.acl
-<boto.acl.ACL instance at 0x2e69e0>
+<boto2.acl.ACL instance at 0x2e69e0>
 >>> acp.acl.grants
-[<boto.acl.Grant instance at 0x2e6a08>]
+[<boto2.acl.Grant instance at 0x2e6a08>]
 >>> for grant in acp.acl.grants:
 ...   print grant.permission, grant.display_name, grant.email_address, grant.id
 ... 
-FULL_CONTROL <boto.user.User instance at 0x2e6a30>
+FULL_CONTROL <boto2.user.User instance at 0x2e6a30>
 
 The Python objects representing the ACL can be found in the acl.py module
-of boto.
+of boto2.
 
 Both the Bucket object and the Key object also provide shortcut
 methods to simplify the process of granting individuals specific

@@ -4,100 +4,100 @@
 pyami
 =====
 
-boto.pyami
+boto2.pyami
 --------------
 
-.. automodule:: boto.pyami
+.. automodule:: boto2.pyami
    :members:   
    :undoc-members:
 
-boto.pyami.bootstrap
+boto2.pyami.bootstrap
 --------------------
 
-.. automodule:: boto.pyami.bootstrap
+.. automodule:: boto2.pyami.bootstrap
    :members:   
    :undoc-members:
 
-boto.pyami.config
+boto2.pyami.config
 -----------------
 
-.. automodule:: boto.pyami.config
+.. automodule:: boto2.pyami.config
    :members:   
    :undoc-members:
 
-boto.pyami.copybot
+boto2.pyami.copybot
 ------------------
 
-.. automodule:: boto.pyami.copybot
+.. automodule:: boto2.pyami.copybot
    :members:   
    :undoc-members:
 
-boto.pyami.installers
+boto2.pyami.installers
 ---------------------
 
-.. automodule:: boto.pyami.installers
+.. automodule:: boto2.pyami.installers
    :members:   
    :undoc-members:
 
-boto.pyami.installers.ubuntu
+boto2.pyami.installers.ubuntu
 ----------------------------
 
-.. automodule:: boto.pyami.installers.ubuntu
+.. automodule:: boto2.pyami.installers.ubuntu
    :members:   
    :undoc-members:
 
-boto.pyami.installers.ubuntu.apache
+boto2.pyami.installers.ubuntu.apache
 -----------------------------------
 
-.. automodule:: boto.pyami.installers.ubuntu.apache
+.. automodule:: boto2.pyami.installers.ubuntu.apache
    :members:   
    :undoc-members:
 
-boto.pyami.installers.ubuntu.ebs
+boto2.pyami.installers.ubuntu.ebs
 --------------------------------
 
-.. automodule:: boto.pyami.installers.ubuntu.ebs
+.. automodule:: boto2.pyami.installers.ubuntu.ebs
    :members:   
    :undoc-members:
 
-boto.pyami.installers.ubuntu.installer
+boto2.pyami.installers.ubuntu.installer
 --------------------------------------
 
-.. automodule:: boto.pyami.installers.ubuntu.installer
+.. automodule:: boto2.pyami.installers.ubuntu.installer
    :members:   
    :undoc-members:
 
-boto.pyami.installers.ubuntu.mysql
+boto2.pyami.installers.ubuntu.mysql
 ----------------------------------
 
-.. automodule:: boto.pyami.installers.ubuntu.mysql
+.. automodule:: boto2.pyami.installers.ubuntu.mysql
    :members:   
    :undoc-members:
 
-boto.pyami.installers.ubuntu.trac
+boto2.pyami.installers.ubuntu.trac
 ---------------------------------
 
-.. automodule:: boto.pyami.installers.ubuntu.trac
+.. automodule:: boto2.pyami.installers.ubuntu.trac
    :members:   
    :undoc-members:
 
-boto.pyami.launch_ami
+boto2.pyami.launch_ami
 ---------------------
 
-.. automodule:: boto.pyami.launch_ami
+.. automodule:: boto2.pyami.launch_ami
    :members:   
    :undoc-members:
 
-boto.pyami.scriptbase
+boto2.pyami.scriptbase
 ---------------------
 
-.. automodule:: boto.pyami.scriptbase
+.. automodule:: boto2.pyami.scriptbase
    :members:   
    :undoc-members:
 
-boto.pyami.startup
+boto2.pyami.startup
 ------------------
 
-.. automodule:: boto.pyami.startup
+.. automodule:: boto2.pyami.startup
    :members:   
    :undoc-members:

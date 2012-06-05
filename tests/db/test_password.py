@@ -41,18 +41,18 @@ class PasswordPropertyTest(unittest.TestCase):
         return hashfunc
 
     def test_model(self,hashfunc=None):
-        from boto.utils import Password
-        from boto.sdb.db.model import Model
-        from boto.sdb.db.property import PasswordProperty
+        from boto2.utils import Password
+        from boto2.sdb.db.model import Model
+        from boto2.sdb.db.property import PasswordProperty
         import hashlib
         class MyModel(Model):
             password=PasswordProperty(hashfunc=hashfunc)
         return MyModel
 
     def test_custom_password_class(self):
-        from boto.utils import Password
-        from boto.sdb.db.model import Model
-        from boto.sdb.db.property import PasswordProperty
+        from boto2.utils import Password
+        from boto2.sdb.db.model import Model
+        from boto2.sdb.db.property import PasswordProperty
         import hmac, hashlib
 
 
@@ -124,5 +124,5 @@ if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(PasswordPropertyTest)
     unittest.TextTestRunner(verbosity=2).run(suite)
 
-    import boto
+    import boto2
  

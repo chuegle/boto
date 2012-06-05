@@ -13,7 +13,7 @@ except:
 
 if live_connection:
 	#TODO: you must set the auth credentials to something valid
-	from boto.mturk.connection import MTurkConnection
+	from boto2.mturk.connection import MTurkConnection
 else:
 	# Here the credentials must be set, but it doesn't matter what
 	#  they're set to.

@@ -15,12 +15,12 @@ Creating a Connection
 The first step in accessing DynamoDB is to create a connection to the service.
 To do so, the most straight forward way is the following::
 
-    >>> import boto
-    >>> conn = boto.connect_dynamodb(
+    >>> import boto2
+    >>> conn = boto2.connect_dynamodb(
             aws_access_key_id='<YOUR_AWS_KEY_ID>',
             aws_secret_access_key='<YOUR_AWS_SECRET_KEY>')
     >>> conn
-    <boto.dynamodb.layer2.Layer2 object at 0x3fb3090>
+    <boto2.dynamodb.layer2.Layer2 object at 0x3fb3090>
 
 Bear in mind that if you have your credentials in boto config in your home
 directory, the two keyword arguments in the call above are not needed. More
@@ -30,10 +30,10 @@ details on configuration can be found in :doc:`boto_config_tut`.
     time, Amazon DynamoDB is available only in the US-EAST-1 region. The
     ``connect_dynamodb`` method automatically connect to that region.
 
-The :py:func:`boto.connect_dynamodb` functions returns a
-:py:class:`boto.dynamodb.layer2.Layer2` instance, which is a high-level API
+The :py:func:`boto2.connect_dynamodb` functions returns a
+:py:class:`boto2.dynamodb.layer2.Layer2` instance, which is a high-level API
 for working with DynamoDB. Layer2 is a set of abstractions that sit atop
-the lower level :py:class:`boto.dynamodb.layer1.Layer1` API, which closely
+the lower level :py:class:`boto2.dynamodb.layer1.Layer1` API, which closely
 mirrors the Amazon DynamoDB API. For the purpose of this tutorial, we'll
 just be covering Layer2.
 
@@ -50,7 +50,7 @@ Creating Tables
 ---------------
 
 DynamoDB tables are created with the
-:py:meth:`Layer2.create_table <boto.dynamodb.layer2.Layer2.create_table>`
+:py:meth:`Layer2.create_table <boto2.dynamodb.layer2.Layer2.create_table>`
 method. While DynamoDB's items (a rough equivalent to a relational DB's row)
 don't have a fixed schema, you do need to create a schema for the table's
 hash key element, and the optional range key element. This is explained in
@@ -80,7 +80,7 @@ We're now ready to create the table::
     >>> table
     Table(messages)
 
-This returns a :py:class:`boto.dynamodb.table.Table` instance, which provides
+This returns a :py:class:`boto2.dynamodb.table.Table` instance, which provides
 simple ways to create (put), update, and delete items.
 
 .. _Data Model: http://docs.amazonwebservices.com/amazondynamodb/latest/developerguide/DataModel.html
@@ -90,7 +90,7 @@ Getting a Table
 ---------------
 
 To retrieve an existing table, use
-:py:meth:`Layer2.get_table <boto.dynamodb.layer2.Layer2.get_table>`::
+:py:meth:`Layer2.get_table <boto2.dynamodb.layer2.Layer2.get_table>`::
 
     >>> conn.list_tables()
     ['test-table', 'another-table', 'messages']
@@ -98,15 +98,15 @@ To retrieve an existing table, use
     >>> table
     Table(messages)
 
-:py:meth:`Layer2.get_table <boto.dynamodb.layer2.Layer2.get_table>`, like
-:py:meth:`Layer2.create_table <boto.dynamodb.layer2.Layer2.create_table>`,
-returns a :py:class:`boto.dynamodb.table.Table` instance.
+:py:meth:`Layer2.get_table <boto2.dynamodb.layer2.Layer2.get_table>`, like
+:py:meth:`Layer2.create_table <boto2.dynamodb.layer2.Layer2.create_table>`,
+returns a :py:class:`boto2.dynamodb.table.Table` instance.
 
 Describing Tables
 -----------------
 
 To get a complete description of a table, use
-:py:meth:`Layer2.describe_table <boto.dynamodb.layer2.Layer2.describe_table>`::
+:py:meth:`Layer2.describe_table <boto2.dynamodb.layer2.Layer2.describe_table>`::
 
     >>> conn.list_tables()
     ['test-table', 'another-table', 'messages']
@@ -156,17 +156,17 @@ Continuing on with our previously created ``messages`` table, adding an::
         )
 
 The
-:py:meth:`Table.new_item <boto.dynamodb.table.Table.new_item>` method creates
-a new :py:class:`boto.dynamodb.item.Item` instance with your specified
+:py:meth:`Table.new_item <boto2.dynamodb.table.Table.new_item>` method creates
+a new :py:class:`boto2.dynamodb.item.Item` instance with your specified
 hash key, range key, and attributes already set.
-:py:class:`Item <boto.dynamodb.item.Item>` is a :py:class:`dict` sub-class,
+:py:class:`Item <boto2.dynamodb.item.Item>` is a :py:class:`dict` sub-class,
 meaning you can edit your data as such::
 
     item['a_new_key'] = 'testing'
     del item['a_new_key']
 
 After you are happy with the contents of the item, use
-:py:meth:`Item.put <boto.dynamodb.item.Item.put>` to commit it to DynamoDB::
+:py:meth:`Item.put <boto2.dynamodb.item.Item.put>` to commit it to DynamoDB::
 
     >>> item.put()
 
@@ -199,7 +199,7 @@ Updating Items
 --------------
 
 To update an item's attributes, simply retrieve it, modify the value, then
-:py:meth:`Item.put <boto.dynamodb.item.Item.put>` it again::
+:py:meth:`Item.put <boto2.dynamodb.item.Item.put>` it again::
 
     >>> table = conn.get_table('messages')
     >>> item = table.get_item(
@@ -213,7 +213,7 @@ Deleting Items
 --------------
 
 To delete items, use the
-:py:meth:`Item.delete <boto.dynamodb.item.Item.delete>` method::
+:py:meth:`Item.delete <boto2.dynamodb.item.Item.delete>` method::
 
     >>> table = conn.get_table('messages')
     >>> item = table.get_item(
@@ -229,12 +229,12 @@ Deleting Tables
   Deleting a table will also **permanently** delete all of its contents without prompt. Use carefully.
 
 There are two easy ways to delete a table. Through your top-level
-:py:class:`Layer2 <boto.dynamodb.layer2.Layer2>` object::
+:py:class:`Layer2 <boto2.dynamodb.layer2.Layer2>` object::
 
     >>> conn.delete_table(table)
 
 Or by getting the table, then using
-:py:meth:`Table.delete <boto.dynamodb.table.Table.delete>`::
+:py:meth:`Table.delete <boto2.dynamodb.table.Table.delete>`::
 
     >>> table = conn.get_table('messages')
     >>> table.delete()

@@ -1,4 +1,4 @@
-from boto.mturk.connection import MTurkConnection as RealMTurkConnection
+from boto2.mturk.connection import MTurkConnection as RealMTurkConnection
 
 class MTurkConnection(RealMTurkConnection):
 	"""

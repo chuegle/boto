@@ -4,45 +4,45 @@
 GS
 ==
 
-boto.gs.acl
+boto2.gs.acl
 -----------
 
-.. automodule:: boto.gs.acl
+.. automodule:: boto2.gs.acl
    :members:   
    :undoc-members:
 
-boto.gs.bucket
+boto2.gs.bucket
 --------------
 
-.. automodule:: boto.gs.bucket
+.. automodule:: boto2.gs.bucket
    :members:   
    :undoc-members:
 
-boto.gs.connection
+boto2.gs.connection
 ------------------
 
-.. automodule:: boto.gs.connection
+.. automodule:: boto2.gs.connection
    :members:
    :undoc-members:
 
-boto.gs.key
+boto2.gs.key
 -----------
 
-.. automodule:: boto.gs.key
+.. automodule:: boto2.gs.key
    :members:   
    :undoc-members:
 
-boto.gs.user
+boto2.gs.user
 ------------
 
-.. automodule:: boto.gs.user
+.. automodule:: boto2.gs.user
    :members:   
    :undoc-members:
 
-boto.gs.resumable_upload_handler
+boto2.gs.resumable_upload_handler
 --------------------------------
 
-.. automodule:: boto.gs.resumable_upload_handler
+.. automodule:: boto2.gs.resumable_upload_handler
    :members:   
    :undoc-members:
 

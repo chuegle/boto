@@ -26,9 +26,9 @@
 import xml.sax
 import unittest
 
-from boto import handler
-from boto.emr import emrobject
-from boto.resultset import ResultSet
+from boto2 import handler
+from boto2.emr import emrobject
+from boto2.resultset import ResultSet
 
 
 JOB_FLOW_EXAMPLE = """

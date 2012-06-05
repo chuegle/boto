@@ -6,35 +6,35 @@ SDB DB Reference
 
 This module offers an ORM-like layer on top of SimpleDB.
 
-boto.sdb.db
+boto2.sdb.db
 -----------
 
-.. automodule:: boto.sdb.db
+.. automodule:: boto2.sdb.db
    :members:   
    :undoc-members:
 
-boto.sdb.db.blob
+boto2.sdb.db.blob
 ----------------
 
-.. automodule:: boto.sdb.db.blob
+.. automodule:: boto2.sdb.db.blob
    :members:   
    :undoc-members:
 
-boto.sdb.db.key
+boto2.sdb.db.key
 ---------------
 
-.. automodule:: boto.sdb.db.key
+.. automodule:: boto2.sdb.db.key
    :members:   
    :undoc-members:
 
-boto.sdb.db.manager
+boto2.sdb.db.manager
 -------------------
 
-.. automodule:: boto.sdb.db.manager
+.. automodule:: boto2.sdb.db.manager
    :members:   
    :undoc-members:
 
-boto.sdb.db.manager.pgmanager
+boto2.sdb.db.manager.pgmanager
 -----------------------------
 
 .. note::
@@ -43,41 +43,41 @@ boto.sdb.db.manager.pgmanager
    
    __ http://initd.org/
 
-.. automodule:: boto.sdb.db.manager.pgmanager
+.. automodule:: boto2.sdb.db.manager.pgmanager
    :members:   
    :undoc-members:
 
-boto.sdb.db.manager.sdbmanager
+boto2.sdb.db.manager.sdbmanager
 ------------------------------
 
-.. automodule:: boto.sdb.db.manager.sdbmanager
+.. automodule:: boto2.sdb.db.manager.sdbmanager
    :members:   
    :undoc-members:
 
-boto.sdb.db.manager.xmlmanager
+boto2.sdb.db.manager.xmlmanager
 ------------------------------
 
-.. automodule:: boto.sdb.db.manager.xmlmanager
+.. automodule:: boto2.sdb.db.manager.xmlmanager
    :members:   
    :undoc-members:
 
-boto.sdb.db.model
+boto2.sdb.db.model
 -----------------
 
-.. automodule:: boto.sdb.db.model
+.. automodule:: boto2.sdb.db.model
    :members:   
    :undoc-members:
 
-boto.sdb.db.property
+boto2.sdb.db.property
 --------------------
 
-.. automodule:: boto.sdb.db.property
+.. automodule:: boto2.sdb.db.property
    :members:   
    :undoc-members:
 
-boto.sdb.db.query
+boto2.sdb.db.query
 -----------------
 
-.. automodule:: boto.sdb.db.query
+.. automodule:: boto2.sdb.db.query
    :members:   
    :undoc-members:

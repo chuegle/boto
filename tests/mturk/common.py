@@ -2,7 +2,7 @@ import unittest
 import uuid
 import datetime
 
-from boto.mturk.question import (
+from boto2.mturk.question import (
 	Question, QuestionContent, AnswerSpecification, FreeTextAnswer,
 )
 from _init_environment import SetHostMTurkConnection
@@ -35,7 +35,7 @@ class MTurkCommon(unittest.TestCase):
 			reward=0.23,
 			duration=datetime.timedelta(minutes=6),
 			approval_delay=60*60,
-			annotation='An annotation from boto create_hit test',
+			annotation='An annotation from boto2 create_hit test',
 			response_groups=['Minimal',
 				'HITDetail',
 				'HITQuestion',

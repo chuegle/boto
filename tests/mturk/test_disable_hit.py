@@ -1,7 +1,7 @@
-from boto.mturk.test.support import unittest
+from boto2.mturk.test.support import unittest
 
 from common import MTurkCommon
-from boto.mturk.connection import MTurkRequestError
+from boto2.mturk.connection import MTurkRequestError
 
 class TestDisableHITs(MTurkCommon):
 	def test_disable_invalid_hit(self):

@@ -4,24 +4,24 @@
 CloudWatch Reference
 ====================
 
-boto.ec2.cloudwatch
+boto2.ec2.cloudwatch
 -------------------
 
-.. automodule:: boto.ec2.cloudwatch
+.. automodule:: boto2.ec2.cloudwatch
    :members:   
    :undoc-members:
 
-boto.ec2.cloudwatch.datapoint
+boto2.ec2.cloudwatch.datapoint
 -----------------------------
 
-.. automodule:: boto.ec2.cloudwatch.datapoint
+.. automodule:: boto2.ec2.cloudwatch.datapoint
    :members:   
    :undoc-members:
 
-boto.ec2.cloudwatch.metric
+boto2.ec2.cloudwatch.metric
 --------------------------
 
-.. automodule:: boto.ec2.cloudwatch.metric
+.. automodule:: boto2.ec2.cloudwatch.metric
    :members:   
    :undoc-members:
 

@@ -27,14 +27,14 @@ The AWS Autoscale service is comprised of three core concepts:
 Creating a Connection
 ---------------------
 The first step in accessing autoscaling is to create a connection to the service.
-There are two ways to do this in boto.  The first is:
+There are two ways to do this in boto2.  The first is:
 
->>> from boto.ec2.autoscale import AutoScaleConnection
+>>> from boto2.ec2.autoscale import AutoScaleConnection
 >>> conn = AutoScaleConnection('<aws access key>', '<aws secret key>')
 
 Alternatively, you can use the shortcut:
 
->>> conn = boto.connect_autoscale()
+>>> conn = boto2.connect_autoscale()
 
 A Note About Regions and Endpoints
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -42,9 +42,9 @@ Like EC2 the Autoscale service has a different endpoint for each region. By
 default the US endpoint is used. To choose a specific region, instantiate the
 AutoScaleConnection object with that region's endpoint.
 
->>> ec2 = boto.connect_autoscale(host='autoscaling.eu-west-1.amazonaws.com')
+>>> ec2 = boto2.connect_autoscale(host='autoscaling.eu-west-1.amazonaws.com')
 
-Alternatively, edit your boto.cfg with the default Autoscale endpoint to use::
+Alternatively, edit your boto2.cfg with the default Autoscale endpoint to use::
 
     [Boto]
     autoscale_endpoint = autoscaling.eu-west-1.amazonaws.com
@@ -82,8 +82,8 @@ id to use, security_group, and key information. We assume the image id, key
 name and security groups have already been defined elsewhere - see the EC2
 tutorial for information on how to create these.
 
->>> from boto.ec2.autoscale import LaunchConfiguration
->>> from boto.ec2.autoscale import AutoScalingGroup
+>>> from boto2.ec2.autoscale import LaunchConfiguration
+>>> from boto2.ec2.autoscale import AutoScalingGroup
 >>> lc = LaunchConfiguration(name='my-launch_config', image_id='my-ami',
                              key_name='my_key_name',
                              security_groups=['my_security_groups'])
@@ -126,7 +126,7 @@ For example, let's modify our above group to have a maxsize of 8 and define mean
 of scaling up based on CPU utilization. We'll say we should scale up if the average
 CPU usage goes above 80% and scale down if it goes below 40%.
 
->>> from boto.ec2.autoscale import Trigger
+>>> from boto2.ec2.autoscale import Trigger
 >>> tr = Trigger(name='my_trigger', autoscale_group=ag,
              measure_name='CPUUtilization', statistic='Average',
              unit='Percent',

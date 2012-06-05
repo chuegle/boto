@@ -4,8 +4,8 @@
 # For listing stats, creating alarms, and managing 
 # other CloudWatch aspects
 
-import boto
-cw = boto.connect_cloudwatch()
+import boto2
+cw = boto2.connect_cloudwatch()
 
 from datetime import datetime, timedelta
 

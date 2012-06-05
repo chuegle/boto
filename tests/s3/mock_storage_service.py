@@ -27,11 +27,11 @@ of the optional params (which we indicate with the constant "NOT_IMPL").
 """
 
 import copy
-import boto
+import boto2
 import base64
 
-from boto.utils import compute_md5
-from boto.s3.prefix import Prefix
+from boto2.utils import compute_md5
+from boto2.s3.prefix import Prefix
 
 try:
     from hashlib import md5
@@ -231,7 +231,7 @@ class MockBucket(object):
     def delete_key(self, key_name, headers=NOT_IMPL,
                    version_id=NOT_IMPL, mfa_token=NOT_IMPL):
         if key_name not in self.keys:
-            raise boto.exception.StorageResponseError(404, 'Not Found')
+            raise boto2.exception.StorageResponseError(404, 'Not Found')
         del self.keys[key_name]
 
     def get_all_keys(self, headers=NOT_IMPL):
@@ -307,7 +307,7 @@ class MockConnection(object):
     def create_bucket(self, bucket_name, headers=NOT_IMPL, location=NOT_IMPL,
                       policy=NOT_IMPL):
         if bucket_name in self.buckets:
-            raise boto.exception.StorageCreateError(
+            raise boto2.exception.StorageCreateError(
                 409, 'BucketAlreadyOwnedByYou',
                 "<Message>Your previous request to create the named bucket "
                 "succeeded and you already own it.</Message>")
@@ -317,13 +317,13 @@ class MockConnection(object):
 
     def delete_bucket(self, bucket, headers=NOT_IMPL):
         if bucket not in self.buckets:
-            raise boto.exception.StorageResponseError(
+            raise boto2.exception.StorageResponseError(
                 404, 'NoSuchBucket', '<Message>no such bucket</Message>')
         del self.buckets[bucket]
 
     def get_bucket(self, bucket_name, validate=NOT_IMPL, headers=NOT_IMPL):
         if bucket_name not in self.buckets:
-            raise boto.exception.StorageResponseError(404, 'NoSuchBucket',
+            raise boto2.exception.StorageResponseError(404, 'NoSuchBucket',
                                                  'Not Found')
         return self.buckets[bucket_name]
 
@@ -360,7 +360,7 @@ class MockBucketStorageUri(object):
         return MockAcl
 
     def canned_acls(self):
-        return boto.provider.Provider('aws').canned_acls
+        return boto2.provider.Provider('aws').canned_acls
 
     def clone_replace_name(self, new_name):
         return MockBucketStorageUri(self.scheme, self.bucket_name, new_name)

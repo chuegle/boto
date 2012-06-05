@@ -29,7 +29,7 @@ if __name__ == "__main__":
 	if len(args) < 1:
 		parser.print_help()
 		exit(1)
-	from boto.utils import fetch_file
+	from boto2.utils import fetch_file
 	f = fetch_file(args[0])
 	if options.outfile:
 		open(options.outfile, "w").write(f.read())

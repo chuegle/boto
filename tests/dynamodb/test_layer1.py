@@ -26,11 +26,11 @@ Tests for Layer1 of DynamoDB
 
 import unittest
 import time
-from boto.dynamodb.exceptions import DynamoDBKeyNotFoundError
-from boto.dynamodb.exceptions import DynamoDBConditionalCheckFailedError
-from boto.dynamodb.exceptions import DynamoDBValidationError
-from boto.dynamodb.layer1 import Layer1
-from boto.sts.credentials import Credentials
+from boto2.dynamodb.exceptions import DynamoDBKeyNotFoundError
+from boto2.dynamodb.exceptions import DynamoDBConditionalCheckFailedError
+from boto2.dynamodb.exceptions import DynamoDBValidationError
+from boto2.dynamodb.layer1 import Layer1
+from boto2.sts.credentials import Credentials
 
 json_doc = """{"access_key": "ASIAIV7R2NUUJ6SB7GKQ", "secret_key": "eIfijGxJlejHDSQiaGr6b7U805U0GKWmllCTt2ZM", "request_id": "28c17897-4555-11e1-8bb1-2529f165f2f0", "expiration": "2012-01-23T00:59:45.617Z", "session_token": "AQoDYXdzEPn//////////wEasAGDXeGY8bx36NLRSA1v3dy2x00k3FNA2KVsMEXkQuKY08gPTtYs2tefZTBsTjgjC+O6j8ieoB1on2bPyCq872+Yq3cipls8jna+PNSEcsXtC8CJBKai/FfYNg1XUHam6EUCtRiUHvqztOVgaGqUUS1UbrBKB7kKSXzgKrJ9AT0bvqi4hZS0ayaU8969f2HIbN9psXhRBKpJyB9FUPuVYpYYZsz9NY3y2kGtK+dgfrKvxyDxxfL4BA=="}"""
 

@@ -29,9 +29,9 @@ Some unit tests for S3 Key
 import unittest
 import time
 import StringIO
-from boto.s3.connection import S3Connection
-from boto.s3.key import Key
-from boto.exception import S3ResponseError
+from boto2.s3.connection import S3Connection
+from boto2.s3.key import Key
+from boto2.exception import S3ResponseError
 
 class S3KeyTest (unittest.TestCase):
 

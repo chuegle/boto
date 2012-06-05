@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Copyright (c) 2011 Jim Browne http://www.42lines.net
-# Borrows heavily from boto/bin/list_instances which has no attribution
+# Borrows heavily from boto2/bin/list_instances which has no attribution
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the
@@ -49,7 +49,7 @@ def list(region, headers, order, completed):
 
     import re
 
-    ec2 = boto.connect_ec2(region=region)
+    ec2 = boto2.connect_ec2(region=region)
 
     reservations = ec2.get_all_instances()
 
@@ -105,9 +105,9 @@ def list(region, headers, order, completed):
         print format_string % tuple(get_column(h, e) for h in headers)
 
 if __name__ == "__main__":
-    import boto
+    import boto2
     from optparse import OptionParser
-    from boto.ec2 import regions
+    from boto2.ec2 import regions
 
     parser = OptionParser(version=VERSION, usage=usage)
     parser.add_option("-a", "--all", help="check all regions", dest="all", default=False,action="store_true")

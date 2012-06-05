@@ -4,17 +4,17 @@
 SWF
 ===
 
-boto.swf
+boto2.swf
 --------
 
-.. automodule:: boto.swf
+.. automodule:: boto2.swf
    :members:   
    :undoc-members:
 
-boto.swf.layer1
+boto2.swf.layer1
 --------------------
 
-.. automodule:: boto.swf.layer1
+.. automodule:: boto2.swf.layer1
    :members:
    :undoc-members:
 

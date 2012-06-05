@@ -4,14 +4,14 @@
 contrib
 =======
 
-boto.contrib
+boto2.contrib
 ------------
 
-.. automodule:: boto.contrib
+.. automodule:: boto2.contrib
    :members:   
    :undoc-members:
 
-boto.contrib.m2helpers
+boto2.contrib.m2helpers
 ----------------------
 
 .. note::
@@ -20,13 +20,13 @@ boto.contrib.m2helpers
    
    __ http://sandbox.rulemaker.net/ngps/m2/
 
-.. automodule:: boto.contrib.m2helpers
+.. automodule:: boto2.contrib.m2helpers
    :members:   
    :undoc-members:
 
-boto.contrib.ymlmessage
+boto2.contrib.ymlmessage
 -----------------------
 
-.. automodule:: boto.contrib.ymlmessage
+.. automodule:: boto2.contrib.ymlmessage
    :members:   
    :undoc-members:

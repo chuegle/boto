@@ -4,44 +4,44 @@
 mturk
 =====
 
-boto.mturk
+boto2.mturk
 ------------
 
-.. automodule:: boto.mturk
+.. automodule:: boto2.mturk
    :members:   
    :undoc-members:
 
-boto.mturk.connection
+boto2.mturk.connection
 ---------------------
 
-.. automodule:: boto.mturk.connection
+.. automodule:: boto2.mturk.connection
    :members:   
    :undoc-members:
 
-boto.mturk.notification
+boto2.mturk.notification
 -----------------------
 
-.. automodule:: boto.mturk.notification
+.. automodule:: boto2.mturk.notification
    :members:   
    :undoc-members:
 
-boto.mturk.price
+boto2.mturk.price
 ----------------
 
-.. automodule:: boto.mturk.price
+.. automodule:: boto2.mturk.price
    :members:   
    :undoc-members:
 
-boto.mturk.qualification
+boto2.mturk.qualification
 ------------------------
 
-.. automodule:: boto.mturk.qualification
+.. automodule:: boto2.mturk.qualification
    :members:   
    :undoc-members:
 
-boto.mturk.question
+boto2.mturk.question
 -------------------
 
-.. automodule:: boto.mturk.question
+.. automodule:: boto2.mturk.question
    :members:   
    :undoc-members:

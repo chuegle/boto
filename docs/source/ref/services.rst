@@ -4,58 +4,58 @@
 services
 ========
 
-boto.services
+boto2.services
 -------------
 
-.. automodule:: boto.services
+.. automodule:: boto2.services
    :members:   
    :undoc-members:
 
-boto.services.bs
+boto2.services.bs
 ----------------
 
-.. automodule:: boto.services.bs
+.. automodule:: boto2.services.bs
    :members:   
    :undoc-members:
 
-boto.services.message
+boto2.services.message
 ---------------------
 
-.. automodule:: boto.services.message
+.. automodule:: boto2.services.message
    :members:   
    :undoc-members:
 
-boto.services.result
+boto2.services.result
 --------------------
 
-.. automodule:: boto.services.result
+.. automodule:: boto2.services.result
    :members:   
    :undoc-members:
 
-boto.services.service
+boto2.services.service
 ---------------------
 
-.. automodule:: boto.services.service
+.. automodule:: boto2.services.service
    :members:   
    :undoc-members:
 
-boto.services.servicedef
+boto2.services.servicedef
 ------------------------
 
-.. automodule:: boto.services.servicedef
+.. automodule:: boto2.services.servicedef
    :members:   
    :undoc-members:
 
-boto.services.sonofmmm
+boto2.services.sonofmmm
 ----------------------
 
-.. automodule:: boto.services.sonofmmm
+.. automodule:: boto2.services.sonofmmm
    :members:   
    :undoc-members:
 
-boto.services.submit
+boto2.services.submit
 --------------------
 
-.. automodule:: boto.services.submit
+.. automodule:: boto2.services.submit
    :members:   
    :undoc-members:

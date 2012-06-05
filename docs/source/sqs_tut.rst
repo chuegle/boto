@@ -11,9 +11,9 @@ downloaded and installed.
 Creating a Connection
 ---------------------
 The first step in accessing SQS is to create a connection to the service.
-There are two ways to do this in boto.  The first is::
+There are two ways to do this in boto2.  The first is::
 
-    >>> from boto.sqs.connection import SQSConnection
+    >>> from boto2.sqs.connection import SQSConnection
     >>> conn = SQSConnection('<aws access key>', '<aws secret key>')
 
 At this point the variable conn will point to an SQSConnection object. Bear in mind that
@@ -32,8 +32,8 @@ and then call the constructor without any arguments, like this::
 There is also a shortcut function in the boto package, called connect_sqs
 that may provide a slightly easier means of creating a connection::
 
-    >>> import boto
-    >>> conn = boto.connect_sqs()
+    >>> import boto2
+    >>> conn = boto2.connect_sqs()
 
 In either case, conn will point to an SQSConnection object which we will
 use throughout the remainder of this tutorial.
@@ -76,7 +76,7 @@ To retrieve a list of the queues for your account in the current region::
         Queue(https://queue.amazonaws.com/411358162645/another_queue2)
     ]
 
-This will leave you with a list of all of your :py:class:`boto.sqs.queue.Queue`
+This will leave you with a list of all of your :py:class:`boto2.sqs.queue.Queue`
 instances. Alternatively, if you wanted to only list the queues that started
 with ``'another'``::
 
@@ -94,7 +94,7 @@ you can retrieve the queue as follows::
     >>> my_queue = conn.get_queue('myqueue')
     Queue(https://queue.amazonaws.com/411358162645/myqueue)
 
-This leaves you with a single :py:class:`boto.sqs.queue.Queue`, which abstracts
+This leaves you with a single :py:class:`boto2.sqs.queue.Queue`, which abstracts
 the SQS Queue named 'myqueue'.
 
 Writing Messages
@@ -106,7 +106,7 @@ message is less than or equal to 256Kb, SQS won't complain.
 
 So, first we need to create a Message object::
 
->>> from boto.sqs.message import Message
+>>> from boto2.sqs.message import Message
 >>> m = Message()
 >>> m.set_body('This is my first message.')
 >>> status = q.write(m)

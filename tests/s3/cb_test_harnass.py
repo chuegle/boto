@@ -23,7 +23,7 @@
 Test harnass that allows us to raise exceptions, change file content,
 and record the byte transfer callback sequence, to test various resumable
 upload and download cases. The 'call' method of this harnass can be passed
-as the 'cb' parameter to boto.s3.Key.send_file() and boto.s3.Key.get_file(),
+as the 'cb' parameter to boto2.s3.Key.send_file() and boto.s3.Key.get_file(),
 allowing testing of various file upload/download conditions.
 """
 

@@ -12,11 +12,11 @@ assumes that you have boto already downloaded and installed.
 Creating a Domain
 -----------------
 
-    import boto
+    import boto2
 
     our_ip = '192.168.1.0'
 
-    conn = boto.connect_cloudsearch()
+    conn = boto2.connect_cloudsearch()
     domain = conn.create_domain('demo')
 
     # Allow our IP address to access the document and search services

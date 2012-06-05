@@ -38,13 +38,13 @@ import tempfile
 import time
 import unittest
 
-import boto
-from boto import storage_uri
-from boto.s3.resumable_download_handler import get_cur_file_size
-from boto.s3.resumable_download_handler import ResumableDownloadHandler
-from boto.exception import ResumableTransferDisposition
-from boto.exception import ResumableDownloadException
-from boto.exception import StorageResponseError
+import boto2
+from boto2 import storage_uri
+from boto2.s3.resumable_download_handler import get_cur_file_size
+from boto2.s3.resumable_download_handler import ResumableDownloadHandler
+from boto2.exception import ResumableTransferDisposition
+from boto2.exception import ResumableDownloadException
+from boto2.exception import StorageResponseError
 from cb_test_harnass import CallbackTestHarnass
 
 # We don't use the OAuth2 authentication plugin directly; importing it here

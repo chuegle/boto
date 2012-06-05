@@ -30,10 +30,10 @@ import mimetypes
 from multiprocessing import Pool
 import getopt, sys, os
 
-import boto
-from boto.exception import S3ResponseError
+import boto2
+from boto2.exception import S3ResponseError
 
-from boto.s3.connection import S3Connection
+from boto2.s3.connection import S3Connection
 from filechunkio import FileChunkIO
 
 usage_string = """
@@ -59,7 +59,7 @@ SYNOPSIS
                path points to a directory, s3_it will recursively traverse
                the directory and upload all files to the specified bucket.
         debug_level - 0 means no debug output (default), 1 means normal
-                      debug output from boto, and 2 means boto debug output
+                      debug output from boto2, and 2 means boto debug output
                       plus request/response output from httplib
         ignore_dirs - a comma-separated list of directory names that will
                       be ignored and not uploaded to S3.
@@ -245,7 +245,7 @@ def main():
         print "bucket name is required!"
         usage()
 
-    c = boto.connect_s3(aws_access_key_id=aws_access_key_id,
+    c = boto2.connect_s3(aws_access_key_id=aws_access_key_id,
                         aws_secret_access_key=aws_secret_access_key)
     c.debug = debug
     b = c.get_bucket(bucket_name)

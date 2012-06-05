@@ -29,9 +29,9 @@ Some unit tests for the S3 Bucket
 import unittest
 import time
 
-from boto.s3.connection import S3Connection
-from boto.s3.bucketlogging import BucketLogging
-from boto.s3.acl import Grant
+from boto2.s3.connection import S3Connection
+from boto2.s3.bucketlogging import BucketLogging
+from boto2.s3.acl import Grant
 
 class S3BucketTest (unittest.TestCase):
 

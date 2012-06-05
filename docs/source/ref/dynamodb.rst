@@ -4,52 +4,52 @@
 DynamoDB
 ========
 
-boto.dynamodb
+boto2.dynamodb
 -------------
 
-.. automodule:: boto.dynamodb
+.. automodule:: boto2.dynamodb
    :members:   
    :undoc-members:
 
-boto.dynamodb.layer1
+boto2.dynamodb.layer1
 --------------------
 
-.. automodule:: boto.dynamodb.layer1
+.. automodule:: boto2.dynamodb.layer1
    :members:
    :undoc-members:
 
-boto.dynamodb.layer2
+boto2.dynamodb.layer2
 --------------------
 
-.. automodule:: boto.dynamodb.layer2
+.. automodule:: boto2.dynamodb.layer2
    :members:
    :undoc-members:
 
-boto.dynamodb.table
+boto2.dynamodb.table
 -------------------
 
-.. automodule:: boto.dynamodb.table
+.. automodule:: boto2.dynamodb.table
    :members:
    :undoc-members:
 
-boto.dynamodb.schema
+boto2.dynamodb.schema
 --------------------
 
-.. automodule:: boto.dynamodb.schema
+.. automodule:: boto2.dynamodb.schema
    :members:
    :undoc-members:
 
-boto.dynamodb.item
+boto2.dynamodb.item
 ------------------
 
-.. automodule:: boto.dynamodb.item
+.. automodule:: boto2.dynamodb.item
    :members:
    :undoc-members:
 
-boto.dynamodb.batch
+boto2.dynamodb.batch
 -------------------
 
-.. automodule:: boto.dynamodb.batch
+.. automodule:: boto2.dynamodb.batch
    :members:
    :undoc-members:
 

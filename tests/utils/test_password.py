@@ -48,12 +48,12 @@ class TestPassword(unittest.TestCase):
 
  
     def test_aaa_version_1_9_default_behavior(self):
-        from boto.utils import Password
+        from boto2.utils import Password
         self.clstest(Password)
 
     def test_custom_hashclass(self):
 
-        from boto.utils import Password
+        from boto2.utils import Password
         import hashlib
 
         class SHA224Password(Password):
@@ -64,7 +64,7 @@ class TestPassword(unittest.TestCase):
         self.assertEquals( hashlib.sha224('foo').hexdigest(), str(password))
  
     def test_hmac(self):
-        from boto.utils import Password
+        from boto2.utils import Password
         import hmac
 
         def hmac_hashfunc(cls,msg):
@@ -81,7 +81,7 @@ class TestPassword(unittest.TestCase):
         self.assertEquals(str(password), hmac.new('mysecretkey','foo').hexdigest())
 
     def test_constructor(self):
-        from boto.utils import Password
+        from boto2.utils import Password
         import hmac
 
         hmac_hashfunc = lambda msg: hmac.new('mysecretkey', msg )

@@ -4,16 +4,16 @@
 ECS
 ===
 
-boto.ecs
+boto2.ecs
 --------
 
-.. automodule:: boto.ecs
+.. automodule:: boto2.ecs
    :members:   
    :undoc-members:
 
-boto.ecs.item
+boto2.ecs.item
 ----------------------------
 
-.. automodule:: boto.ecs.item
+.. automodule:: boto2.ecs.item
    :members:   
    :undoc-members:

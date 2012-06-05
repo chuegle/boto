@@ -27,11 +27,11 @@ Tests for Layer2 of Amazon DynamoDB
 import unittest
 import time
 import uuid
-from boto.dynamodb.exceptions import DynamoDBKeyNotFoundError, DynamoDBItemError
-from boto.dynamodb.exceptions import DynamoDBConditionalCheckFailedError
-from boto.dynamodb.layer2 import Layer2
-from boto.dynamodb.types import get_dynamodb_type
-from boto.dynamodb.condition import *
+from boto2.dynamodb.exceptions import DynamoDBKeyNotFoundError, DynamoDBItemError
+from boto2.dynamodb.exceptions import DynamoDBConditionalCheckFailedError
+from boto2.dynamodb.layer2 import Layer2
+from boto2.dynamodb.types import get_dynamodb_type
+from boto2.dynamodb.condition import *
 
 class DynamoDBLayer2Test (unittest.TestCase):
 

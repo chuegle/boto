@@ -178,10 +178,10 @@ if __name__ == "__main__":
         import readline
     except ImportError:
         pass
-    import boto
+    import boto2
     import sys
     from optparse import OptionParser
-    from boto.mashups.iobject import IObject
+    from boto2.mashups.iobject import IObject
     parser = OptionParser(version=VERSION, usage=usage)
     parser.add_option("-z", "--zone", help="Operate on zone", action="append", default=[], dest="zones")
     parser.add_option("-l", "--listener", help="Specify Listener in,out,proto", action="append", default=[], dest="listeners")
@@ -192,7 +192,7 @@ if __name__ == "__main__":
         parser.print_help()
         sys.exit(1)
 
-    elb = boto.connect_elb()
+    elb = boto2.connect_elb()
 
     print "%s" % (elb.region.endpoint)
 

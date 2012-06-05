@@ -25,7 +25,7 @@ Initial, and very limited, unit tests for ELBConnection.
 """
 
 import unittest
-from boto.ec2.elb import ELBConnection
+from boto2.ec2.elb import ELBConnection
 
 class ELBConnectionTest(unittest.TestCase):
 

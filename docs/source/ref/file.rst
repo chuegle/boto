@@ -4,31 +4,31 @@
 file
 ====
 
-boto.file.bucket
+boto2.file.bucket
 ----------------
 
-.. automodule:: boto.file.bucket
+.. automodule:: boto2.file.bucket
    :members:   
    :undoc-members:
 
-boto.file.simpleresultset
+boto2.file.simpleresultset
 -------------------------
 
-.. automodule:: boto.file.simpleresultset
+.. automodule:: boto2.file.simpleresultset
    :members:   
    :undoc-members:
 
-boto.file.connection
+boto2.file.connection
 --------------------
 
-.. automodule:: boto.file.connection
+.. automodule:: boto2.file.connection
    :members:
    :undoc-members:
 
-boto.file.key
+boto2.file.key
 -------------
 
-.. automodule:: boto.file.key
+.. automodule:: boto2.file.key
    :members:   
    :undoc-members:
 

@@ -13,7 +13,7 @@ Creating a VPC connection
 -------------------------
 First, we need to create a new VPC connection:
 
->>> from boto.vpc import VPCConnection
+>>> from boto2.vpc import VPCConnection
 >>> c = VPCConnection()
 
 To create a VPC

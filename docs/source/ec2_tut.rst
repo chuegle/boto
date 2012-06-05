@@ -6,15 +6,15 @@ An Introduction to boto's EC2 interface
 
 This tutorial focuses on the boto interface to the Elastic Compute Cloud
 from Amazon Web Services.  This tutorial assumes that you have already
-downloaded and installed boto.
+downloaded and installed boto2.
 
 Creating a Connection
 ---------------------
 
 The first step in accessing EC2 is to create a connection to the service.
-There are two ways to do this in boto.  The first is::
+There are two ways to do this in boto2.  The first is::
 
-    >>> from boto.ec2.connection import EC2Connection
+    >>> from boto2.ec2.connection import EC2Connection
     >>> conn = EC2Connection('<AWS_ACCESS_KEY_ID>', '<AWS_SECRET_ACCESS_KEY>')
 
 At this point the variable conn will point to an EC2Connection object.  In
@@ -27,8 +27,8 @@ and then call the constructor without any arguments, like this::
 There is also a shortcut function in the boto package, called connect_ec2
 that may provide a slightly easier means of creating a connection::
 
-    >>> import boto
-    >>> conn = boto.connect_ec2()
+    >>> import boto2
+    >>> conn = boto2.connect_ec2()
 
 In either case, conn will point to an EC2Connection object which we will
 use throughout the remainder of this tutorial.

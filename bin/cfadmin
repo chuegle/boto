@@ -66,9 +66,9 @@ def invalidate(cf, origin_or_id, *paths):
     cf.create_invalidation_request(dist.id, paths)
 
 if __name__ == "__main__":
-    import boto
+    import boto2
     import sys
-    cf = boto.connect_cloudfront()
+    cf = boto2.connect_cloudfront()
     self = sys.modules['__main__']
     if len(sys.argv) >= 2:
         try:

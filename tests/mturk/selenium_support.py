@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from boto.mturk.test.support import unittest
+from boto2.mturk.test.support import unittest
 
 sel_args = ('localhost', 4444, '*chrome', 'https://workersandbox.mturk.com')
 
@@ -46,7 +46,7 @@ def complete_hit(hit_type_id, response='Some Response'):
 	sel.open("/mturk/welcome")
 	sel.click("lnkWorkerSignin")
 	sel.wait_for_page_to_load("30000")
-	sel.type("email", "boto.tester@example.com")
+	sel.type("email", "boto2.tester@example.com")
 	sel.type("password", "BotoTest")
 	sel.click("Continue")
 	sel.wait_for_page_to_load("30000")

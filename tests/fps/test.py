@@ -14,8 +14,8 @@ if __name__ == "__main__":
     print '>>> advanced FPS tests; using local boto sources'
     advanced = True
 
-from boto.fps.connection import FPSConnection
-from boto.fps.response import ComplexAmount
+from boto2.fps.connection import FPSConnection
+from boto2.fps.response import ComplexAmount
 
 
 class FPSTestCase(TestCase):

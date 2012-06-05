@@ -1,7 +1,7 @@
 >>> import uuid
 >>> import datetime
 >>> from _init_environment import MTurkConnection, mturk_host
->>> from boto.mturk.question import Question, QuestionContent, AnswerSpecification, FreeTextAnswer
+>>> from boto2.mturk.question import Question, QuestionContent, AnswerSpecification, FreeTextAnswer
 
 >>> conn = MTurkConnection(host=mturk_host)
 
@@ -28,7 +28,7 @@
 ...                                 reward=0.23,
 ...                                 duration=60*6,
 ...                                 approval_delay=60*60,
-...                                 annotation='An annotation from boto create_hit test',
+...                                 annotation='An annotation from boto2 create_hit test',
 ...                                 response_groups=['Minimal',
 ...                                                  'HITDetail',
 ...                                                  'HITQuestion',
@@ -86,7 +86,7 @@ u'Boto create_hit description'
 
 # annotation is correct
 >>> hit.RequesterAnnotation
-u'An annotation from boto create_hit test'
+u'An annotation from boto2 create_hit test'
 
 >>> hit.HITReviewStatus
 u'NotReviewed'

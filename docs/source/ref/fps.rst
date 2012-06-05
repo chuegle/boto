@@ -4,16 +4,16 @@
 fps
 ===
 
-boto.fps
+boto2.fps
 --------
 
-.. automodule:: boto.fps
+.. automodule:: boto2.fps
    :members:   
    :undoc-members:
 
-boto.fps.connection
+boto2.fps.connection
 -------------------
 
-.. automodule:: boto.fps.connection
+.. automodule:: boto2.fps.connection
    :members:   
    :undoc-members:

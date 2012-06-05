@@ -16,10 +16,10 @@ CloudFront.
 Creating a CloudFront connection
 --------------------------------
 
-    >>> import boto
-    >>> c = boto.connect_cloudfront()
+    >>> import boto2
+    >>> c = boto2.connect_cloudfront()
 
-Create a new :class:`boto.cloudfront.distribution.Distribution`::
+Create a new :class:`boto2.cloudfront.distribution.Distribution`::
 
     >>> distro = c.create_distribution(origin='mybucket.s3.amazonaws.com', enabled=False, comment='My new Distribution')
     >>> d.domain_name
@@ -38,22 +38,22 @@ Create a new :class:`boto.cloudfront.distribution.Distribution`::
     False
 
 Note that a new caller reference is created automatically, using
-uuid.uuid4(). The :class:`boto.cloudfront.distribution.Distribution`,
-:class:`boto.cloudfront.distribution.DistributionConfig` and
-:class:`boto.cloudfront.distribution.DistributionSummary` objects are defined
-in the :mod:`boto.cloudfront.distribution` module.
+uuid.uuid4(). The :class:`boto2.cloudfront.distribution.Distribution`,
+:class:`boto2.cloudfront.distribution.DistributionConfig` and
+:class:`boto2.cloudfront.distribution.DistributionSummary` objects are defined
+in the :mod:`boto2.cloudfront.distribution` module.
 
 To get a listing of all current distributions::
 
     >>> rs = c.get_all_distributions()
     >>> rs
-    [<boto.cloudfront.distribution.DistributionSummary instance at 0xe8d4e0>,
-     <boto.cloudfront.distribution.DistributionSummary instance at 0xe8d788>]
+    [<boto2.cloudfront.distribution.DistributionSummary instance at 0xe8d4e0>,
+     <boto2.cloudfront.distribution.DistributionSummary instance at 0xe8d788>]
 
-This returns a list of :class:`boto.cloudfront.distribution.DistributionSummary`
+This returns a list of :class:`boto2.cloudfront.distribution.DistributionSummary`
 objects. Note that paging is not yet supported! To get a
-:class:`boto.cloudfront.distribution.DistributionObject` from a
-:class:`boto.cloudfront.distribution.DistributionSummary` object::
+:class:`boto2.cloudfront.distribution.DistributionObject` from a
+:class:`boto2.cloudfront.distribution.DistributionSummary` object::
 
     >>> ds = rs[1]
     >>> distro = ds.get_distribution()
@@ -80,6 +80,6 @@ or
 The only attributes that can be updated for a Distribution are
 comment, enabled and cnames.
 
-To delete a :class:`boto.cloudfront.distribution.Distribution`::
+To delete a :class:`boto2.cloudfront.distribution.Distribution`::
 
     >>> distro.delete()

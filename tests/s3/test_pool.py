@@ -24,7 +24,7 @@
 Some multi-threading tests of boto in a greenlet environment.
 """
 
-import boto
+import boto2
 import time
 import uuid
 
@@ -60,7 +60,7 @@ def test_close_connections():
     print "Running test_close_connections"
 
     # Connect to S3
-    s3 = boto.connect_s3()
+    s3 = boto2.connect_s3()
 
     # Clean previous tests.
     for b in s3.get_all_buckets():
@@ -196,7 +196,7 @@ def test_reuse_connections():
     print "Running test_reuse_connections"
 
     # Connect to S3
-    s3 = boto.connect_s3()
+    s3 = boto2.connect_s3()
 
     # Make a test bucket
     bucket = s3.create_bucket('test-%d' % int(time.time()))

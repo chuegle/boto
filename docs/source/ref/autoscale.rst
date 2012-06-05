@@ -4,59 +4,59 @@
 Auto Scaling Reference
 ======================
 
-boto.ec2.autoscale
+boto2.ec2.autoscale
 ------------------
 
-.. automodule:: boto.ec2.autoscale
+.. automodule:: boto2.ec2.autoscale
    :members:   
    :undoc-members:
 
-boto.ec2.autoscale.activity
+boto2.ec2.autoscale.activity
 ---------------------------
 
-.. automodule:: boto.ec2.autoscale.activity
+.. automodule:: boto2.ec2.autoscale.activity
    :members:   
    :undoc-members:
 
-boto.ec2.autoscale.group
+boto2.ec2.autoscale.group
 ------------------------
 
-.. automodule:: boto.ec2.autoscale.group
+.. automodule:: boto2.ec2.autoscale.group
    :members:   
    :undoc-members:
 
 
-boto.ec2.autoscale.instance
+boto2.ec2.autoscale.instance
 ---------------------------
 
-.. automodule:: boto.ec2.autoscale.instance
+.. automodule:: boto2.ec2.autoscale.instance
    :members:   
    :undoc-members:
 
-boto.ec2.autoscale.launchconfig
+boto2.ec2.autoscale.launchconfig
 -------------------------------
 
-.. automodule:: boto.ec2.autoscale.launchconfig
+.. automodule:: boto2.ec2.autoscale.launchconfig
    :members:   
    :undoc-members:
 
-boto.ec2.autoscale.policy
+boto2.ec2.autoscale.policy
 --------------------------
 
-.. automodule:: boto.ec2.autoscale.policy
+.. automodule:: boto2.ec2.autoscale.policy
    :members:   
    :undoc-members:
 
-boto.ec2.autoscale.request
+boto2.ec2.autoscale.request
 --------------------------
 
-.. automodule:: boto.ec2.autoscale.request
+.. automodule:: boto2.ec2.autoscale.request
    :members:   
    :undoc-members:
 
-boto.ec2.autoscale.scheduled
+boto2.ec2.autoscale.scheduled
 ----------------------------
 
-.. automodule:: boto.ec2.autoscale.scheduled
+.. automodule:: boto2.ec2.autoscale.scheduled
    :members:   
    :undoc-members:

@@ -4,58 +4,58 @@
 SQS 
 ====
 
-boto.sqs
+boto2.sqs
 --------
 
-.. automodule:: boto.sqs
+.. automodule:: boto2.sqs
    :members:   
    :undoc-members:
 
-boto.sqs.attributes
+boto2.sqs.attributes
 -------------------
 
-.. automodule:: boto.sqs.attributes
+.. automodule:: boto2.sqs.attributes
    :members:   
    :undoc-members:
 
-boto.sqs.connection
+boto2.sqs.connection
 -------------------
 
-.. automodule:: boto.sqs.connection
+.. automodule:: boto2.sqs.connection
    :members:   
    :undoc-members:
 
-boto.sqs.jsonmessage
+boto2.sqs.jsonmessage
 --------------------
 
-.. automodule:: boto.sqs.jsonmessage
+.. automodule:: boto2.sqs.jsonmessage
    :members:   
    :undoc-members:
 
-boto.sqs.message
+boto2.sqs.message
 ----------------
 
-.. automodule:: boto.sqs.message
+.. automodule:: boto2.sqs.message
    :members:   
    :undoc-members:
 
-boto.sqs.queue
+boto2.sqs.queue
 --------------
 
-.. automodule:: boto.sqs.queue
+.. automodule:: boto2.sqs.queue
    :members:   
    :undoc-members:
 
-boto.sqs.regioninfo
+boto2.sqs.regioninfo
 -------------------
 
-.. automodule:: boto.sqs.regioninfo
+.. automodule:: boto2.sqs.regioninfo
    :members:   
    :undoc-members:
 
-boto.sqs.batchresults
+boto2.sqs.batchresults
 ---------------------
 
-.. automodule:: boto.sqs.batchresults
+.. automodule:: boto2.sqs.batchresults
    :members:   
    :undoc-members:

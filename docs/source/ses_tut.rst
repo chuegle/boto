@@ -15,8 +15,8 @@ Creating a Connection
 The first step in accessing SES is to create a connection to the service.
 To do so, the most straight forward way is the following::
 
-    >>> import boto
-    >>> conn = boto.connect_ses(
+    >>> import boto2
+    >>> conn = boto2.connect_ses(
             aws_access_key_id='<YOUR_AWS_KEY_ID>',
             aws_secret_access_key='<YOUR_AWS_SECRET_KEY>')
     >>> conn
@@ -26,8 +26,8 @@ Bear in mind that if you have your credentials in boto config in your home
 directory, the two keyword arguments in the call above are not needed. More
 details on configuration can be fond in :doc:`boto_config_tut`.
 
-The :py:func:`boto.connect_ses` functions returns a
-:py:class:`boto.ses.connection.SESConnection` instance, which is a the boto API
+The :py:func:`boto2.connect_ses` functions returns a
+:py:class:`boto2.ses.connection.SESConnection` instance, which is a the boto API
 for working with SES.
 
 Notes on Sending
@@ -62,7 +62,7 @@ Listing Verified Addresses
 
 If you'd like to list the addresses that are currently verified on your
 SES account, use
-:py:meth:`list_verified_email_addresses <boto.ses.connection.SESConnection.list_verified_email_addresses>`::
+:py:meth:`list_verified_email_addresses <boto2.ses.connection.SESConnection.list_verified_email_addresses>`::
 
     >>> conn.list_verified_email_addresses()
     {
@@ -84,7 +84,7 @@ Deleting a Verified Address
 
 In the event that you'd like to remove an email address from your account,
 use
-:py:meth:`delete_verified_email_address <boto.ses.connection.SESConnection.delete_verified_email_address>`::
+:py:meth:`delete_verified_email_address <boto2.ses.connection.SESConnection.delete_verified_email_address>`::
 
     >>> conn.delete_verified_email_address('another@address.com')
 
@@ -92,7 +92,7 @@ Sending an Email
 ----------------
 
 Sending an email is done via
-:py:meth:`send_email <boto.ses.connection.SESConnection.send_email>`::
+:py:meth:`send_email <boto2.ses.connection.SESConnection.send_email>`::
 
     >>> conn.send_email(
             'some@address.com',
@@ -111,7 +111,7 @@ Sending an email is done via
     }
 
 If you're wanting to send a multipart MIME email, see the reference for
-:py:meth:`send_raw_email <boto.ses.connection.SESConnection.send_raw_email>`,
+:py:meth:`send_raw_email <boto2.ses.connection.SESConnection.send_raw_email>`,
 which is a bit more of a low-level alternative.
 
 Checking your Send Quota
@@ -121,7 +121,7 @@ Staying within your quota is critical, since the upper limit is a hard cap.
 Once you have hit your quota, no further email may be sent until enough
 time elapses to where your 24 hour email count (rolling continuously) is
 within acceptable ranges. Use
-:py:meth:`get_send_quota <boto.ses.connection.SESConnection.get_send_quota>`::
+:py:meth:`get_send_quota <boto2.ses.connection.SESConnection.get_send_quota>`::
 
     >>> conn.get_send_quota()
     {
@@ -142,7 +142,7 @@ Checking your Send Statistics
 
 In order to fight spammers and ensure quality mail is being sent from SES,
 Amazon tracks bounces, rejections, and complaints. This is done via
-:py:meth:`get_send_statistics <boto.ses.connection.SESConnection.get_send_statistics>`.
+:py:meth:`get_send_statistics <boto2.ses.connection.SESConnection.get_send_statistics>`.
 Please be warned that the output is extremely verbose, to the point
 where we'll just show a short excerpt here::
 

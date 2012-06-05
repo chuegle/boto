@@ -7,7 +7,7 @@ import uuid
 import json
 import traceback
 
-from boto.swf.layer1_decisions import Layer1Decisions
+from boto2.swf.layer1_decisions import Layer1Decisions
 
 from test_layer1 import SimpleWorkflowLayer1TestBase
 

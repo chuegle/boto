@@ -4,21 +4,21 @@
 STS
 ===
 
-boto.sts
+boto2.sts
 --------
 
-.. automodule:: boto.sts
+.. automodule:: boto2.sts
    :members:   
    :undoc-members:
 
-.. autoclass:: boto.sts.STSConnection
+.. autoclass:: boto2.sts.STSConnection
    :members:
    :undoc-members:
 
-boto.sts.credentials
+boto2.sts.credentials
 --------------------
 
-.. automodule:: boto.sts.credentials
+.. automodule:: boto2.sts.credentials
    :members:   
    :undoc-members:
    

@@ -37,7 +37,7 @@ class TestDBHandler(object):
 
     def test_sequence_generator_no_rollover(self):
         """Test the sequence generator without rollover"""
-        from boto.sdb.db.sequence import SequenceGenerator
+        from boto2.sdb.db.sequence import SequenceGenerator
         gen = SequenceGenerator("ABC")
         assert(gen("") == "A")
         assert(gen("A") == "B")
@@ -47,7 +47,7 @@ class TestDBHandler(object):
 
     def test_sequence_generator_with_rollover(self):
         """Test the sequence generator with rollover"""
-        from boto.sdb.db.sequence import SequenceGenerator
+        from boto2.sdb.db.sequence import SequenceGenerator
         gen = SequenceGenerator("ABC", rollover=True)
         assert(gen("") == "A")
         assert(gen("A") == "B")
@@ -56,7 +56,7 @@ class TestDBHandler(object):
 
     def test_sequence_simple_int(self):
         """Test a simple counter sequence"""
-        from boto.sdb.db.sequence import Sequence
+        from boto2.sdb.db.sequence import Sequence
         s = Sequence()
         self.sequences.append(s)
         assert(s.val == 0)
@@ -69,7 +69,7 @@ class TestDBHandler(object):
         assert(s2.val == 3)
 
     def test_sequence_simple_string(self):
-        from boto.sdb.db.sequence import Sequence,increment_string
+        from boto2.sdb.db.sequence import Sequence,increment_string
         s = Sequence(fnc=increment_string)
         self.sequences.append(s)
         assert(s.val == "A")
@@ -77,7 +77,7 @@ class TestDBHandler(object):
 
     def test_fib(self):
         """Test the fibonacci sequence generator"""
-        from boto.sdb.db.sequence import fib
+        from boto2.sdb.db.sequence import fib
         # Just check the first few numbers in the sequence
         lv = 0
         for v in [1,2,3,5,8,13,21,34,55,89,144]:
@@ -86,7 +86,7 @@ class TestDBHandler(object):
 
     def test_sequence_fib(self):
         """Test the fibonacci sequence"""
-        from boto.sdb.db.sequence import Sequence,fib
+        from boto2.sdb.db.sequence import Sequence,fib
         s = Sequence(fnc=fib)
         s2 = Sequence(s.id)
         self.sequences.append(s)
@@ -99,7 +99,7 @@ class TestDBHandler(object):
 
     def test_sequence_string(self):
         """Test the String incrementation sequence"""
-        from boto.sdb.db.sequence import Sequence,increment_string
+        from boto2.sdb.db.sequence import Sequence,increment_string
         s = Sequence(fnc=increment_string)
         self.sequences.append(s)
         assert(s.val == "A")

@@ -23,9 +23,9 @@
 # Tools to dump and recover an SDB domain
 #
 VERSION = "%prog version 1.0"
-import boto
+import boto2
 import time
-from boto import sdb
+from boto2 import sdb
 
 # Allow support for JSON
 try:
@@ -104,7 +104,7 @@ def create_db(domain_name, region_name):
     :param domain: Name of the domain to create
     :type domain: str
     """
-    sdb = boto.sdb.connect_to_region(region_name)
+    sdb = boto2.sdb.connect_to_region(region_name)
     return sdb.create_domain(domain_name)
 
 if __name__ == "__main__":
@@ -131,7 +131,7 @@ if __name__ == "__main__":
             create_db(domain_name, options.region_name)
         exit()
 
-    sdb = boto.sdb.connect_to_region(options.region_name)
+    sdb = boto2.sdb.connect_to_region(options.region_name)
     if options.list:
         for db in sdb.get_all_domains():
             print db

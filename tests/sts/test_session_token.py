@@ -27,9 +27,9 @@ Tests for Session Tokens
 import unittest
 import time
 import os
-from boto.sts.connection import STSConnection
-from boto.sts.credentials import Credentials
-from boto.s3.connection import S3Connection
+from boto2.sts.connection import STSConnection
+from boto2.sts.credentials import Credentials
+from boto2.s3.connection import S3Connection
 
 class SessionTokenTest (unittest.TestCase):
 

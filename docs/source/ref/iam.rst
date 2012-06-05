@@ -4,24 +4,24 @@
 IAM
 ===
 
-boto.iam
+boto2.iam
 --------
 
-.. automodule:: boto.iam
+.. automodule:: boto2.iam
    :members:   
    :undoc-members:
 
-boto.iam.connection
+boto2.iam.connection
 -------------------
 
-.. automodule:: boto.iam.connection
+.. automodule:: boto2.iam.connection
    :members:   
    :undoc-members:
 
-boto.iam.summarymap
+boto2.iam.summarymap
 -------------------
 
-.. automodule:: boto.iam.summarymap
+.. automodule:: boto2.iam.summarymap
    :members:   
    :undoc-members:
 

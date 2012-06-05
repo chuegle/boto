@@ -26,14 +26,14 @@ Some unit tests for the AutoscaleConnection
 
 import unittest
 import time
-from boto.ec2.autoscale import AutoScaleConnection
-from boto.ec2.autoscale.activity import Activity
-from boto.ec2.autoscale.group import AutoScalingGroup, ProcessType
-from boto.ec2.autoscale.launchconfig import LaunchConfiguration
-from boto.ec2.autoscale.policy import AdjustmentType, MetricCollectionTypes, ScalingPolicy
-from boto.ec2.autoscale.scheduled import ScheduledUpdateGroupAction
-from boto.ec2.autoscale.instance import Instance
-from boto.ec2.autoscale.tag import Tag
+from boto2.ec2.autoscale import AutoScaleConnection
+from boto2.ec2.autoscale.activity import Activity
+from boto2.ec2.autoscale.group import AutoScalingGroup, ProcessType
+from boto2.ec2.autoscale.launchconfig import LaunchConfiguration
+from boto2.ec2.autoscale.policy import AdjustmentType, MetricCollectionTypes, ScalingPolicy
+from boto2.ec2.autoscale.scheduled import ScheduledUpdateGroupAction
+from boto2.ec2.autoscale.instance import Instance
+from boto2.ec2.autoscale.tag import Tag
 
 class AutoscaleConnectionTest(unittest.TestCase):
 

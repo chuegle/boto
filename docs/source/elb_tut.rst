@@ -43,8 +43,8 @@ Creating a Connection
 
 The first step in accessing ELB is to create a connection to the service.
 
->>> import boto
->>> conn = boto.connect_elb(
+>>> import boto2
+>>> conn = boto2.connect_elb(
         aws_access_key_id='YOUR-KEY-ID-HERE',
         aws_secret_access_key='YOUR-SECRET-HERE'
     )
@@ -57,12 +57,12 @@ Like EC2, the ELB service has a different endpoint for each region. By default
 the US East endpoint is used. To choose a specific region, instantiate the
 ELBConnection object with that region's information.
 
->>> from boto.regioninfo import RegionInfo
+>>> from boto2.regioninfo import RegionInfo
 >>> reg = RegionInfo(
         name='eu-west-1',
         endpoint='elasticloadbalancing.eu-west-1.amazonaws.com'
     )
->>> conn = boto.connect_elb(
+>>> conn = boto2.connect_elb(
         aws_access_key_id='YOUR-KEY-ID-HERE',
         aws_secret_access_key='YOUR-SECRET-HERE',
         region=reg
@@ -70,14 +70,14 @@ ELBConnection object with that region's information.
 
 Another way to connect to an alternative region is like this:
 
->>> import boto.ec2.elb
->>> elb = boto.ec2.elb.connect_to_region('eu-west-1')
+>>> import boto2.ec2.elb
+>>> elb = boto2.ec2.elb.connect_to_region('eu-west-1')
 
 Here's yet another way to discover what regions are available and then
 connect to one:
 
->>> import boto.ec2.elb
->>> regions = boto.ec2.elb.regions()
+>>> import boto2.ec2.elb
+>>> regions = boto2.ec2.elb.regions()
 >>> regions
 [RegionInfo:us-east-1,
  RegionInfo:ap-northeast-1,
@@ -86,7 +86,7 @@ connect to one:
  RegionInfo:eu-west-1]
 >>> elb = regions[-1].connect()
 
-Alternatively, edit your boto.cfg with the default ELB endpoint to use::
+Alternatively, edit your boto2.cfg with the default ELB endpoint to use::
 
     [Boto]
     elb_region_name = eu-west-1
@@ -105,10 +105,10 @@ You can also filter by name
 >>> conn.get_all_load_balancers(load_balancer_names=['load-balancer-prod'])
 [LoadBalancer:load-balancer-prod]
 
-:py:meth:`get_all_load_balancers <boto.ec2.elb.ELBConnection.get_all_load_balancers>`
-returns a :py:class:`boto.resultset.ResultSet` that contains instances
-of :class:`boto.ec2.elb.loadbalancer.LoadBalancer`, each of which abstracts
-access to a load balancer. :py:class:`ResultSet <boto.resultset.ResultSet>`
+:py:meth:`get_all_load_balancers <boto2.ec2.elb.ELBConnection.get_all_load_balancers>`
+returns a :py:class:`boto2.resultset.ResultSet` that contains instances
+of :class:`boto2.ec2.elb.loadbalancer.LoadBalancer`, each of which abstracts
+access to a load balancer. :py:class:`ResultSet <boto2.resultset.ResultSet>`
 works very much like a list.
 
 >>> balancers = conn.get_all_load_balancers()
@@ -178,7 +178,7 @@ The following example creates a health check called *instance_health* that
 simply checks instances every 20 seconds on port 80 over HTTP at the
 resource /health for 200 successes.
 
->>> from boto.ec2.elb import HealthCheck
+>>> from boto2.ec2.elb import HealthCheck
 >>> hc = HealthCheck(
         interval=20,
         healthy_threshold=3,

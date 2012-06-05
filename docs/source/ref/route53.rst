@@ -5,30 +5,30 @@ route53
 =======
 
 
-boto.route53.connection
+boto2.route53.connection
 -----------------------
 
-.. automodule:: boto.route53.connection
+.. automodule:: boto2.route53.connection
    :members:   
    :undoc-members:
 
-boto.route53.hostedzone
+boto2.route53.hostedzone
 ------------------------
 
-.. automodule:: boto.route53.hostedzone
+.. automodule:: boto2.route53.hostedzone
    :members:   
    :undoc-members:
 
-boto.route53.record
+boto2.route53.record
 -------------------
 
-.. automodule:: boto.route53.record
+.. automodule:: boto2.route53.record
    :members:   
    :undoc-members:
 
-boto.route53.exception
+boto2.route53.exception
 ----------------------
 
-.. automodule:: boto.route53.exception
+.. automodule:: boto2.route53.exception
    :members:   
    :undoc-members:

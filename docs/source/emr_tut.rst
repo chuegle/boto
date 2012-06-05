@@ -6,14 +6,14 @@ An Introduction to boto's Elastic Mapreduce interface
 
 This tutorial focuses on the boto interface to Elastic Mapreduce from
 Amazon Web Services.  This tutorial assumes that you have already
-downloaded and installed boto.
+downloaded and installed boto2.
 
 Creating a Connection
 ---------------------
 The first step in accessing Elastic Mapreduce is to create a connection
-to the service.  There are two ways to do this in boto.  The first is:
+to the service.  There are two ways to do this in boto2.  The first is:
 
->>> from boto.emr.connection import EmrConnection
+>>> from boto2.emr.connection import EmrConnection
 >>> conn = EmrConnection('<aws access key>', '<aws secret key>')
 
 At this point the variable conn will point to an EmrConnection object.
@@ -30,8 +30,8 @@ and then call the constructor without any arguments, like this:
 There is also a shortcut function in the boto package called connect_emr
 that may provide a slightly easier means of creating a connection:
 
->>> import boto
->>> conn = boto.connect_emr()
+>>> import boto2
+>>> conn = boto2.connect_emr()
 
 In either case, conn points to an EmrConnection object which we will use
 throughout the remainder of this tutorial.
@@ -44,7 +44,7 @@ and custom jar, both of which have a class in the boto Elastic Mapreduce impleme
 
 Creating a streaming step that runs the AWS wordcount example, itself written in Python, can be accomplished by:
 
->>> from boto.emr.step import StreamingStep
+>>> from boto2.emr.step import StreamingStep
 >>> step = StreamingStep(name='My wordcount example',
 ...                      mapper='s3n://elasticmapreduce/samples/wordcount/wordSplitter.py',
 ...                      reducer='aggregate',
@@ -62,7 +62,7 @@ Creating Custom Jar Job Flow Steps
 
 The second type of jobflow step executes tasks written with a custom jar.  Creating a custom jar step for the AWS CloudBurst example can be accomplished by:
 
->>> from boto.emr.step import JarStep
+>>> from boto2.emr.step import JarStep
 >>> step = JarStep(name='Coudburst example',
 ...                jar='s3n://elasticmapreduce/samples/cloudburst/cloudburst.jar',
 ...                step_args=['s3n://elasticmapreduce/samples/cloudburst/input/s_suis.br',
@@ -76,8 +76,8 @@ Creating JobFlows
 -----------------
 Once you have created one or more jobflow steps, you will next want to create and run a jobflow.  Creating a jobflow that executes either of the steps we created above can be accomplished by:
 
->>> import boto
->>> conn = boto.connect_emr()
+>>> import boto2
+>>> conn = boto2.connect_emr()
 >>> jobid = conn.run_jobflow(name='My jobflow', 
 ...                          log_uri='s3://<my log uri>/jobflow_logs', 
 ...                          steps=[step])
@@ -102,7 +102,7 @@ Terminating JobFlows
 --------------------
 By default when all the steps of a jobflow have finished or failed the jobflow terminates.  However, if you set the keep_alive parameter to True or just want to halt the execution of a jobflow early you can terminate a jobflow by:
 
->>> import boto
->>> conn = boto.connect_emr()
+>>> import boto2
+>>> conn = boto2.connect_emr()
 >>> conn.terminate_jobflow('<jobflow id>') 
 

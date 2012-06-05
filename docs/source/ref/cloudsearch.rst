@@ -4,52 +4,52 @@
 Cloudsearch
 ===========
 
-boto.cloudsearch
+boto2.cloudsearch
 --------
 
-.. automodule:: boto.swf
+.. automodule:: boto2.swf
    :members:   
    :undoc-members:
 
-boto.cloudsearch.domain
+boto2.cloudsearch.domain
 --------------------
 
-.. automodule:: boto.cloudsearch.domain
+.. automodule:: boto2.cloudsearch.domain
    :members:
    :undoc-members:
 
-boto.cloudsearch.layer1
+boto2.cloudsearch.layer1
 --------------------
 
-.. automodule:: boto.cloudsearch.layer1
+.. automodule:: boto2.cloudsearch.layer1
    :members:
    :undoc-members:
 
-boto.cloudsearch.layer2
+boto2.cloudsearch.layer2
 --------------------
 
-.. automodule:: boto.cloudsearch.layer2
+.. automodule:: boto2.cloudsearch.layer2
    :members:
    :undoc-members:
 
-boto.cloudsearch.optionstatus
+boto2.cloudsearch.optionstatus
 --------------------
 
-.. automodule:: boto.cloudsearch.optionstatus
+.. automodule:: boto2.cloudsearch.optionstatus
    :members:
    :undoc-members:
 
-boto.cloudsearch.search
+boto2.cloudsearch.search
 --------------------
 
-.. automodule:: boto.cloudsearch.search
+.. automodule:: boto2.cloudsearch.search
    :members:
    :undoc-members:
 
-boto.cloudsearch.document
+boto2.cloudsearch.document
 --------------------
 
-.. automodule:: boto.cloudsearch.document
+.. automodule:: boto2.cloudsearch.document
    :members:
    :undoc-members:
 

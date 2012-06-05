@@ -3,15 +3,15 @@
 import sys
 from optparse import OptionParser
 
-import boto
-from boto.ec2 import regions
+import boto2
+from boto2.ec2 import regions
 
 
 
 def kill_instance(region, ids):
     """Kill an instances given it's instance IDs"""
     # Connect the region
-    ec2 = boto.connect_ec2(region=region)
+    ec2 = boto2.connect_ec2(region=region)
     for instance_id in ids:
         print "Stopping instance: %s" % instance_id
         ec2.terminate_instances([instance_id])

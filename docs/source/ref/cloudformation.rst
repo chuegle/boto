@@ -4,31 +4,31 @@
 cloudformation
 ==============
 
-boto.cloudformation
+boto2.cloudformation
 -------------------
 
-.. automodule:: boto.cloudformation
+.. automodule:: boto2.cloudformation
    :members:   
    :undoc-members:
 
-boto.cloudformation.connection
+boto2.cloudformation.connection
 ------------------------------
 
-.. automodule:: boto.cloudformation.connection
+.. automodule:: boto2.cloudformation.connection
    :members:
    :undoc-members:
 
-boto.cloudformation.stack
+boto2.cloudformation.stack
 -------------------------
 
-.. automodule:: boto.cloudformation.stack
+.. automodule:: boto2.cloudformation.stack
    :members:
    :undoc-members:
 
-boto.cloudformation.template
+boto2.cloudformation.template
 ----------------------------
 
-.. automodule:: boto.cloudformation.template
+.. automodule:: boto2.cloudformation.template
    :members:
    :undoc-members:
 

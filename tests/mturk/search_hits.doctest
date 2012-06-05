@@ -12,5 +12,5 @@ True
 True
 
 >>> search_rs # doctest: +ELLIPSIS
-[<boto.mturk.connection.HIT instance at ...]
+[<boto2.mturk.connection.HIT instance at ...]
 

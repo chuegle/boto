@@ -27,9 +27,9 @@ Some unit tests for the SQSConnection
 
 import unittest
 import time
-from boto.sqs.connection import SQSConnection
-from boto.sqs.message import MHMessage
-from boto.exception import SQSError
+from boto2.sqs.connection import SQSConnection
+from boto2.sqs.message import MHMessage
+from boto2.exception import SQSError
 
 class SQSConnectionTest (unittest.TestCase):
 

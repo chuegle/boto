@@ -6,8 +6,8 @@ import os
 import unittest
 import time
 
-from boto.swf.layer1 import Layer1
-from boto.swf import exceptions as swf_exceptions
+from boto2.swf.layer1 import Layer1
+from boto2.swf import exceptions as swf_exceptions
 
 
 

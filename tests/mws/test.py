@@ -23,7 +23,7 @@ if __name__ == "__main__":
     if advanced:
         print '>>> advanced MWS tests; using local boto sources'
 
-from boto.mws.connection import MWSConnection
+from boto2.mws.connection import MWSConnection
 
 
 class MWSTestCase(TestCase):

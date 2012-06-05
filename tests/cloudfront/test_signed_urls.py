@@ -5,7 +5,7 @@ try:
 except ImportError:
     import json
 from textwrap import dedent
-from boto.cloudfront.distribution import Distribution
+from boto2.cloudfront.distribution import Distribution
 
 class CloudfrontSignedUrlsTest(unittest.TestCase):
     def setUp(self):

@@ -20,21 +20,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 
 #
-# Send Mail from a PYAMI instance, or anything that has a boto.cfg
+# Send Mail from a PYAMI instance, or anything that has a boto2.cfg
 # properly set up
 #
 VERSION="0.1"
 usage = """%prog [options]
-Sends whatever is on stdin to the recipient specified by your boto.cfg
+Sends whatever is on stdin to the recipient specified by your boto2.cfg
 or whoevery you specify in the options here.
 """
 
 if __name__ == "__main__":
-    from boto.utils import notify
+    from boto2.utils import notify
     import sys
     from optparse import OptionParser
     parser = OptionParser(version=VERSION, usage=usage)
-    parser.add_option("-t", "--to", help="Optional to address to send to (default from your boto.cfg)", action="store", default=None, dest="to")
+    parser.add_option("-t", "--to", help="Optional to address to send to (default from your boto2.cfg)", action="store", default=None, dest="to")
     parser.add_option("-s", "--subject", help="Optional Subject to send this report as", action="store", default="Report", dest="subject")
     parser.add_option("-f", "--file", help="Optionally, read from a file instead of STDIN", action="store", default=None, dest="file")
     parser.add_option("--html", help="HTML Format the email", action="store_true", default=False, dest="html")

@@ -4,30 +4,30 @@
 CloudFront
 ==========
 
-boto.cloudfront
+boto2.cloudfront
 ---------------
 
-.. automodule:: boto.cloudfront
+.. automodule:: boto2.cloudfront
    :members:   
    :undoc-members:
 
-boto.cloudfront.distribution
+boto2.cloudfront.distribution
 ----------------------------
 
-.. automodule:: boto.cloudfront.distribution
+.. automodule:: boto2.cloudfront.distribution
    :members:
    :undoc-members:
 
-boto.cloudfront.origin
+boto2.cloudfront.origin
 ----------------------------
 
-.. automodule:: boto.cloudfront.origin
+.. automodule:: boto2.cloudfront.origin
    :members:
    :undoc-members:
 
-boto.cloudfront.exception
+boto2.cloudfront.exception
 -------------------------
 
-.. automodule:: boto.cloudfront.exception
+.. automodule:: boto2.cloudfront.exception
    :members:   
    :undoc-members:

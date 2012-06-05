@@ -13,8 +13,8 @@ Creating a Connection
 The first step in accessing SimpleDB is to create a connection to the service.
 To do so, the most straight forward way is the following::
 
-    >>> import boto
-    >>> conn = boto.connect_sdb(aws_access_key_id='<YOUR_AWS_KEY_ID>',aws_secret_access_key='<YOUR_AWS_SECRET_KEY>')
+    >>> import boto2
+    >>> conn = boto2.connect_sdb(aws_access_key_id='<YOUR_AWS_KEY_ID>',aws_secret_access_key='<YOUR_AWS_SECRET_KEY>')
     >>> conn
     SDBConnection:sdb.amazonaws.com
     >>>
@@ -50,8 +50,8 @@ So, to list all your domains for your account in a region, you can simply do as 
     [Domain:test-domain, Domain:test-domain-2]
     >>>
 
-The get_all_domains() method returns a :py:class:`boto.resultset.ResultSet` containing
-all :py:class:`boto.sdb.domain.Domain` objects associated with
+The get_all_domains() method returns a :py:class:`boto2.resultset.ResultSet` containing
+all :py:class:`boto2.sdb.domain.Domain` objects associated with
 this connection's Access Key ID for that region.
 
 Retrieving a Domain (by name)
@@ -65,7 +65,7 @@ If you wish to retrieve a specific domain whose name is known, you can do so as 
 
 The get_domain call has an optional validate parameter, which defaults to True. This will make sure to raise
 an exception if the domain you are looking for doesn't exist. If you set it to false, it will return a 
-:py:class:`Domain <boto.sdb.domain.Domain>` object blindly regardless of its existence. 
+:py:class:`Domain <boto2.sdb.domain.Domain>` object blindly regardless of its existence. 
 
 Getting Domain Metadata
 ------------------------
@@ -74,7 +74,7 @@ To this end, boto offers a simple and convenient way to do so as shown below::
 
     >>> domain_meta = conn.domain_metadata(dom)
     >>> domain_meta
-    <boto.sdb.domain.DomainMetaData instance at 0x23cd440>
+    <boto2.sdb.domain.DomainMetaData instance at 0x23cd440>
     >>> dir(domain_meta)
     ['BoxUsage', 'DomainMetadataResponse', 'DomainMetadataResult', 'RequestId', 'ResponseMetadata', 
     '__doc__', '__init__', '__module__', 'attr_name_count', 'attr_names_size', 'attr_value_count', 'attr_values_size', 

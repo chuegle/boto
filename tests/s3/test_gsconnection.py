@@ -28,16 +28,16 @@
 Some unit tests for the GSConnection
 """
 
-import boto
+import boto2
 import unittest
 import time
 import os
 import re
 import xml
-from boto.gs.connection import GSConnection
-from boto.gs.cors import Cors
-from boto import handler
-from boto import storage_uri
+from boto2.gs.connection import GSConnection
+from boto2.gs.cors import Cors
+from boto2 import handler
+from boto2 import storage_uri
 
 class GSConnectionTest (unittest.TestCase):
 
@@ -168,7 +168,7 @@ class GSConnectionTest (unittest.TestCase):
             '<ACCESSControlList><EntrIes><Entry>'    +
             '<Scope type="AllUsers"></Scope><Permission>READ</Permission>' +
             '</Entry></EntrIes></ACCESSControlList>')
-        acl = boto.gs.acl.ACL()
+        acl = boto2.gs.acl.ACL()
         h = handler.XmlHandler(acl, bucket)
         xml.sax.parseString(acl_xml, h)
         bucket.set_acl(acl)

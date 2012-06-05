@@ -22,15 +22,15 @@ values for options that control the behavior of the boto library. Upon startup,
 the boto library looks for configuration files in the following locations
 and in the following order:
 
-* /etc/boto.cfg - for site-wide settings that all users on this machine will use
+* /etc/boto2.cfg - for site-wide settings that all users on this machine will use
 * ~/.boto - for user-specific settings
 
 The options are merged into a single, in-memory configuration that is
-available as :py:mod:`boto.config`. The :py:class:`boto.pyami.config.Config`
+available as :py:mod:`boto2.config`. The :py:class:`boto.pyami.config.Config`
 class is a subclass of the standard Python
 :py:class:`ConfigParser.SafeConfigParser` object and inherits all of the
 methods of that object. In addition, the boto
-:py:class:`Config <boto.pyami.config.Config>` class defines additional
+:py:class:`Config <boto2.pyami.config.Config>` class defines additional
 methods that are described on the PyamiConfigMethods page.
 
 Sections
@@ -72,7 +72,7 @@ boto itself. This section defines the following options:
     The following values are defined::
 
         0 - no debug messages are printed
-        1 - basic debug messages from boto are printed
+        1 - basic debug messages from boto2 are printed
         2 - all boto debugging messages plus request/response messages from httplib
 
 :proxy: The name of the proxy host to use for connecting to AWS.
@@ -102,7 +102,7 @@ Even if you have your boto config setup, you can also have credentials and
 options stored in environmental variables or you can explicitly pass them to
 method calls i.e.::
 
-	>>> boto.connect_ec2('<KEY_ID>','<SECRET_KEY>')
+	>>> boto2.connect_ec2('<KEY_ID>','<SECRET_KEY>')
 
 In these cases where these options can be found in more than one place boto
 will first use the explicitly supplied arguments, if none found it will then

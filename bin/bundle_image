@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from boto.manage.server import Server
+from boto2.manage.server import Server
 if __name__ == "__main__":
     from optparse import OptionParser
     parser = OptionParser(version="%prog 1.0", usage="Usage: %prog [options] instance-id [instance-id-2]")

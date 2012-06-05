@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-import boto
-from boto.s3.connection import OrdinaryCallingFormat
+import boto2
+from boto2.s3.connection import OrdinaryCallingFormat
 
 def sizeof_fmt(num):
     for x in ['b ','KB','MB','GB','TB', 'XB']:
@@ -11,8 +11,8 @@ def sizeof_fmt(num):
 
 def list_bucket(b, prefix=None):
     """List everything in a bucket"""
-    from boto.s3.prefix import Prefix
-    from boto.s3.key import Key
+    from boto2.s3.prefix import Prefix
+    from boto2.s3.key import Key
     total = 0
     query = b
     if prefix:
@@ -66,9 +66,9 @@ if __name__ == "__main__":
                 mixedCase = True
     
     if mixedCase:
-        s3 = boto.connect_s3(calling_format=OrdinaryCallingFormat())
+        s3 = boto2.connect_s3(calling_format=OrdinaryCallingFormat())
     else:
-        s3 = boto.connect_s3()
+        s3 = boto2.connect_s3()
 
     if len(sys.argv) < 2:
         list_buckets(s3)

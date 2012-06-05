@@ -9,37 +9,37 @@ layer for SimpleDB that may be used:
 
 * :doc:`SimpleDB DB <sdb_db>` (Maintained, but little documentation)
 
-boto.sdb
+boto2.sdb
 --------
 
-.. automodule:: boto.sdb
+.. automodule:: boto2.sdb
    :members:   
    :undoc-members:
 
-boto.sdb.connection
+boto2.sdb.connection
 -------------------
 
-.. automodule:: boto.sdb.connection
+.. automodule:: boto2.sdb.connection
    :members:   
    :undoc-members:
 
-boto.sdb.domain
+boto2.sdb.domain
 ---------------
 
-.. automodule:: boto.sdb.domain
+.. automodule:: boto2.sdb.domain
    :members:   
    :undoc-members:
 
-boto.sdb.item
+boto2.sdb.item
 -------------
 
-.. automodule:: boto.sdb.item
+.. automodule:: boto2.sdb.item
    :members:   
    :undoc-members:
 
-boto.sdb.queryresultset
+boto2.sdb.queryresultset
 -----------------------
 
-.. automodule:: boto.sdb.queryresultset
+.. automodule:: boto2.sdb.queryresultset
    :members:   
    :undoc-members:

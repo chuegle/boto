@@ -11,37 +11,37 @@ boto
    :members:   
    :undoc-members:
 
-boto.connection
+boto2.connection
 ---------------
 
-.. automodule:: boto.connection
+.. automodule:: boto2.connection
    :members:   
    :undoc-members:
 
-boto.exception
+boto2.exception
 --------------
 
-.. automodule:: boto.exception
+.. automodule:: boto2.exception
    :members:   
    :undoc-members:
 
-boto.handler
+boto2.handler
 ------------
 
-.. automodule:: boto.handler
+.. automodule:: boto2.handler
    :members:   
    :undoc-members:
 
-boto.resultset
+boto2.resultset
 --------------
 
-.. automodule:: boto.resultset
+.. automodule:: boto2.resultset
    :members:   
    :undoc-members:
 
-boto.utils
+boto2.utils
 ----------
 
-.. automodule:: boto.utils
+.. automodule:: boto2.utils
    :members:   
    :undoc-members:

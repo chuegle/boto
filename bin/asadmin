@@ -164,7 +164,7 @@ def migrate_instances(autoscale, name):
     g = get_group(autoscale, name)
 
     old_instances = g.instances
-    ec2 = boto.connect_ec2()
+    ec2 = boto2.connect_ec2()
     for old_instance in old_instances:
         print "Terminating instance " + old_instance.instance_id
         ec2.terminate_instances([old_instance.instance_id])
@@ -193,13 +193,13 @@ if __name__ == "__main__":
         import readline
     except ImportError:
         pass
-    import boto
+    import boto2
     import sys
     import time
     from optparse import OptionParser
-    from boto.mashups.iobject import IObject
-    from boto.ec2.autoscale import AutoScalingGroup
-    from boto.ec2.autoscale import LaunchConfiguration
+    from boto2.mashups.iobject import IObject
+    from boto2.ec2.autoscale import AutoScalingGroup
+    from boto2.ec2.autoscale import LaunchConfiguration
     parser = OptionParser(version=VERSION, usage=usage)
     """ Create launch config options """
     parser.add_option("-i", "--image-id",
@@ -257,7 +257,7 @@ if __name__ == "__main__":
         parser.print_help()
         sys.exit(1)
 
-    autoscale = boto.connect_autoscale()
+    autoscale = boto2.connect_autoscale()
 
     print "%s" % (autoscale.region.endpoint)
 

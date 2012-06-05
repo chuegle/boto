@@ -4,8 +4,8 @@ import sys
 from operator import attrgetter
 from optparse import OptionParser
 
-import boto
-from boto.ec2 import regions
+import boto2
+from boto2.ec2 import regions
 
 
 HEADERS = {
@@ -43,7 +43,7 @@ def main():
     else:
         print "Region %s not found." % options.region
         sys.exit(1)
-    ec2 = boto.connect_ec2(region=region)
+    ec2 = boto2.connect_ec2(region=region)
 
     # Read headers
     if options.headers:

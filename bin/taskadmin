@@ -34,7 +34,7 @@ Commands:
 
 def list():
     """List all Tasks in SDB"""
-    from boto.manage.task import Task
+    from boto2.manage.task import Task
     print "%-8s %-40s %s" %  ("Hour", "Name", "Command")
     print "-"*100
     for t in Task.all():
@@ -45,7 +45,7 @@ def get(name):
     :param name: The name of the task to fetch
     :type name: str
     """
-    from boto.manage.task import Task
+    from boto2.manage.task import Task
     q = Task.find()
     q.filter("name like", "%s%%" % name)
     for t in q:
@@ -62,7 +62,7 @@ def get(name):
         print "="*80
 
 def delete(id):
-    from boto.manage.task import Task
+    from boto2.manage.task import Task
     t = Task.get_by_id(id)
     print "Deleting task: %s" % t.name
     if raw_input("Are you sure? ").lower() in ["y", "yes"]:
@@ -80,7 +80,7 @@ def create(name, hour, command):
     :param command: The command to execute
     :type command: str
     """
-    from boto.manage.task import Task
+    from boto2.manage.task import Task
     t = Task()
     t.name = name
     t.hour = hour
@@ -93,10 +93,10 @@ if __name__ == "__main__":
         import readline
     except ImportError:
         pass
-    import boto
+    import boto2
     import sys
     from optparse import OptionParser
-    from boto.mashups.iobject import IObject
+    from boto2.mashups.iobject import IObject
     parser = OptionParser(version=__version__, usage=usage)
 
     (options, args) = parser.parse_args()

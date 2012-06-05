@@ -5,17 +5,17 @@ SES
 ===
 
 
-boto.ses
+boto2.ses
 ------------
 
-.. automodule:: boto.ses
+.. automodule:: boto2.ses
    :members:   
    :undoc-members:
 
-boto.ses.connection
+boto2.ses.connection
 ---------------------
 
-.. automodule:: boto.ses.connection
+.. automodule:: boto2.ses.connection
    :members:   
    :undoc-members:
 

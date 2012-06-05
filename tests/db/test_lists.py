@@ -19,8 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 #
-from boto.sdb.db.property import ListProperty
-from boto.sdb.db.model import Model
+from boto2.sdb.db.property import ListProperty
+from boto2.sdb.db.model import Model
 import time
 
 class SimpleListModel(Model):

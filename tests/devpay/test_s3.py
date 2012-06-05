@@ -29,8 +29,8 @@ import time
 import os
 import urllib
 
-from boto.s3.connection import S3Connection
-from boto.exception import S3PermissionsError
+from boto2.s3.connection import S3Connection
+from boto2.exception import S3PermissionsError
 
 # this test requires a devpay product and user token to run:
 
