@@ -1,0 +1,7 @@
+This is a TellApart private branch of Boto. It's primary purpose it to rename 
+'boto' to 'boto2', so that we can import the current and a legacy version
+simultaneously in our production code.
+
+The script 'rename_2.sh' in the root folder can be used to convert a main
+branch to a 'boto2' branch.
+
