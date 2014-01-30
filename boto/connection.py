@@ -231,19 +231,10 @@ class AWSAuthConnection:
     def server_name(self, port=None):
         if not port:
             port = self.port
-        if port == 80:
+        if port in [80, 443]:
             signature_host = self.host
         else:
-            # This unfortunate little hack can be attributed to
-            # a difference in the 2.6 version of httplib.  In old
-            # versions, it would append ":443" to the hostname sent
-            # in the Host header and so we needed to make sure we
-            # did the same when calculating the V2 signature.  In 2.6
-            # it no longer does that.  Hence, this kludge.
-            if sys.version[:3] == "2.6" and port == 443:
-                signature_host = self.host
-            else:
-                signature_host = '%s:%d' % (self.host, port)
+            signature_host = '%s:%d' % (self.host, port)
         return signature_host
 
     def handle_proxy(self, proxy, proxy_port, proxy_user, proxy_pass):
@@ -579,6 +570,8 @@ class AWSQueryConnection(AWSAuthConnection):
         params['SignatureVersion'] = self.SignatureVersion
         params['Timestamp'] = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime())
         qs, signature = self.get_signature(params, verb, self.get_path(path))
+        if self.SignatureVersion == 2:
+            headers['Host'] = self.server_name().lower()
         if verb == 'POST':
             headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
             request_body = qs + '&Signature=' + urllib.quote(signature)

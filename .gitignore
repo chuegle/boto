@@ -1,0 +1,15 @@
+syntax: glob
+
+*#
+*~
+*.pyc
+*.pyo
+.DS_Store
+.classpath
+.project
+.ropeproject
+.idea
+.pydevproject
+.metadata
+.settings
+.testresult
