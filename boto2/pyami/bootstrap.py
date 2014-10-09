@@ -129,6 +129,6 @@ class Bootstrap(ScriptBase):
 if __name__ == "__main__":
     # because bootstrap starts before any logging configuration can be loaded from
     # the boto config files, we will manually enable logging to /var/log/boto2.log
-    boto2.set_file_logger('bootstrap', '/var/log/boto.log')
+    boto2.set_file_logger('bootstrap', '/var/log/boto2.log')
     bs = Bootstrap()
     bs.main()

@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
+
 class Tag(object):
     """
     A name/value tag on an AutoScalingGroup resource.
@@ -32,7 +33,7 @@ class Tag(object):
     :ivar resource_type: The only supported resource type at this time
         is "auto-scaling-group".
     """
-    
+
     def __init__(self, connection=None, key=None, value=None,
                  propagate_at_launch=False, resource_id=None,
                  resource_type='auto-scaling-group'):
@@ -54,11 +55,12 @@ class Tag(object):
             self.key = value
         elif name == 'Value':
             self.value = value
-        elif name == 'PropogateAtLaunch':
+        # Tellapart Fix: Boto typo'd propogate
+        elif name == 'PropagateAtLaunch':
             if value.lower() == 'true':
-                self.propogate_at_launch = True
+                self.propagate_at_launch = True
             else:
-                self.propogate_at_launch = False
+                self.propagate_at_launch = False
         elif name == 'ResourceId':
             self.resource_id = value
         elif name == 'ResourceType':
@@ -70,15 +72,14 @@ class Tag(object):
         to identify this Tag in a request.
         """
         prefix = 'Tags.member.%d.' % i
-        params[prefix+'ResourceId'] = self.resource_id
-        params[prefix+'ResourceType'] = self.resource_type
-        params[prefix+'Key'] = self.key
-        params[prefix+'Value'] = self.value
+        params[prefix + 'ResourceId'] = self.resource_id
+        params[prefix + 'ResourceType'] = self.resource_type
+        params[prefix + 'Key'] = self.key
+        params[prefix + 'Value'] = self.value
         if self.propagate_at_launch:
-            params[prefix+'PropagateAtLaunch'] = 'true'
+            params[prefix + 'PropagateAtLaunch'] = 'true'
         else:
-            params[prefix+'PropagateAtLaunch'] = 'false'
+            params[prefix + 'PropagateAtLaunch'] = 'false'
 
     def delete(self):
         return self.connection.delete_tags([self])
-        

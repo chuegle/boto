@@ -21,7 +21,7 @@
 # IN THE SOFTWARE.
 #
 
-from boto2.ec2.regioninfo import RegionInfo
+from boto2.regioninfo import RegionInfo
 
 
 def regions():
@@ -47,9 +47,15 @@ def regions():
             RegionInfo(name='ap-southeast-1',
                        endpoint='dynamodb.ap-southeast-1.amazonaws.com',
                        connection_cls=boto2.dynamodb.layer2.Layer2),
+            RegionInfo(name='ap-southeast-2',
+                       endpoint='dynamodb.ap-southeast-2.amazonaws.com',
+                       connection_cls=boto2.dynamodb.layer2.Layer2),
             RegionInfo(name='eu-west-1',
                        endpoint='dynamodb.eu-west-1.amazonaws.com',
                        connection_cls=boto2.dynamodb.layer2.Layer2),
+            RegionInfo(name='sa-east-1',
+                   endpoint='dynamodb.sa-east-1.amazonaws.com',
+                   connection_cls=boto2.dynamodb.layer2.Layer2),
             ]
 
 

@@ -14,17 +14,15 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
 # OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABIL-
 # ITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
-# SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+# SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
 import uuid
 import base64
-try:
-    import simplejson as json
-except ImportError:
-    import json
+import time
+from boto2.compat import json
 from boto2.cloudfront.identity import OriginAccessIdentity
 from boto2.cloudfront.object import Object, StreamingObject
 from boto2.cloudfront.signers import ActiveTrustedSigners, TrustedSigners
@@ -51,23 +49,23 @@ class DistributionConfig:
         :param enabled: Whether the distribution is enabled to accept
                         end user requests for content.
         :type enabled: bool
-        
+
         :param caller_reference: A unique number that ensures the
                                  request can't be replayed.  If no
                                  caller_reference is provided, boto
                                  will generate a type 4 UUID for use
                                  as the caller reference.
         :type enabled: str
-        
+
         :param cnames: A CNAME alias you want to associate with this
                        distribution. You can have up to 10 CNAME aliases
                        per distribution.
         :type enabled: array of str
-        
+
         :param comment: Any comments you want to include about the
                         distribution.
         :type comment: str
-        
+
         :param trusted_signers: Specifies any AWS accounts you want to
                                 permit to create signed URLs for private
                                 content. If you want the distribution to
@@ -76,7 +74,7 @@ class DistributionConfig:
                                 distribution to use basic URLs, leave
                                 this None.
         :type trusted_signers: :class`boto2.cloudfront.signers.TrustedSigners`
-        
+
         :param default_root_object: Designates a default root object.
                                     Only include a DefaultRootObject value
                                     if you are going to assign a default
@@ -88,7 +86,7 @@ class DistributionConfig:
                         this should contain a LoggingInfo object; otherwise
                         it should contain None.
         :type logging: :class`boto2.cloudfront.logging.LoggingInfo`
-        
+
         """
         self.connection = connection
         self.origin = origin
@@ -280,7 +278,7 @@ class StreamingDistributionSummary(DistributionSummary):
 
     def get_distribution(self):
         return self.connection.get_streaming_distribution_info(self.id)
-    
+
 class Distribution:
 
     def __init__(self, connection=None, config=None, domain_name='',
@@ -402,11 +400,11 @@ class Distribution:
             return self._bucket
         else:
             raise NotImplementedError('Unable to get_objects on CustomOrigin')
-    
+
     def get_objects(self):
         """
         Return a list of all content objects in this distribution.
-        
+
         :rtype: list of :class:`boto2.cloudfront.object.Object`
         :return: The content objects
         """
@@ -622,8 +620,12 @@ class Distribution:
         Creates a custom policy string based on the supplied parameters.
         """
         condition = {}
-        if expires:
-            condition["DateLessThan"] = {"AWS:EpochTime": expires}
+        # SEE: http://docs.amazonwebservices.com/AmazonCloudFront/latest/DeveloperGuide/RestrictingAccessPrivateContent.html#CustomPolicy
+        # The 'DateLessThan' property is required.
+        if not expires:
+            # Defaults to ONE day
+            expires = int(time.time()) + 86400
+        condition["DateLessThan"] = {"AWS:EpochTime": expires}
         if valid_after:
             condition["DateGreaterThan"] = {"AWS:EpochTime": valid_after}
         if ip_address:
@@ -638,13 +640,13 @@ class Distribution:
     @staticmethod
     def _sign_string(message, private_key_file=None, private_key_string=None):
         """
-        Signs a string for use with Amazon CloudFront.  Requires the M2Crypto
-        library be installed.
+        Signs a string for use with Amazon CloudFront.
+        Requires the rsa library be installed.
         """
         try:
-            from M2Crypto import EVP
+            import rsa
         except ImportError:
-            raise NotImplementedError("Boto depends on the python M2Crypto "
+            raise NotImplementedError("Boto depends on the python rsa "
                                       "library to generate signed URLs for "
                                       "CloudFront")
         # Make sure only one of private_key_file and private_key_string is set
@@ -652,18 +654,16 @@ class Distribution:
             raise ValueError("Only specify the private_key_file or the private_key_string not both")
         if not private_key_file and not private_key_string:
             raise ValueError("You must specify one of private_key_file or private_key_string")
-        # if private_key_file is a file object read the key string from there
+        # If private_key_file is a file, read its contents. Otherwise, open it and then read it
         if isinstance(private_key_file, file):
             private_key_string = private_key_file.read()
-        # Now load key and calculate signature
-        if private_key_string:
-            key = EVP.load_key_string(private_key_string)
-        else:
-            key = EVP.load_key(private_key_file)
-        key.reset_context(md='sha1')
-        key.sign_init()
-        key.sign_update(str(message))
-        signature = key.sign_final()
+        elif private_key_file:
+            with open(private_key_file, 'r') as file_handle:
+                private_key_string = file_handle.read()
+
+        # Sign it!
+        private_key = rsa.PrivateKey.load_pkcs1(private_key_string)
+        signature = rsa.sign(str(message), private_key, 'SHA-1')
         return signature
 
     @staticmethod
@@ -741,5 +741,5 @@ class StreamingDistribution(Distribution):
 
     def delete(self):
         self.connection.delete_streaming_distribution(self.id, self.etag)
-            
-        
+
+

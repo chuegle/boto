@@ -122,7 +122,10 @@ class SecurityGroup(TaggedEC2Object):
                                         target_grant = grant
                         if target_grant:
                             rule.grants.remove(target_grant)
-        if len(rule.grants) == 0:
+        # TELLAPART FIX: boto had rule.grants here, which is just the last rule
+        # seen, allowing a target_rule with grants to be deleted prematurely.
+        # someone needs to lookup "and" and "break"....
+        if target_rule and len(target_rule.grants) == 0:
             self.rules.remove(target_rule)
 
     def authorize(self, ip_protocol=None, from_port=None, to_port=None,
@@ -183,7 +186,7 @@ class SecurityGroup(TaggedEC2Object):
                                                           group_id,
                                                           src_group_group_id)
         if status:
-            if type(cidr_ip) != list:
+            if not isinstance(cidr_ip, list):
                 cidr_ip = [cidr_ip]
             for single_cidr_ip in cidr_ip:
                 self.add_rule(ip_protocol, from_port, to_port, src_group_name,

@@ -25,7 +25,7 @@ class ComplexType(dict):
     _value = 'Value'
 
     def __repr__(self):
-        return '{}{}'.format(getattr(self, self._value, None), self.copy())
+        return '{0}{1}'.format(getattr(self, self._value, None), self.copy())
 
     def __str__(self):
         return str(getattr(self, self._value, ''))
@@ -46,7 +46,10 @@ class DeclarativeType(object):
     def setup(self, parent, name, *args, **kw):
         self._parent = parent
         self._name = name
-        setattr(self._parent, self._name, self)
+        self._clone = self.__class__(self._hint)
+        self._clone._parent = parent
+        self._clone._name = name
+        setattr(self._parent, self._name, self._clone)
 
     def start(self, *args, **kw):
         raise NotImplemented
@@ -55,7 +58,7 @@ class DeclarativeType(object):
         raise NotImplemented
 
     def teardown(self, *args, **kw):
-        if self._value is None or self._value == []:
+        if self._value is None:
             delattr(self._parent, self._name)
         else:
             setattr(self._parent, self._name, self._value)
@@ -71,9 +74,14 @@ class Element(DeclarativeType):
 
 
 class SimpleList(DeclarativeType):
-    def setup(self, *args, **kw):
-        DeclarativeType.setup(self, *args, **kw)
+    def __init__(self, *args, **kw):
+        DeclarativeType.__init__(self, *args, **kw)
         self._value = []
+
+    def teardown(self, *args, **kw):
+        if self._value == []:
+            self._value = None
+        DeclarativeType.teardown(self, *args, **kw)
 
     def start(self, *args, **kw):
         return None
@@ -165,15 +173,16 @@ class ResponseElement(dict):
         return self._connection
 
     def __repr__(self):
-        render = lambda pair: '{!s}: {!r}'.format(*pair)
+        render = lambda pair: '{0!s}: {1!r}'.format(*pair)
         do_show = lambda pair: not pair[0].startswith('_')
         attrs = filter(do_show, self.__dict__.items())
         name = self.__class__.__name__
         if name == 'JITResponse':
-            name = '^{}^'.format(self._name or '')
-        return '{}{!r}({})'.format(name,
-                            self.copy(),
-                            ', '.join(map(render, attrs)))
+            name = '^{0}^'.format(self._name or '')
+        elif name == 'MWSResponse':
+            name = '^{0}^'.format(self._name or name)
+        return '{0}{1!r}({2})'.format(
+            name, self.copy(), ', '.join(map(render, attrs)))
 
     def _type_for(self, name, attrs):
         return self._override.get(name, globals().get(name, ResponseElement))
@@ -204,6 +213,13 @@ class ResponseElement(dict):
 
 class Response(ResponseElement):
     ResponseMetadata = Element()
+
+    @strip_namespace
+    def startElement(self, name, attrs, connection):
+        if name == self._name:
+            self.update(attrs)
+        else:
+            return ResponseElement.startElement(self, name, attrs, connection)
 
     @property
     def _result(self):
@@ -259,7 +275,7 @@ class RequestReportResult(ResponseElement):
 
 
 class GetReportRequestListResult(RequestReportResult):
-    ReportRequestInfo = Element()
+    ReportRequestInfo = ElementList()
 
 
 class GetReportRequestListByNextTokenResult(GetReportRequestListResult):
@@ -271,7 +287,7 @@ class CancelReportRequestsResult(RequestReportResult):
 
 
 class GetReportListResult(ResponseElement):
-    ReportInfo = Element()
+    ReportInfo = ElementList()
 
 
 class GetReportListByNextTokenResult(GetReportListResult):
@@ -333,7 +349,7 @@ class ComplexAmount(ResponseElement):
     _amount = 'Value'
 
     def __repr__(self):
-        return '{} {}'.format(self.CurrencyCode, getattr(self, self._amount))
+        return '{0} {1}'.format(self.CurrencyCode, getattr(self, self._amount))
 
     def __float__(self):
         return float(getattr(self, self._amount))
@@ -344,7 +360,7 @@ class ComplexAmount(ResponseElement):
     @strip_namespace
     def startElement(self, name, attrs, connection):
         if name not in ('CurrencyCode', self._amount):
-            message = 'Unrecognized tag {} in ComplexAmount'.format(name)
+            message = 'Unrecognized tag {0} in ComplexAmount'.format(name)
             raise AssertionError(message)
         return ResponseElement.startElement(self, name, attrs, connection)
 
@@ -361,7 +377,7 @@ class ComplexMoney(ComplexAmount):
 
 class ComplexWeight(ResponseElement):
     def __repr__(self):
-        return '{} {}'.format(self.Value, self.Unit)
+        return '{0} {1}'.format(self.Value, self.Unit)
 
     def __float__(self):
         return float(self.Value)
@@ -372,7 +388,7 @@ class ComplexWeight(ResponseElement):
     @strip_namespace
     def startElement(self, name, attrs, connection):
         if name not in ('Unit', 'Value'):
-            message = 'Unrecognized tag {} in ComplexWeight'.format(name)
+            message = 'Unrecognized tag {0} in ComplexWeight'.format(name)
             raise AssertionError(message)
         return ResponseElement.startElement(self, name, attrs, connection)
 
@@ -398,7 +414,7 @@ class ComplexDimensions(ResponseElement):
     @strip_namespace
     def startElement(self, name, attrs, connection):
         if name not in self._dimensions:
-            message = 'Unrecognized tag {} in ComplexDimensions'.format(name)
+            message = 'Unrecognized tag {0} in ComplexDimensions'.format(name)
             raise AssertionError(message)
         setattr(self, name, Dimension(attrs.copy()))
 
@@ -524,7 +540,9 @@ class Product(ResponseElement):
         VariationParent=ElementList(VariationRelationship),
     )
     CompetitivePricing = ElementList(CompetitivePricing)
-    SalesRankings = ElementList(SalesRank)
+    SalesRankings = Element(\
+        SalesRank=ElementList(SalesRank),
+    )
     LowestOfferListings = Element(\
         LowestOfferListing=ElementList(LowestOfferListing),
     )
@@ -544,6 +562,10 @@ class ProductsBulkOperationResponse(ResponseResultList):
 
 
 class GetMatchingProductResponse(ProductsBulkOperationResponse):
+    pass
+
+
+class GetMatchingProductForIdResult(ListMatchingProductsResult):
     pass
 
 
@@ -583,12 +605,12 @@ class GetProductCategoriesForASINResult(GetProductCategoriesResult):
 
 
 class Order(ResponseElement):
-    OrderTotal = Element(ComplexAmount)
+    OrderTotal = Element(ComplexMoney)
     ShippingAddress = Element()
     PaymentExecutionDetail = Element(\
         PaymentExecutionDetailItem=ElementList(\
             PaymentExecutionDetailItem=Element(\
-                Payment=Element(ComplexAmount)
+                Payment=Element(ComplexMoney)
             )
         )
     )
@@ -607,17 +629,17 @@ class GetOrderResult(ListOrdersResult):
 
 
 class OrderItem(ResponseElement):
-    ItemPrice = Element(ComplexAmount)
-    ShippingPrice = Element(ComplexAmount)
-    GiftWrapPrice = Element(ComplexAmount)
-    ItemTax = Element(ComplexAmount)
-    ShippingTax = Element(ComplexAmount)
-    GiftWrapTax = Element(ComplexAmount)
-    ShippingDiscount = Element(ComplexAmount)
-    PromotionDiscount = Element(ComplexAmount)
+    ItemPrice = Element(ComplexMoney)
+    ShippingPrice = Element(ComplexMoney)
+    GiftWrapPrice = Element(ComplexMoney)
+    ItemTax = Element(ComplexMoney)
+    ShippingTax = Element(ComplexMoney)
+    GiftWrapTax = Element(ComplexMoney)
+    ShippingDiscount = Element(ComplexMoney)
+    PromotionDiscount = Element(ComplexMoney)
     PromotionIds = SimpleList()
-    CODFee = Element(ComplexAmount)
-    CODFeeDiscount = Element(ComplexAmount)
+    CODFee = Element(ComplexMoney)
+    CODFeeDiscount = Element(ComplexMoney)
 
 
 class ListOrderItemsResult(ResponseElement):

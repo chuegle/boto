@@ -1,4 +1,6 @@
-# Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
+# Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
+# Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
+# All Rights Reserved
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the
@@ -19,6 +21,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
+from boto2.ec2.elb.listelement import ListElement
+
+
 class Listener(object):
     """
     Represents an EC2 Load Balancer Listener tuple
@@ -31,6 +36,7 @@ class Listener(object):
         self.instance_port = instance_port
         self.protocol = protocol
         self.ssl_certificate_id = ssl_certificate_id
+        self.policy_names = ListElement()
 
     def __repr__(self):
         r = "(%d, %d, '%s'" % (self.load_balancer_port, self.instance_port, self.protocol)
@@ -40,6 +46,8 @@ class Listener(object):
         return r
 
     def startElement(self, name, attrs, connection):
+        if name == 'PolicyNames':
+            return self.policy_names
         return None
 
     def endElement(self, name, value, connection):
@@ -65,7 +73,3 @@ class Listener(object):
         if key == 2:
             return self.protocol
         raise KeyError
-
-
-
-
