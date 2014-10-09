@@ -36,16 +36,16 @@ equally distribute load amongst all your instances.
 Creating a Connection
 ---------------------
 The first step in accessing ELB is to create a connection to the service.
-There are two ways to do this in boto.  The first is:
+There are two ways to do this in boto1.  The first is:
 
->>> from boto.ec2.elb import ELBConnection
+>>> from boto1.ec2.elb import ELBConnection
 >>> conn = ELBConnection('<aws access key>', '<aws secret key>')
 
 There is also a shortcut function in the boto package, called connect_elb
 that may provide a slightly easier means of creating a connection:
 
->>> import boto
->>> conn = boto.connect_elb()
+>>> import boto1
+>>> conn = boto1.connect_elb()
 
 In either case, conn will point to an ELBConnection object which we will
 use throughout the remainder of this tutorial.
@@ -56,9 +56,9 @@ Like EC2 the ELB service has a different endpoint for each region. By default
 the US endpoint is used. To choose a specific region, instantiate the
 ELBConnection object with that region's endpoint.
 
->>> ec2 = boto.connect_elb(host='eu-west-1.elasticloadbalancing.amazonaws.com')
+>>> ec2 = boto1.connect_elb(host='eu-west-1.elasticloadbalancing.amazonaws.com')
 
-Alternatively, edit your boto.cfg with the default ELB endpoint to use::
+Alternatively, edit your boto1.cfg with the default ELB endpoint to use::
 
     [Boto]
     elb_endpoint = eu-west-1.elasticloadbalancing.amazonaws.com
@@ -132,9 +132,9 @@ respond to requests. A health check is essentially a tuple consisting of:
 The following example creates a health check called *instance_health* that simply checks
 instances every 20 seconds on port 80 over HTTP at the resource /health for 200 successes.
 
->>> import boto
->>> from boto.ec2.elb import HealthCheck
->>> conn = boto.connect_elb()
+>>> import boto1
+>>> from boto1.ec2.elb import HealthCheck
+>>> conn = boto1.connect_elb()
 >>> hc = HealthCheck('instance_health', interval=20, target='HTTP:8080/health')
 
 Putting It All Together

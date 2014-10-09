@@ -21,7 +21,7 @@
 
 import weakref
 
-from boto.ec2.autoscale.request import Request
+from boto1.ec2.autoscale.request import Request
 
 
 class Trigger(object):

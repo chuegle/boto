@@ -24,10 +24,10 @@ import os
 import rfc822
 import StringIO
 import base64
-import boto.utils
-from boto.exception import S3ResponseError, S3DataError, BotoClientError
-from boto.s3.user import User
-from boto import UserAgent, config
+import boto1.utils
+from boto1.exception import S3ResponseError, S3DataError, BotoClientError
+from boto1.s3.user import User
+from boto1 import UserAgent, config
 try:
     from hashlib import md5
 except ImportError:
@@ -95,7 +95,7 @@ class Key(object):
             if self.resp.status < 199 or self.resp.status > 299:
                 raise S3ResponseError(self.resp.status, self.resp.reason)
             response_headers = self.resp.msg
-            self.metadata = boto.utils.get_aws_metadata(response_headers)
+            self.metadata = boto1.utils.get_aws_metadata(response_headers)
             for name,value in response_headers.items():
                 if name.lower() == 'content-length':
                     self.size = int(value)
@@ -179,7 +179,7 @@ class Key(object):
                          If no metadata is supplied, the source key's
                          metadata will be copied to the new key.
 
-        :rtype: :class:`boto.s3.key.Key` or subclass
+        :rtype: :class:`boto1.s3.key.Key` or subclass
         :returns: An instance of the newly created key object
         """
         dst_bucket = self.bucket.connection.lookup(dst_bucket)
@@ -362,7 +362,7 @@ class Key(object):
             headers['Content-Type'] = self.content_type
         headers['Content-Length'] = str(self.size)
         headers['Expect'] = '100-Continue'
-        headers = boto.utils.merge_meta(headers, self.metadata)
+        headers = boto1.utils.merge_meta(headers, self.metadata)
         return self.bucket.connection.make_request('PUT', self.bucket.name,
                 self.name, headers, sender=sender)
 
@@ -423,7 +423,7 @@ class Key(object):
              this parameter determines the granularity of the callback by defining
              the maximum number of times the callback will be called during the file transfer.
 
-        :type policy: :class:`boto.s3.acl.CannedACLStrings`
+        :type policy: :class:`boto1.s3.acl.CannedACLStrings`
         :param policy: A canned ACL policy that will be applied to the new key in S3.
              
         :type md5: A tuple containing the hexdigest version of the MD5 checksum of the
@@ -483,7 +483,7 @@ class Key(object):
              this parameter determines the granularity of the callback by defining
              the maximum number of times the callback will be called during the file transfer.  
              
-        :type policy: :class:`boto.s3.acl.CannedACLStrings`
+        :type policy: :class:`boto1.s3.acl.CannedACLStrings`
         :param policy: A canned ACL policy that will be applied to the new key in S3.
              
         :type md5: A tuple containing the hexdigest version of the MD5 checksum of the
@@ -524,7 +524,7 @@ class Key(object):
              this parameter determines the granularity of the callback by defining
              the maximum number of times the callback will be called during the file transfer.  
              
-        :type policy: :class:`boto.s3.acl.CannedACLStrings`
+        :type policy: :class:`boto1.s3.acl.CannedACLStrings`
         :param policy: A canned ACL policy that will be applied to the new key in S3.
              
         :type md5: A tuple containing the hexdigest version of the MD5 checksum of the

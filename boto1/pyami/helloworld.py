@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 #
-from boto.pyami.scriptbase import ScriptBase
+from boto1.pyami.scriptbase import ScriptBase
 
 class HelloWorld(ScriptBase):
 

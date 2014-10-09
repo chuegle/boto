@@ -27,7 +27,7 @@ M2Crypto's version verifies the certificate of the server.
 
 To use this feature, do something like this:
 
-from boto.ec2.connection import EC2Connection
+from boto1.ec2.connection import EC2Connection
 
 ec2 = EC2Connection(ACCESS_KEY_ID, SECRET_ACCESS_KEY,
     https_connection_factory=https_connection_factory(cafile=CA_FILE))

@@ -23,8 +23,8 @@
 Exception classes - Subclassing allows you to check for specific errors
 """
 
-from boto import handler
-from boto.resultset import ResultSet
+from boto1 import handler
+from boto1.resultset import ResultSet
 
 import xml.sax
 

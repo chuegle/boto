@@ -49,11 +49,11 @@ import urllib, urlparse
 import os
 import xml.sax
 import Queue
-import boto
-from boto.exception import AWSConnectionError, BotoClientError, BotoServerError
-from boto.resultset import ResultSet
-import boto.utils
-from boto import config, UserAgent, handler
+import boto1
+from boto1.exception import AWSConnectionError, BotoClientError, BotoServerError
+from boto1.resultset import ResultSet
+import boto1.utils
+from boto1 import config, UserAgent, handler
 
 #
 # the following is necessary because of the incompatibilities
@@ -88,7 +88,7 @@ PORTS_BY_SECURITY = { True: 443, False: 80 }
 
 class ConnectionPool:
     def __init__(self, hosts, connections_per_host):
-        self._hosts = boto.utils.LRUCache(hosts)
+        self._hosts = boto1.utils.LRUCache(hosts)
         self.connections_per_host = connections_per_host
 
     def __getitem__(self, key):
@@ -283,7 +283,7 @@ class AWSAuthConnection:
             host = '%s:%d' % (self.proxy, int(self.proxy_port))
         if host is None:
             host = self.server_name()
-        boto.log.debug('establishing HTTP connection')
+        boto1.log.debug('establishing HTTP connection')
         if is_secure:
             if self.use_proxy:
                 connection = self.proxy_ssl()
@@ -364,11 +364,11 @@ class AWSAuthConnection:
         This code was inspired by the S3Utils classes posted to the boto-users
         Google group by Larry Bates.  Thanks!
         """
-        boto.log.debug('Method: %s' % method)
-        boto.log.debug('Path: %s' % path)
-        boto.log.debug('Data: %s' % data)
-        boto.log.debug('Headers: %s' % headers)
-        boto.log.debug('Host: %s' % host)
+        boto1.log.debug('Method: %s' % method)
+        boto1.log.debug('Path: %s' % path)
+        boto1.log.debug('Data: %s' % data)
+        boto1.log.debug('Headers: %s' % headers)
+        boto1.log.debug('Host: %s' % host)
         response = None
         body = None
         e = None
@@ -389,7 +389,7 @@ class AWSAuthConnection:
                 if method == 'HEAD' and getattr(response, 'chunked', False):
                     response.chunked = 0
                 if response.status == 500 or response.status == 503:
-                    boto.log.debug('received %d response, retrying in %d seconds' % (response.status, 2**i))
+                    boto1.log.debug('received %d response, retrying in %d seconds' % (response.status, 2**i))
                     body = response.read()
                 elif response.status == 408:
                     body = response.read()
@@ -407,14 +407,14 @@ class AWSAuthConnection:
                             urlparse.urlparse(location)
                     if query:
                         path += '?' + query
-                    boto.log.debug('Redirecting: %s' % scheme + '://' + host + path)
+                    boto1.log.debug('Redirecting: %s' % scheme + '://' + host + path)
                     connection = self.get_http_connection(host,
                             scheme == 'https')
                     continue
             except KeyboardInterrupt:
                 sys.exit('Keyboard Interrupt')
             except self.http_exceptions, e:
-                boto.log.debug('encountered %s exception, reconnecting' % \
+                boto1.log.debug('encountered %s exception, reconnecting' % \
                                   e.__class__.__name__)
                 connection = self.new_http_connection(host, self.is_secure)
             time.sleep(2**i)
@@ -455,8 +455,8 @@ class AWSAuthConnection:
             headers['Date'] = time.strftime("%a, %d %b %Y %H:%M:%S GMT",
                                             time.gmtime())
 
-        c_string = boto.utils.canonical_string(method, path, headers)
-        boto.log.debug('Canonical: %s' % c_string)
+        c_string = boto1.utils.canonical_string(method, path, headers)
+        boto1.log.debug('Canonical: %s' % c_string)
         hmac = self.hmac.copy()
         hmac.update(c_string)
         b64_hmac = base64.encodestring(hmac.digest()).strip()
@@ -466,7 +466,7 @@ class AWSAuthConnection:
         """(Optional) Close any open HTTP connections.  This is non-destructive,
         and making a new request will open a connection again."""
 
-        boto.log.debug('closing all HTTP connections')
+        boto1.log.debug('closing all HTTP connections')
         self.connection = None  # compat field
         hosts = list(self._cache.keys())
         for host in hosts:
@@ -497,7 +497,7 @@ class AWSQueryConnection(AWSAuthConnection):
             return value
 
     def calc_signature_0(self, params):
-        boto.log.debug('using calc_signature_0')
+        boto1.log.debug('using calc_signature_0')
         hmac = self.hmac.copy()
         s = params['Action'] + params['Timestamp']
         hmac.update(s)
@@ -511,7 +511,7 @@ class AWSQueryConnection(AWSAuthConnection):
         return (qs, base64.b64encode(hmac.digest()))
 
     def calc_signature_1(self, params):
-        boto.log.debug('using calc_signature_1')
+        boto1.log.debug('using calc_signature_1')
         hmac = self.hmac.copy()
         keys = params.keys()
         keys.sort(cmp = lambda x, y: cmp(x.lower(), y.lower()))
@@ -525,7 +525,7 @@ class AWSQueryConnection(AWSAuthConnection):
         return (qs, base64.b64encode(hmac.digest()))
 
     def calc_signature_2(self, params, verb, path):
-        boto.log.debug('using calc_signature_2')
+        boto1.log.debug('using calc_signature_2')
         string_to_sign = '%s\n%s\n%s\n' % (verb, self.server_name().lower(), path)
         if self.hmac_256:
             hmac = self.hmac_256.copy()
@@ -540,13 +540,13 @@ class AWSQueryConnection(AWSAuthConnection):
             val = self.get_utf8_value(params[key])
             pairs.append(urllib.quote(key, safe='') + '=' + urllib.quote(val, safe='-_~'))
         qs = '&'.join(pairs)
-        boto.log.debug('query string: %s' % qs)
+        boto1.log.debug('query string: %s' % qs)
         string_to_sign += qs
-        boto.log.debug('string_to_sign: %s' % string_to_sign)
+        boto1.log.debug('string_to_sign: %s' % string_to_sign)
         hmac.update(string_to_sign)
         b64 = base64.b64encode(hmac.digest())
-        boto.log.debug('len(b64)=%d' % len(b64))
-        boto.log.debug('base64 encoded digest: %s' % b64)
+        boto1.log.debug('len(b64)=%d' % len(b64))
+        boto1.log.debug('base64 encoded digest: %s' % b64)
         return (qs, b64)
 
     def get_signature(self, params, verb, path):
@@ -596,15 +596,15 @@ class AWSQueryConnection(AWSAuthConnection):
             parent = self
         response = self.make_request(action, params, path, verb)
         body = response.read()
-        boto.log.debug(body)
+        boto1.log.debug(body)
         if response.status == 200:
             rs = ResultSet(markers)
             h = handler.XmlHandler(rs, parent)
             xml.sax.parseString(body, h)
             return rs
         else:
-            boto.log.error('%s %s' % (response.status, response.reason))
-            boto.log.error('%s' % body)
+            boto1.log.error('%s %s' % (response.status, response.reason))
+            boto1.log.error('%s' % body)
             raise self.ResponseError(response.status, response.reason, body)
 
     def get_object(self, action, params, cls, path='/', parent=None, verb='GET'):
@@ -612,15 +612,15 @@ class AWSQueryConnection(AWSAuthConnection):
             parent = self
         response = self.make_request(action, params, path, verb)
         body = response.read()
-        boto.log.debug(body)
+        boto1.log.debug(body)
         if response.status == 200:
             obj = cls(parent)
             h = handler.XmlHandler(obj, parent)
             xml.sax.parseString(body, h)
             return obj
         else:
-            boto.log.error('%s %s' % (response.status, response.reason))
-            boto.log.error('%s' % body)
+            boto1.log.error('%s %s' % (response.status, response.reason))
+            boto1.log.error('%s' % body)
             raise self.ResponseError(response.status, response.reason, body)
 
     def get_status(self, action, params, path='/', parent=None, verb='GET'):
@@ -628,14 +628,14 @@ class AWSQueryConnection(AWSAuthConnection):
             parent = self
         response = self.make_request(action, params, path, verb)
         body = response.read()
-        boto.log.debug(body)
+        boto1.log.debug(body)
         if response.status == 200:
             rs = ResultSet()
             h = handler.XmlHandler(rs, parent)
             xml.sax.parseString(body, h)
             return rs.status
         else:
-            boto.log.error('%s %s' % (response.status, response.reason))
-            boto.log.error('%s' % body)
+            boto1.log.error('%s %s' % (response.status, response.reason))
+            boto1.log.error('%s' % body)
             raise self.ResponseError(response.status, response.reason, body)
 

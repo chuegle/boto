@@ -20,9 +20,9 @@
 # IN THE SOFTWARE.
 #
 
-import boto
-from boto.sdb.db.property import *
-from boto.sdb.db.model import Model
+import boto1
+from boto1.sdb.db.property import *
+from boto1.sdb.db.model import Model
 import datetime, subprocess, StringIO, time
 
 def check_hour(val):
@@ -73,7 +73,7 @@ class Task(Model):
         If it's a daily task and it's never been run and the hour is right, run it now.
         """
         need_to_run = False
-        boto.log.info('checking Task[%s]-now=%s, last=%s' % (self.name, self.now, self.last_executed))
+        boto1.log.info('checking Task[%s]-now=%s, last=%s' % (self.name, self.now, self.last_executed))
 
         if self.hourly and not self.last_executed:
             return 0
@@ -97,17 +97,17 @@ class Task(Model):
                 return min(60*60*24-delta.seconds, 43200)
     
     def _run(self, msg, vtimeout):
-        boto.log.info('Task[%s] - running:%s' % (self.name, self.command))
+        boto1.log.info('Task[%s] - running:%s' % (self.name, self.command))
         log_fp = StringIO.StringIO()
         process = subprocess.Popen(self.command, shell=True, stdin=subprocess.PIPE,
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         nsecs = 5
         current_timeout = vtimeout
         while process.poll() == None:
-            boto.log.info('nsecs=%s, timeout=%s' % (nsecs, current_timeout))
+            boto1.log.info('nsecs=%s, timeout=%s' % (nsecs, current_timeout))
             if nsecs >= current_timeout:
                 current_timeout += vtimeout
-                boto.log.info('Task[%s] - setting timeout to %d seconds' % (self.name, current_timeout))
+                boto1.log.info('Task[%s] - setting timeout to %d seconds' % (self.name, current_timeout))
                 if msg:
                     msg.change_visibility(current_timeout)
             time.sleep(5)
@@ -115,14 +115,14 @@ class Task(Model):
         t = process.communicate()
         log_fp.write(t[0])
         log_fp.write(t[1])
-        boto.log.info('Task[%s] - output: %s' % (self.name, log_fp.getvalue()))
+        boto1.log.info('Task[%s] - output: %s' % (self.name, log_fp.getvalue()))
         self.last_executed = self.now
         self.last_status = process.returncode
         self.last_output = log_fp.getvalue()[0:1023]
 
     def run(self, msg, vtimeout=60):
         delay = self.check()
-        boto.log.info('Task[%s] - delay=%s seconds' % (self.name, delay))
+        boto1.log.info('Task[%s] - delay=%s seconds' % (self.name, delay))
         if delay == 0:
             self._run(msg, vtimeout)
             queue = msg.queue
@@ -130,26 +130,26 @@ class Task(Model):
             new_msg = queue.write(msg)
             self.message_id = new_msg.id
             self.put()
-            boto.log.info('Task[%s] - new message id=%s' % (self.name, new_msg.id))
+            boto1.log.info('Task[%s] - new message id=%s' % (self.name, new_msg.id))
             msg.delete()
-            boto.log.info('Task[%s] - deleted message %s' % (self.name, msg.id))
+            boto1.log.info('Task[%s] - deleted message %s' % (self.name, msg.id))
         else:
-            boto.log.info('new_vtimeout: %d' % delay)
+            boto1.log.info('new_vtimeout: %d' % delay)
             msg.change_visibility(delay)
 
     def start(self, queue_name):
-        boto.log.info('Task[%s] - starting with queue: %s' % (self.name, queue_name))
-        queue = boto.lookup('sqs', queue_name)
+        boto1.log.info('Task[%s] - starting with queue: %s' % (self.name, queue_name))
+        queue = boto1.lookup('sqs', queue_name)
         msg = queue.new_message(self.id)
         msg = queue.write(msg)
         self.message_id = msg.id
         self.put()
-        boto.log.info('Task[%s] - start successful' % self.name)
+        boto1.log.info('Task[%s] - start successful' % self.name)
 
 class TaskPoller(object):
 
     def __init__(self, queue_name):
-        self.sqs = boto.connect_sqs()
+        self.sqs = boto1.connect_sqs()
         self.queue = self.sqs.lookup(queue_name)
 
     def poll(self, wait=60, vtimeout=60):
@@ -159,10 +159,10 @@ class TaskPoller(object):
                 task = Task.get_by_id(m.get_body())
                 if task:
                     if not task.message_id or m.id == task.message_id:
-                        boto.log.info('Task[%s] - read message %s' % (task.name, m.id))
+                        boto1.log.info('Task[%s] - read message %s' % (task.name, m.id))
                         task.run(m, vtimeout)
                     else:
-                        boto.log.info('Task[%s] - found extraneous message, ignoring' % task.name)
+                        boto1.log.info('Task[%s] - found extraneous message, ignoring' % task.name)
             else:
                 time.sleep(wait)
 

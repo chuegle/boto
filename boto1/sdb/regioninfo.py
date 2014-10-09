@@ -20,7 +20,7 @@
 # IN THE SOFTWARE.
 #
 
-from boto.ec2.regioninfo import RegionInfo
+from boto1.ec2.regioninfo import RegionInfo
 
 class SDBRegionInfo(RegionInfo):
 
@@ -32,9 +32,9 @@ class SDBRegionInfo(RegionInfo):
         object's constructor as keyword arguments and they will be
         passed along to the SDBConnection object.
         
-        :rtype: :class:`boto.sdb.connection.SDBConnection`
+        :rtype: :class:`boto1.sdb.connection.SDBConnection`
         :return: The connection to this regions endpoint
         """
-        from boto.sdb.connection import SDBConnection
+        from boto1.sdb.connection import SDBConnection
         return SDBConnection(region=self, **kw_params)
 

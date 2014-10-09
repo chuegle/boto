@@ -43,29 +43,29 @@ Config file section::
     mount_point = <directory to mount device, defaults to /ebs>
 
 """
-import boto
-from boto.manage.volume import Volume
+import boto1
+from boto1.manage.volume import Volume
 import os, time
-from boto.pyami.installers.ubuntu.installer import Installer
+from boto1.pyami.installers.ubuntu.installer import Installer
 from string import Template
 
 BackupScriptTemplate = """#!/usr/bin/env python
 # Backup EBS volume
-import boto
-from boto.pyami.scriptbase import ScriptBase
+import boto1
+from boto1.pyami.scriptbase import ScriptBase
 import traceback
 
 class Backup(ScriptBase):
 
     def main(self):
         try:
-            ec2 = boto.connect_ec2()
+            ec2 = boto1.connect_ec2()
             self.run("/usr/sbin/xfs_freeze -f ${mount_point}")
             snapshot = ec2.create_snapshot('${volume_id}')
-            boto.log.info("Snapshot created: %s " %  snapshot)
+            boto1.log.info("Snapshot created: %s " %  snapshot)
         except Exception, e:
             self.notify(subject="${instance_id} Backup Failed", body=traceback.format_exc())
-            boto.log.info("Snapshot created: ${volume_id}")
+            boto1.log.info("Snapshot created: ${volume_id}")
         except Exception, e:
             self.notify(subject="${instance_id} Backup Failed", body=traceback.format_exc())
         finally:
@@ -90,14 +90,14 @@ class EBSInstaller(Installer):
 
     def __init__(self, config_file=None):
         Installer.__init__(self, config_file)
-        self.instance_id = boto.config.get('Instance', 'instance-id')
-        self.device = boto.config.get('EBS', 'device', '/dev/sdp')
-        self.volume_id = boto.config.get('EBS', 'volume_id')
-        self.logical_volume_name = boto.config.get('EBS', 'logical_volume_name')
-        self.mount_point = boto.config.get('EBS', 'mount_point', '/ebs')
+        self.instance_id = boto1.config.get('Instance', 'instance-id')
+        self.device = boto1.config.get('EBS', 'device', '/dev/sdp')
+        self.volume_id = boto1.config.get('EBS', 'volume_id')
+        self.logical_volume_name = boto1.config.get('EBS', 'logical_volume_name')
+        self.mount_point = boto1.config.get('EBS', 'mount_point', '/ebs')
 
     def attach(self):
-        ec2 = boto.connect_ec2()
+        ec2 = boto1.connect_ec2()
         if self.logical_volume_name:
             # if a logical volume was specified, override the specified volume_id
             # (if there was one) with the current AWS volume for the logical volume:
@@ -107,16 +107,16 @@ class EBSInstaller(Installer):
         # wait for the volume to be available. The volume may still be being created
         # from a snapshot.
         while volume.update() != 'available':
-            boto.log.info('Volume %s not yet available. Current status = %s.' % (volume.id, volume.status))
+            boto1.log.info('Volume %s not yet available. Current status = %s.' % (volume.id, volume.status))
             time.sleep(5)
         ec2.attach_volume(self.volume_id, self.instance_id, self.device)
         # now wait for the volume device to appear
         while not os.path.exists(self.device):
-            boto.log.info('%s still does not exist, waiting 10 seconds' % self.device)
+            boto1.log.info('%s still does not exist, waiting 10 seconds' % self.device)
             time.sleep(10)
 
     def make_fs(self):
-        boto.log.info('make_fs...')
+        boto1.log.info('make_fs...')
         has_fs = self.run('fsck %s' % self.device)
         if has_fs != 0:
             self.run('mkfs -t xfs %s' % self.device)
@@ -137,13 +137,13 @@ class EBSInstaller(Installer):
         self.run('chmod +x /usr/local/bin/ebs_backup_cleanup')
 
     def handle_mount_point(self):
-        boto.log.info('handle_mount_point')
+        boto1.log.info('handle_mount_point')
         if not os.path.isdir(self.mount_point):
-            boto.log.info('making directory')
+            boto1.log.info('making directory')
             # mount directory doesn't exist so create it
             self.run("mkdir %s" % self.mount_point)
         else:
-            boto.log.info('directory exists already')
+            boto1.log.info('directory exists already')
             self.run('mount -l')
             lines = self.last_command.output.split('\n')
             for line in lines:
@@ -182,13 +182,13 @@ class EBSInstaller(Installer):
         self.create_backup_script()
 
         # Set up the backup script
-        minute = boto.config.get('EBS', 'backup_cron_minute', '0')
-        hour = boto.config.get('EBS', 'backup_cron_hour', '4,16')
+        minute = boto1.config.get('EBS', 'backup_cron_minute', '0')
+        hour = boto1.config.get('EBS', 'backup_cron_hour', '4,16')
         self.add_cron("ebs_backup", "/usr/local/bin/ebs_backup", minute=minute, hour=hour)
 
         # Set up the backup cleanup script
-        minute = boto.config.get('EBS', 'backup_cleanup_cron_minute')
-        hour = boto.config.get('EBS', 'backup_cleanup_cron_hour')
+        minute = boto1.config.get('EBS', 'backup_cleanup_cron_minute')
+        hour = boto1.config.get('EBS', 'backup_cleanup_cron_hour')
         if (minute != None) and (hour != None):
             self.create_backup_cleanup_script();
             self.add_cron("ebs_backup_cleanup", "/usr/local/bin/ebs_backup_cleanup", minute=minute, hour=hour)
@@ -200,4 +200,4 @@ class EBSInstaller(Installer):
         if not os.path.exists(self.device):
             self.install()
         else:
-            boto.log.info("Device %s is already attached, skipping EBS Installer" % self.device)
+            boto1.log.info("Device %s is already attached, skipping EBS Installer" % self.device)

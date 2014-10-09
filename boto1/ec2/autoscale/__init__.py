@@ -24,21 +24,21 @@ This module provides an interface to the Elastic Compute Cloud (EC2)
 Auto Scaling service.
 """
 
-import boto
-from boto import config
-from boto.connection import AWSQueryConnection
-from boto.resultset import ResultSet
-from boto.ec2.regioninfo import RegionInfo
-from boto.ec2.autoscale.request import Request
-from boto.ec2.autoscale.trigger import Trigger
-from boto.ec2.autoscale.launchconfig import LaunchConfiguration
-from boto.ec2.autoscale.group import AutoScalingGroup
-from boto.ec2.autoscale.activity import Activity
+import boto1
+from boto1 import config
+from boto1.connection import AWSQueryConnection
+from boto1.resultset import ResultSet
+from boto1.ec2.regioninfo import RegionInfo
+from boto1.ec2.autoscale.request import Request
+from boto1.ec2.autoscale.trigger import Trigger
+from boto1.ec2.autoscale.launchconfig import LaunchConfiguration
+from boto1.ec2.autoscale.group import AutoScalingGroup
+from boto1.ec2.autoscale.activity import Activity
 
 
 class AutoScaleConnection(AWSQueryConnection):
-    APIVersion = boto.config.get('Boto', 'autoscale_version', '2009-05-15')
-    Endpoint = boto.config.get('Boto', 'autoscale_endpoint',
+    APIVersion = boto1.config.get('Boto', 'autoscale_version', '2009-05-15')
+    Endpoint = boto1.config.get('Boto', 'autoscale_endpoint',
                                'autoscaling.amazonaws.com')
     SignatureVersion = '2'
 
@@ -102,7 +102,7 @@ class AutoScaleConnection(AWSQueryConnection):
         """
         Creates a new Launch Configuration.
 
-        :type launch_config: boto.ec2.autoscale.launchconfig.LaunchConfiguration
+        :type launch_config: boto1.ec2.autoscale.launchconfig.LaunchConfiguration
         :param launch_config: LaunchConfiguraiton object.
 
         """

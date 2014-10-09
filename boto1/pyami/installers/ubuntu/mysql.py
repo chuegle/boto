@@ -27,10 +27,10 @@ a different location.  By default, this is /mnt but that can be
 configured in the [MySQL] section of the boto config file passed
 to the instance.
 """
-from boto.pyami.installers.ubuntu.installer import Installer
+from boto1.pyami.installers.ubuntu.installer import Installer
 import os
-import boto
-from boto.utils import ShellCommand
+import boto1
+from boto1.utils import ShellCommand
 from ConfigParser import SafeConfigParser
 import time
 
@@ -48,13 +48,13 @@ class MySQL(Installer):
 
 #    def set_root_password(self, password=None):
 #        if not password:
-#            password = boto.config.get('MySQL', 'root_password')
+#            password = boto1.config.get('MySQL', 'root_password')
 #        if password:
 #            self.run('mysqladmin -u root password %s' % password)
 #        return password
 
     def change_data_dir(self, password=None):
-        data_dir = boto.config.get('MySQL', 'data_dir', '/mnt')
+        data_dir = boto1.config.get('MySQL', 'data_dir', '/mnt')
         fresh_install = False;
         is_mysql_running_command = ShellCommand('mysqladmin ping') # exit status 0 if mysql is running
         is_mysql_running_command.run()

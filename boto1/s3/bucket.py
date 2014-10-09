@@ -19,16 +19,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-import boto
-from boto import handler
-from boto.resultset import ResultSet
-from boto.s3.acl import Policy, CannedACLStrings, ACL, Grant
-from boto.s3.user import User
-from boto.s3.key import Key
-from boto.s3.prefix import Prefix
-from boto.exception import S3ResponseError, S3PermissionsError, S3CopyError
-from boto.s3.bucketlistresultset import BucketListResultSet
-import boto.utils
+import boto1
+from boto1 import handler
+from boto1.resultset import ResultSet
+from boto1.s3.acl import Policy, CannedACLStrings, ACL, Grant
+from boto1.s3.user import User
+from boto1.s3.key import Key
+from boto1.s3.prefix import Prefix
+from boto1.exception import S3ResponseError, S3PermissionsError, S3CopyError
+from boto1.s3.bucketlistresultset import BucketListResultSet
+import boto1.utils
 import xml.sax
 import urllib
 
@@ -83,7 +83,7 @@ class Bucket:
     def set_key_class(self, key_class):
         """
         Set the Key class associated with this bucket.  By default, this
-        would be the boto.s3.key.Key class but if you want to subclass that
+        would be the boto1.s3.key.Key class but if you want to subclass that
         for some reason this allows you to associate your new class with a
         bucket so that when you call bucket.new_key() or when you get a listing
         of keys in the bucket you will get an instances of your key class
@@ -101,7 +101,7 @@ class Bucket:
         :type key_name: string
         :param key_name: The name of the key to retrieve
         
-        :rtype: :class:`boto.s3.key.Key`
+        :rtype: :class:`boto1.s3.key.Key`
         :returns: A Key object from this bucket.
         """
         return self.get_key(key_name, headers=headers)
@@ -115,14 +115,14 @@ class Bucket:
         :type key_name: string
         :param key_name: The name of the key to retrieve
         
-        :rtype: :class:`boto.s3.key.Key`
+        :rtype: :class:`boto1.s3.key.Key`
         :returns: A Key object from this bucket.
         """
         response = self.connection.make_request('HEAD', self.name, key_name, headers=headers)
         if response.status == 200:
             body = response.read()
             k = self.key_class(self)
-            k.metadata = boto.utils.get_aws_metadata(response.msg)
+            k.metadata = boto1.utils.get_aws_metadata(response.msg)
             k.etag = response.getheader('etag')
             k.content_type = response.getheader('content-type')
             k.content_encoding = response.getheader('content-encoding')
@@ -161,7 +161,7 @@ class Bucket:
         :type marker: string
         :param marker: The "marker" of where you are in the result set
         
-        :rtype: :class:`boto.s3.bucketlistresultset.BucketListResultSet`
+        :rtype: :class:`boto1.s3.bucketlistresultset.BucketListResultSet`
         :return: an instance of a BucketListResultSet that handles paging, etc
         """
         return BucketListResultSet(self, prefix, delimiter, marker, headers)
@@ -203,7 +203,7 @@ class Bucket:
         response = self.connection.make_request('GET', self.name,
                 headers=headers, query_args=s)
         body = response.read()
-        boto.log.debug(body)
+        boto1.log.debug(body)
         if response.status == 200:
             rs = ResultSet([('Contents', self.key_class),
                             ('CommonPrefixes', Prefix)])
@@ -220,7 +220,7 @@ class Bucket:
         :type key_name: string
         :param key_name: The name of the key to create
         
-        :rtype: :class:`boto.s3.key.Key` or subclass
+        :rtype: :class:`boto1.s3.key.Key` or subclass
         :returns: An instance of the newly created key object
         """
         return self.key_class(self, key_name)
@@ -261,14 +261,14 @@ class Bucket:
                          If no metadata is supplied, the source key's
                          metadata will be copied to the new key.
 
-        :rtype: :class:`boto.s3.key.Key` or subclass
+        :rtype: :class:`boto1.s3.key.Key` or subclass
         :returns: An instance of the newly created key object
         """
         src = '%s/%s' % (src_bucket_name, urllib.quote(src_key_name))
         if metadata:
             headers = {'x-amz-copy-source' : src,
                        'x-amz-metadata-directive' : 'REPLACE'}
-            headers = boto.utils.merge_meta(headers, metadata)
+            headers = boto1.utils.merge_meta(headers, metadata)
         else:
             headers = {'x-amz-copy-source' : src,
                        'x-amz-metadata-directive' : 'COPY'}

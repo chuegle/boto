@@ -19,8 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from boto.sqs.message import MHMessage
-from boto.exception import SQSDecodeError
+from boto1.sqs.message import MHMessage
+from boto1.exception import SQSDecodeError
 import base64
 import simplejson
 

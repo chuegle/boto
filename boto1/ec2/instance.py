@@ -22,12 +22,12 @@
 """
 Represents an EC2 Instance
 """
-import boto
-from boto.ec2.ec2object import EC2Object
-from boto.resultset import ResultSet
-from boto.ec2.address import Address
-from boto.ec2.blockdevicemapping import BlockDeviceMapping
-from boto.ec2.image import ProductCodes
+import boto1
+from boto1.ec2.ec2object import EC2Object
+from boto1.resultset import ResultSet
+from boto1.ec2.address import Address
+from boto1.ec2.blockdevicemapping import BlockDeviceMapping
+from boto1.ec2.image import ProductCodes
 import base64
 
 class Reservation(EC2Object):
@@ -136,7 +136,7 @@ class Instance(EC2Object):
             try:
                 self.state_code = int(value)
             except ValueError:
-                boto.log.warning('Error converting code (%s) to int' % value)
+                boto1.log.warning('Error converting code (%s) to int' % value)
                 self.state_code = value
         elif name == 'instanceType':
             self.instance_type = value

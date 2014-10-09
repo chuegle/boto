@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-import boto
-ec2 = boto.connect_ec2()
+import boto1
+ec2 = boto1.connect_ec2()
 
 print "%-20s %-30s %s" % ("ID", "Groups", "Hostname")
 for r in ec2.get_all_instances():

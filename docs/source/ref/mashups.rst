@@ -4,37 +4,37 @@
 mashups
 =======
 
-boto.mashups
+boto1.mashups
 ------------
 
-.. automodule:: boto.mashups
+.. automodule:: boto1.mashups
    :members:   
    :undoc-members:
 
-boto.mashups.interactive
+boto1.mashups.interactive
 ------------------------
 
-.. automodule:: boto.mashups.interactive
+.. automodule:: boto1.mashups.interactive
    :members:   
    :undoc-members:
 
-boto.mashups.iobject
+boto1.mashups.iobject
 --------------------
 
-.. automodule:: boto.mashups.iobject
+.. automodule:: boto1.mashups.iobject
    :members:   
    :undoc-members:
 
-boto.mashups.order
+boto1.mashups.order
 ------------------
 
-.. automodule:: boto.mashups.order
+.. automodule:: boto1.mashups.order
    :members:   
    :undoc-members:
 
-boto.mashups.server
+boto1.mashups.server
 -------------------
 
-.. automodule:: boto.mashups.server
+.. automodule:: boto1.mashups.server
    :members:   
    :undoc-members:

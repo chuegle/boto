@@ -92,4 +92,4 @@ class Event:
         #TODO: build self.event_time datetime from string self.event_time_str
 
     def __repr__(self):
-        return "<boto.mturk.notification.Event: %s for HIT # %s>" % (self.event_type, self.hit_id)
+        return "<boto1.mturk.notification.Event: %s for HIT # %s>" % (self.event_type, self.hit_id)

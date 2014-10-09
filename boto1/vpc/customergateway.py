@@ -23,7 +23,7 @@
 Represents a Customer Gateway
 """
 
-from boto.ec2.ec2object import EC2Object
+from boto1.ec2.ec2object import EC2Object
 
 class CustomerGateway(EC2Object):
 

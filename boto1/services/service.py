@@ -19,12 +19,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-import boto
-from boto.services.message import ServiceMessage
-from boto.services.servicedef import ServiceDef
-from boto.pyami.scriptbase import ScriptBase
-from boto.exception import S3ResponseError
-from boto.utils import get_ts
+import boto1
+from boto1.services.message import ServiceMessage
+from boto1.services.servicedef import ServiceDef
+from boto1.pyami.scriptbase import ScriptBase
+from boto1.exception import S3ResponseError
+from boto1.utils import get_ts
 import StringIO
 import time
 import os
@@ -39,7 +39,7 @@ class Service(ScriptBase):
     def __init__(self, config_file=None, mimetype_files=None):
         ScriptBase.__init__(self, config_file)
         self.name = self.__class__.__name__
-        self.working_dir = boto.config.get('Pyami', 'working_dir')
+        self.working_dir = boto1.config.get('Pyami', 'working_dir')
         self.sd = ServiceDef(config_file)
         self.retry_count = self.sd.getint('retry_count', 5)
         self.loop_delay = self.sd.getint('loop_delay', 30)
@@ -60,10 +60,10 @@ class Service(ScriptBase):
         return t
 
     def read_message(self):
-        boto.log.info('read_message')
+        boto1.log.info('read_message')
         message = self.input_queue.read(self.processing_time)
         if message:
-            boto.log.info(message.get_body())
+            boto1.log.info(message.get_body())
             key = 'Service-Read'
             message[key] = get_ts()
         return message
@@ -73,8 +73,8 @@ class Service(ScriptBase):
         bucket_name = message['Bucket']
         key_name = message['InputKey']
         file_name = os.path.join(self.working_dir, message.get('OriginalFileName', 'in_file'))
-        boto.log.info('get_file: %s/%s to %s' % (bucket_name, key_name, file_name))
-        bucket = boto.lookup('s3', bucket_name)
+        boto1.log.info('get_file: %s/%s to %s' % (bucket_name, key_name, file_name))
+        bucket = boto1.lookup('s3', bucket_name)
         key = bucket.new_key(key_name)
         key.get_contents_to_filename(os.path.join(self.working_dir, file_name))
         return file_name
@@ -85,8 +85,8 @@ class Service(ScriptBase):
 
     # store result file in S3
     def put_file(self, bucket_name, file_path, key_name=None):
-        boto.log.info('putting file %s as %s.%s' % (file_path, bucket_name, key_name))
-        bucket = boto.lookup('s3', bucket_name)
+        boto1.log.info('putting file %s as %s.%s' % (file_path, bucket_name, key_name))
+        bucket = boto1.lookup('s3', bucket_name)
         key = bucket.new_key(key_name)
         key.set_contents_from_filename(file_path)
         return key
@@ -113,16 +113,16 @@ class Service(ScriptBase):
             message['Host'] = 'unknown'
         message['Instance-ID'] = self.instance_id
         if self.output_queue:
-            boto.log.info('Writing message to SQS queue: %s' % self.output_queue.id)
+            boto1.log.info('Writing message to SQS queue: %s' % self.output_queue.id)
             self.output_queue.write(message)
         if self.output_domain:
-            boto.log.info('Writing message to SDB domain: %s' % self.output_domain.name)
+            boto1.log.info('Writing message to SDB domain: %s' % self.output_domain.name)
             item_name = '/'.join([message['Service-Write'], message['Bucket'], message['InputKey']])
             self.output_domain.put_attributes(item_name, message)
 
     # delete message from input queue
     def delete_message(self, message):
-        boto.log.info('deleting message from %s' % self.input_queue.id)
+        boto1.log.info('deleting message from %s' % self.input_queue.id)
         self.input_queue.delete_message(message)
 
     # to clean up any files, etc. after each iteration
@@ -134,7 +134,7 @@ class Service(ScriptBase):
         if on_completion == 'shutdown':
             if self.instance_id:
                 time.sleep(60)
-                c = boto.connect_ec2()
+                c = boto1.connect_ec2()
                 c.terminate_instances([self.instance_id])
 
     def main(self, notify=False):
@@ -156,7 +156,7 @@ class Service(ScriptBase):
                     empty_reads += 1
                     time.sleep(self.loop_delay)
             except Exception, e:
-                boto.log.exception('Service Failed')
+                boto1.log.exception('Service Failed')
                 empty_reads += 1
         self.notify('Service: %s Shutting Down' % self.name)
         self.shutdown()

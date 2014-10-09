@@ -18,7 +18,7 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
-import boto
+import boto1
 
 def get_manager(cls):
     """
@@ -41,31 +41,31 @@ def get_manager(cls):
     specific is found.  You can also create a section for a specific Model class that
     gives the db info for that class.  In the example above, TestBasic is a Model subclass.
     """
-    db_user = boto.config.get('DB', 'db_user', None)
-    db_passwd = boto.config.get('DB', 'db_passwd', None)
-    db_type = boto.config.get('DB', 'db_type', 'SimpleDB')
-    db_name = boto.config.get('DB', 'db_name', None)
-    db_table = boto.config.get('DB', 'db_table', None)
-    db_host = boto.config.get('DB', 'db_host', "sdb.amazonaws.com")
-    db_port = boto.config.getint('DB', 'db_port', 443)
-    enable_ssl = boto.config.getbool('DB', 'enable_ssl', True)
-    sql_dir = boto.config.get('DB', 'sql_dir', None)
-    debug = boto.config.getint('DB', 'debug', 0)
+    db_user = boto1.config.get('DB', 'db_user', None)
+    db_passwd = boto1.config.get('DB', 'db_passwd', None)
+    db_type = boto1.config.get('DB', 'db_type', 'SimpleDB')
+    db_name = boto1.config.get('DB', 'db_name', None)
+    db_table = boto1.config.get('DB', 'db_table', None)
+    db_host = boto1.config.get('DB', 'db_host', "sdb.amazonaws.com")
+    db_port = boto1.config.getint('DB', 'db_port', 443)
+    enable_ssl = boto1.config.getbool('DB', 'enable_ssl', True)
+    sql_dir = boto1.config.get('DB', 'sql_dir', None)
+    debug = boto1.config.getint('DB', 'debug', 0)
     # first see if there is a fully qualified section name in the Boto config file
     module_name = cls.__module__.replace('.', '_')
     db_section = 'DB_' + module_name + '_' + cls.__name__
-    if not boto.config.has_section(db_section):
+    if not boto1.config.has_section(db_section):
         db_section = 'DB_' + cls.__name__
-    if boto.config.has_section(db_section):
-        db_user = boto.config.get(db_section, 'db_user', db_user)
-        db_passwd = boto.config.get(db_section, 'db_passwd', db_passwd)
-        db_type = boto.config.get(db_section, 'db_type', db_type)
-        db_name = boto.config.get(db_section, 'db_name', db_name)
-        db_table = boto.config.get(db_section, 'db_table', db_table)
-        db_host = boto.config.get(db_section, 'db_host', db_host)
-        db_port = boto.config.getint(db_section, 'db_port', db_port)
-        enable_ssl = boto.config.getint(db_section, 'enable_ssl', enable_ssl)
-        debug = boto.config.getint(db_section, 'debug', debug)
+    if boto1.config.has_section(db_section):
+        db_user = boto1.config.get(db_section, 'db_user', db_user)
+        db_passwd = boto1.config.get(db_section, 'db_passwd', db_passwd)
+        db_type = boto1.config.get(db_section, 'db_type', db_type)
+        db_name = boto1.config.get(db_section, 'db_name', db_name)
+        db_table = boto1.config.get(db_section, 'db_table', db_table)
+        db_host = boto1.config.get(db_section, 'db_host', db_host)
+        db_port = boto1.config.getint(db_section, 'db_port', db_port)
+        enable_ssl = boto1.config.getint(db_section, 'enable_ssl', enable_ssl)
+        debug = boto1.config.getint(db_section, 'debug', debug)
     if db_type == 'SimpleDB':
         from sdbmanager import SDBManager
         return SDBManager(cls, db_name, db_user, db_passwd,

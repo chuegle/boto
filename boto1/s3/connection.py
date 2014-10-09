@@ -22,14 +22,14 @@
 import xml.sax
 import urllib, base64
 import time
-import boto.utils
+import boto1.utils
 import types
-from boto.connection import AWSAuthConnection
-from boto import handler
-from boto.s3.bucket import Bucket
-from boto.s3.key import Key
-from boto.resultset import ResultSet
-from boto.exception import S3ResponseError, S3CreateError, BotoClientError
+from boto1.connection import AWSAuthConnection
+from boto1 import handler
+from boto1.s3.bucket import Bucket
+from boto1.s3.key import Key
+from boto1.resultset import ResultSet
+from boto1.exception import S3ResponseError, S3CreateError, BotoClientError
 
 def assert_case_insensitive(f):
     def wrapper(*args, **kwargs):
@@ -119,7 +119,7 @@ class S3Connection(AWSAuthConnection):
         # Convert conditions object mappings to condition statements
 
         return '{"expiration": "%s",\n"conditions": [%s]}' % \
-            (time.strftime(boto.utils.ISO8601, expiration_time), ",".join(conditions))
+            (time.strftime(boto1.utils.ISO8601, expiration_time), ",".join(conditions))
 
 
     def build_post_form_args(self, bucket_name, key, expires_in = 6000,
@@ -140,7 +140,7 @@ class S3Connection(AWSAuthConnection):
         :type expires_in: integer
         
         :param acl: ACL rule to use, if any
-        :type acl: :class:`boto.s3.acl.ACL`
+        :type acl: :class:`boto1.s3.acl.ACL`
         
         :param success_action_redirect: URL to redirect to on success
         :type success_action_redirect: string 
@@ -222,7 +222,7 @@ class S3Connection(AWSAuthConnection):
             headers = {}
         expires = int(time.time() + expires_in)
         auth_path = self.calling_format.build_auth_path(bucket, key)
-        canonical_str = boto.utils.canonical_string(method, auth_path,
+        canonical_str = boto1.utils.canonical_string(method, auth_path,
                                                     headers, expires)
         hmac_copy = self.hmac.copy()
         hmac_copy.update(canonical_str)
@@ -293,10 +293,10 @@ class S3Connection(AWSAuthConnection):
         :type headers: dict
         :param headers: Additional headers to pass along with the request to AWS.
 
-        :type location: :class:`boto.s3.connection.Location`
+        :type location: :class:`boto1.s3.connection.Location`
         :param location: The location of the new bucket
         
-        :type policy: :class:`boto.s3.acl.CannedACLStrings`
+        :type policy: :class:`boto1.s3.acl.CannedACLStrings`
         :param policy: A canned ACL policy that will be applied to the new key in S3.
              
         """

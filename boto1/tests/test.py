@@ -26,12 +26,12 @@ do the unit tests!
 
 import sys, os, unittest
 import getopt, sys
-import boto
+import boto1
 
-from boto.tests.test_sqsconnection import SQSConnectionTest
-from boto.tests.test_s3connection import S3ConnectionTest
-from boto.tests.test_ec2connection import EC2ConnectionTest
-from boto.tests.test_sdbconnection import SDBConnectionTest
+from boto1.tests.test_sqsconnection import SQSConnectionTest
+from boto1.tests.test_s3connection import S3ConnectionTest
+from boto1.tests.test_ec2connection import EC2ConnectionTest
+from boto1.tests.test_sdbconnection import SDBConnectionTest
 
 def usage():
     print 'test.py  [-t testsuite] [-v verbosity]'

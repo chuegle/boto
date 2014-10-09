@@ -20,11 +20,11 @@
 # IN THE SOFTWARE.
 
 import uuid
-from boto.cloudfront.identity import OriginAccessIdentity
-from boto.cloudfront.object import Object, StreamingObject
-from boto.cloudfront.signers import Signer, ActiveTrustedSigners, TrustedSigners
-from boto.cloudfront.logging import LoggingInfo
-from boto.s3.acl import ACL
+from boto1.cloudfront.identity import OriginAccessIdentity
+from boto1.cloudfront.object import Object, StreamingObject
+from boto1.cloudfront.signers import Signer, ActiveTrustedSigners, TrustedSigners
+from boto1.cloudfront.logging import LoggingInfo
+from boto1.s3.acl import ACL
 
 class DistributionConfig:
 
@@ -255,13 +255,13 @@ class Distribution:
         :type comment: str or unicode
         :param comment: The comment associated with the Distribution.
 
-        :type origin_access_identity: :class:`boto.cloudfront.identity.OriginAccessIdentity`
+        :type origin_access_identity: :class:`boto1.cloudfront.identity.OriginAccessIdentity`
         :param origin_access_identity: The CloudFront origin access identity
                                        associated with the distribution.  This
                                        must be provided if you want the
                                        distribution to serve private content.
 
-        :type trusted_signers: :class:`boto.cloudfront.signers.TrustedSigner`
+        :type trusted_signers: :class:`boto1.cloudfront.signers.TrustedSigner`
         :param trusted_signers: The AWS users who are authorized to sign
                                 URL's for private content in this Distribution.
 
@@ -310,7 +310,7 @@ class Distribution:
     def _get_bucket(self):
         if not self._bucket:
             bucket_name = self.config.origin.split('.')[0]
-            from boto.s3.connection import S3Connection
+            from boto1.s3.connection import S3Connection
             s3 = S3Connection(self.connection.aws_access_key_id,
                               self.connection.aws_secret_access_key,
                               proxy=self.connection.proxy,
@@ -326,7 +326,7 @@ class Distribution:
         """
         Return a list of all content objects in this distribution.
         
-        :rtype: list of :class:`boto.cloudfront.object.Object`
+        :rtype: list of :class:`boto1.cloudfront.object.Object`
         :return: The content objects
         """
         bucket = self._get_bucket()
@@ -344,7 +344,7 @@ class Distribution:
         the Distribution is serving public content the content will
         be set up with "public-read".
 
-        :type object: :class:`boto.cloudfront.object.Object`
+        :type object: :class:`boto1.cloudfront.object.Object`
         :param enabled: The Object whose ACL is being set
 
         :type replace: bool
@@ -402,7 +402,7 @@ class Distribution:
                         you would like associated with the new
                         object in S3.
 
-        :rtype: :class:`boto.cloudfront.object.Object`
+        :rtype: :class:`boto1.cloudfront.object.Object`
         :return: The newly created object.
         """
         if self.config.origin_access_identity:

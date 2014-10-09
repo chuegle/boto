@@ -19,15 +19,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 #
-import boto.pyami.installers
+import boto1.pyami.installers
 import os
 import os.path
 import stat
-import boto
+import boto1
 import random
 from pwd import getpwnam
 
-class Installer(boto.pyami.installers.Installer):
+class Installer(boto1.pyami.installers.Installer):
     """
     Base Installer class for Ubuntu-based AMI's
     """
@@ -65,7 +65,7 @@ class Installer(boto.pyami.installers.Installer):
         For Ubuntu, the best place is /etc/environment.  Values placed here do
         not need to be exported.
         """
-        boto.log.info('Adding env variable: %s=%s' % (key, value))
+        boto1.log.info('Adding env variable: %s=%s' % (key, value))
         if not os.path.exists("/etc/environment.orig"):
             self.run('cp /etc/environment /etc/environment.orig', notify=False, exit_on_error=False)
         fp = open('/etc/environment', 'a')

@@ -18,13 +18,13 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
-import boto
-from boto.utils import find_class, Password
+import boto1
+from boto1.utils import find_class, Password
 import uuid
-from boto.sdb.db.key import Key
-from boto.sdb.db.model import Model
+from boto1.sdb.db.key import Key
+from boto1.sdb.db.model import Model
 from datetime import datetime
-from boto.exception import SDBPersistenceError
+from boto1.exception import SDBPersistenceError
 from xml.dom.minidom import getDOMImplementation, parse, parseString, Node
 
 ISO8601 = '%Y-%m-%dT%H:%M:%SZ'
@@ -271,7 +271,7 @@ class XMLManager(object):
 
     def get_s3_connection(self):
         if not self.s3:
-            self.s3 = boto.connect_s3(self.aws_access_key_id, self.aws_secret_access_key)
+            self.s3 = boto1.connect_s3(self.aws_access_key_id, self.aws_secret_access_key)
         return self.s3
 
     def get_list(self, prop_node, item_type):

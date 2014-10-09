@@ -22,8 +22,8 @@
 """
 Represents an EC2 Spot Instance Datafeed Subscription
 """
-from boto.ec2.ec2object import EC2Object
-from boto.ec2.spotinstancerequest import SpotInstanceStateFault
+from boto1.ec2.ec2object import EC2Object
+from boto1.ec2.spotinstancerequest import SpotInstanceStateFault
 
 class SpotDatafeedSubscription(EC2Object):
     

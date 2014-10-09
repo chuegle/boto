@@ -1,7 +1,7 @@
 >>> import uuid
 >>> import datetime
->>> from boto.mturk.connection import MTurkConnection
->>> from boto.mturk.question import Question, QuestionContent, AnswerSpecification, FreeTextAnswer
+>>> from boto1.mturk.connection import MTurkConnection
+>>> from boto1.mturk.question import Question, QuestionContent, AnswerSpecification, FreeTextAnswer
 >>> 
 >>> conn = MTurkConnection(host='mechanicalturk.sandbox.amazonaws.com')
 >>> keywords=['boto', 'test', 'doctest']
@@ -36,7 +36,7 @@ u'...'
 ...                                 question=qn,
 ...                                 lifetime=60*65,
 ...                                 max_assignments=2,
-...                                 annotation='An annotation from boto create_hit_from_hit_type test',
+...                                 annotation='An annotation from boto1 create_hit_from_hit_type test',
 ...                                 response_groups=['Minimal',
 ...                                                  'HITDetail',
 ...                                                  'HITQuestion',
@@ -90,7 +90,7 @@ u'HIT Type for testing Boto'
 
 # annotation is correct
 >>> create_hit_rs.RequesterAnnotation
-u'An annotation from boto create_hit_from_hit_type test'
+u'An annotation from boto1 create_hit_from_hit_type test'
 
 # not reviewed yet
 >>> create_hit_rs.HITReviewStatus

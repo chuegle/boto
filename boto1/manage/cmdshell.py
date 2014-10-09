@@ -19,8 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from boto.mashups.interactive import interactive_shell
-import boto
+from boto1.mashups.interactive import interactive_shell
+import boto1
 import os, time, shutil
 import StringIO
 import paramiko
@@ -95,7 +95,7 @@ class SSHClient(object):
         interactive_shell(channel)
 
     def run(self, command):
-        boto.log.info('running:%s on %s' % (command, self.server.instance_id))
+        boto1.log.info('running:%s on %s' % (command, self.server.instance_id))
         log_fp = StringIO.StringIO()
         status = 0
         try:
@@ -107,7 +107,7 @@ class SSHClient(object):
         t[0].close()
         t[1].close()
         t[2].close()
-        boto.log.info('output: %s' % log_fp.getvalue())
+        boto1.log.info('output: %s' % log_fp.getvalue())
         return (status, log_fp.getvalue())
 
     def close(self):
@@ -141,7 +141,7 @@ class LocalClient(object):
         raise NotImplementedError, 'shell not supported with LocalClient'
 
     def run(self):
-        boto.log.info('running:%s' % self.command)
+        boto1.log.info('running:%s' % self.command)
         log_fp = StringIO.StringIO()
         process = subprocess.Popen(self.command, shell=True, stdin=subprocess.PIPE,
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -150,15 +150,15 @@ class LocalClient(object):
             t = process.communicate()
             log_fp.write(t[0])
             log_fp.write(t[1])
-        boto.log.info(log_fp.getvalue())
-        boto.log.info('output: %s' % log_fp.getvalue())
+        boto1.log.info(log_fp.getvalue())
+        boto1.log.info('output: %s' % log_fp.getvalue())
         return (process.returncode, log_fp.getvalue())
 
     def close(self):
         pass
 
 def start(server):
-    instance_id = boto.config.get('Instance', 'instance-id', None)
+    instance_id = boto1.config.get('Instance', 'instance-id', None)
     if instance_id == server.instance_id:
         return LocalClient(server)
     else:

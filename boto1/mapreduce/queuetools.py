@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import socket, sys
 from lqs import LQSServer, LQSMessage
-import boto
-from boto.sqs.jsonmessage import JSONMessage
+import boto1
+from boto1.sqs.jsonmessage import JSONMessage
 
 class LQSClient:
 
@@ -48,7 +48,7 @@ class SQSClient:
         self.queue_name = queue_name
 
     def connect(self):
-        self.queue = boto.lookup('sqs', self.queue_name)
+        self.queue = boto1.lookup('sqs', self.queue_name)
         self.queue.set_mesasge_class(JSONMessage)
 
     def get(self):

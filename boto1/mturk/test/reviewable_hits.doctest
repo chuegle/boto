@@ -1,4 +1,4 @@
->>> from boto.mturk.connection import MTurkConnection
+>>> from boto1.mturk.connection import MTurkConnection
 >>> conn = MTurkConnection(host='mechanicalturk.sandbox.amazonaws.com')
 
 # should have some reviewable HIT's returned, especially if returning all HIT type's
@@ -14,7 +14,7 @@ True
 
 # should contain at least one HIT object
 >>> reviewable_rs # doctest: +ELLIPSIS
-[<boto.mturk.connection.HIT instance at ...]
+[<boto1.mturk.connection.HIT instance at ...]
 
 >>> hit_id = reviewable_rs[0].HITId
 
@@ -39,7 +39,7 @@ True
 
 # should contain at least one Assignment object
 >>> assignments_rs # doctest: +ELLIPSIS
-[<boto.mturk.connection.Assignment instance at ...]
+[<boto1.mturk.connection.Assignment instance at ...]
 
 # should have returned assignments for the requested HIT id
 >>> assignment = assignments_rs[0]
@@ -57,7 +57,7 @@ True
 
 # should contain at least one set of QuestionFormAnswer objects
 >>> assignment.answers # doctest: +ELLIPSIS
-[[<boto.mturk.connection.QuestionFormAnswer instance at ...]]
+[[<boto1.mturk.connection.QuestionFormAnswer instance at ...]]
 
 >>> answer = assignment.answers[0][0]
 

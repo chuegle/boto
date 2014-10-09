@@ -21,14 +21,14 @@
 
 import datetime
 from key import Key
-from boto.utils import Password
-from boto.sdb.db.query import Query
+from boto1.utils import Password
+from boto1.sdb.db.query import Query
 from tempfile import TemporaryFile
 
 import re
-import boto
-import boto.s3.key
-from boto.sdb.db.blob import Blob
+import boto1
+import boto1.s3.key
+from boto1.sdb.db.blob import Blob
 
 class Property(object):
 
@@ -64,7 +64,7 @@ class Property(object):
                 fnc = getattr(obj, "on_set_%s" % self.name)
                 value = fnc(value)
         except Exception, e:
-            boto.log.exception("Exception running on_set_%s" % self.name)
+            boto1.log.exception("Exception running on_set_%s" % self.name)
 
         setattr(obj, self.slot_name, value)
 
@@ -195,7 +195,7 @@ class BlobProperty(Property):
 
 class S3KeyProperty(Property):
     
-    data_type = boto.s3.key.Key
+    data_type = boto1.s3.key.Key
     type_name = 'S3Key'
     validate_regex = "^s3:\/\/([^\/]*)\/(.*)$"
 

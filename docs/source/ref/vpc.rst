@@ -4,51 +4,51 @@
 VPC
 ====
 
-boto.vpc
+boto1.vpc
 --------
 
-.. automodule:: boto.vpc
+.. automodule:: boto1.vpc
    :members:   
    :undoc-members:
 
-boto.vpc.customergateway
+boto1.vpc.customergateway
 ------------------------
 
-.. automodule:: boto.vpc.customergateway
+.. automodule:: boto1.vpc.customergateway
    :members:   
    :undoc-members:
 
-boto.vpc.dhcpoptions
+boto1.vpc.dhcpoptions
 --------------------
 
-.. automodule:: boto.vpc.dhcpoptions
+.. automodule:: boto1.vpc.dhcpoptions
    :members:   
    :undoc-members:
 
-boto.vpc.subnet
+boto1.vpc.subnet
 ---------------
 
-.. automodule:: boto.vpc.subnet
+.. automodule:: boto1.vpc.subnet
    :members:   
    :undoc-members:
 
-boto.vpc.vpc
+boto1.vpc.vpc
 ------------
 
-.. automodule:: boto.vpc.vpc
+.. automodule:: boto1.vpc.vpc
    :members:   
    :undoc-members:
 
-boto.vpc.vpnconnection
+boto1.vpc.vpnconnection
 ----------------------
 
-.. automodule:: boto.vpc.vpnconnection
+.. automodule:: boto1.vpc.vpnconnection
    :members:   
    :undoc-members:
 
-boto.vpc.vpngateway
+boto1.vpc.vpngateway
 -------------------
 
-.. automodule:: boto.vpc.vpngateway
+.. automodule:: boto1.vpc.vpngateway
    :members:   
    :undoc-members:

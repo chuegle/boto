@@ -1,27 +1,27 @@
 import os, sys, time, traceback
 import smtplib
-from boto.utils import ShellCommand, get_ts
-import boto
-import boto.utils
+from boto1.utils import ShellCommand, get_ts
+import boto1
+import boto1.utils
 
 class ScriptBase:
 
     def __init__(self, config_file=None):
-        self.instance_id = boto.config.get('Instance', 'instance-id', 'default')
+        self.instance_id = boto1.config.get('Instance', 'instance-id', 'default')
         self.name = self.__class__.__name__
         self.ts = get_ts()
         if config_file:
-            boto.config.read(config_file)
+            boto1.config.read(config_file)
 
     def notify(self, subject, body=''):
-        boto.utils.notify(subject, body)
+        boto1.utils.notify(subject, body)
 
     def mkdir(self, path):
         if not os.path.isdir(path):
             try:
                 os.mkdir(path)
             except:
-                boto.log.error('Error creating directory: %s' % path)
+                boto1.log.error('Error creating directory: %s' % path)
 
     def umount(self, path):
         if os.path.ismount(path):
@@ -30,7 +30,7 @@ class ScriptBase:
     def run(self, command, notify=True, exit_on_error=False):
         self.last_command = ShellCommand(command)
         if self.last_command.status != 0:
-            boto.log.error('Error running command: "%s". Output: "%s"' % (command, self.last_command.output))
+            boto1.log.error('Error running command: "%s". Output: "%s"' % (command, self.last_command.output))
             if notify:
                 self.notify('Error encountered', \
                         'Error running the following command:\n\t%s\n\nCommand output:\n\t%s' % \

@@ -1,4 +1,4 @@
->>> from boto.mturk.connection import MTurkConnection
+>>> from boto1.mturk.connection import MTurkConnection
 >>> conn = MTurkConnection(host='mechanicalturk.sandbox.amazonaws.com')
 
 # should have some HIT's returned by a search (but only if your account has existing HIT's)
@@ -12,5 +12,5 @@ True
 True
 
 >>> search_rs # doctest: +ELLIPSIS
-[<boto.mturk.connection.HIT instance at ...]
+[<boto1.mturk.connection.HIT instance at ...]
 

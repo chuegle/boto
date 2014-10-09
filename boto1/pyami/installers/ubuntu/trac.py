@@ -19,8 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 #
-from boto.pyami.installers.ubuntu.installer import Installer
-import boto
+from boto1.pyami.installers.ubuntu.installer import Installer
+import boto1
 import os
 
 class Trac(Installer):
@@ -54,14 +54,14 @@ class Trac(Installer):
 		self.run("a2enmod rewrite")
 
 	def setup_vhost(self):
-		domain = boto.config.get("Trac", "hostname").strip()
+		domain = boto1.config.get("Trac", "hostname").strip()
 		if domain:
 			cnf = open("/etc/apache2/sites-available/%s" % domain, "w")
 			cnf.write("NameVirtualHost *:80\n")
-			if boto.config.get("Trac", "SSLCertificateFile"):
+			if boto1.config.get("Trac", "SSLCertificateFile"):
 				cnf.write("NameVirtualHost *:443\n\n")
 				cnf.write("<VirtualHost *:80>\n")
-				cnf.write("\tServerAdmin %s\n" % boto.config.get("Trac", "server_admin").strip())
+				cnf.write("\tServerAdmin %s\n" % boto1.config.get("Trac", "server_admin").strip())
 				cnf.write("\tServerName %s\n" % domain)
 				cnf.write("\tRewriteEngine On\n")
 				cnf.write("\tRewriteRule ^(.*)$ https://%s$1\n" % domain)
@@ -71,11 +71,11 @@ class Trac(Installer):
 			else:
 				cnf.write("<VirtualHost *:80>\n")
 
-			cnf.write("\tServerAdmin %s\n" % boto.config.get("Trac", "server_admin").strip())
+			cnf.write("\tServerAdmin %s\n" % boto1.config.get("Trac", "server_admin").strip())
 			cnf.write("\tServerName %s\n" % domain)
-			cnf.write("\tDocumentRoot %s\n" % boto.config.get("Trac", "home").strip())
+			cnf.write("\tDocumentRoot %s\n" % boto1.config.get("Trac", "home").strip())
 
-			cnf.write("\t<Directory %s>\n" % boto.config.get("Trac", "home").strip())
+			cnf.write("\t<Directory %s>\n" % boto1.config.get("Trac", "home").strip())
 			cnf.write("\t\tOptions FollowSymLinks Indexes MultiViews\n")
 			cnf.write("\t\tAllowOverride All\n")
 			cnf.write("\t\tOrder allow,deny\n")
@@ -84,15 +84,15 @@ class Trac(Installer):
 
 			cnf.write("\t<Location />\n")
 			cnf.write("\t\tAuthType Basic\n")
-			cnf.write("\t\tAuthName \"%s\"\n" % boto.config.get("Trac", "name"))
+			cnf.write("\t\tAuthName \"%s\"\n" % boto1.config.get("Trac", "name"))
 			cnf.write("\t\tRequire valid-user\n")
 			cnf.write("\t\tAuthBasicAuthoritative off\n")
 			cnf.write("\t\tAuthUserFile /dev/null\n")
 			cnf.write("\t\tPythonAuthenHandler marajo.web.authen_handler\n")
-			cnf.write("\t\tPythonOption SDBDomain %s\n" % boto.config.get("Trac", "sdb_auth_domain"))
+			cnf.write("\t\tPythonOption SDBDomain %s\n" % boto1.config.get("Trac", "sdb_auth_domain"))
 			cnf.write("\t</Location>\n")
 
-			data_dir = boto.config.get("Trac", "data_dir")
+			data_dir = boto1.config.get("Trac", "data_dir")
 			for env in os.listdir(data_dir):
 				if(env[0] != "."):
 					cnf.write("\t<Location /trac/%s>\n" % env)
@@ -103,7 +103,7 @@ class Trac(Installer):
 					cnf.write("\t\tPythonOption TracUriRoot /trac%s\n" % env)
 					cnf.write("\t</Location>\n")
 
-			svn_dir = boto.config.get("Trac", "svn_dir")
+			svn_dir = boto1.config.get("Trac", "svn_dir")
 			for env in os.listdir(svn_dir):
 				if(env[0] != "."):
 					cnf.write("\t<Location /svn/%s>\n" % env)
@@ -115,16 +115,16 @@ class Trac(Installer):
 			cnf.write("\tLogLevel warn\n")
 			cnf.write("\tCustomLog /var/log/apache2/access.log combined\n")
 			cnf.write("\tServerSignature On\n")
-			SSLCertificateFile = boto.config.get("Trac", "SSLCertificateFile")
+			SSLCertificateFile = boto1.config.get("Trac", "SSLCertificateFile")
 			if SSLCertificateFile:
 				cnf.write("\tSSLEngine On\n")
 				cnf.write("\tSSLCertificateFile %s\n" % SSLCertificateFile)
 
-			SSLCertificateKeyFile = boto.config.get("Trac", "SSLCertificateKeyFile")
+			SSLCertificateKeyFile = boto1.config.get("Trac", "SSLCertificateKeyFile")
 			if SSLCertificateKeyFile:
 				cnf.write("\tSSLCertificateKeyFile %s\n" % SSLCertificateKeyFile)
 
-			SSLCertificateChainFile = boto.config.get("Trac", "SSLCertificateChainFile")
+			SSLCertificateChainFile = boto1.config.get("Trac", "SSLCertificateChainFile")
 			if SSLCertificateChainFile:
 				cnf.write("\tSSLCertificateChainFile %s\n" % SSLCertificateChainFile)
 			cnf.write("</VirtualHost>\n")

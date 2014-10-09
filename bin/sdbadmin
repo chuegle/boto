@@ -23,7 +23,7 @@
 # Tools to dump and recover an SDB domain
 #
 VERSION = "%prog version 1.0"
-import boto
+import boto1
 import time
 
 def choice_input(options, default=None, title=None):
@@ -79,7 +79,7 @@ def create_db(domain_name):
     :param domain: Name of the domain to create
     :type domain: str
     """
-    sdb = boto.connect_sdb()
+    sdb = boto1.connect_sdb()
     return sdb.create_domain(domain_name)
 
 if __name__ == "__main__":
@@ -103,7 +103,7 @@ if __name__ == "__main__":
         create_db(*args)
         exit()
 
-    sdb = boto.connect_sdb()
+    sdb = boto1.connect_sdb()
     if options.list:
         for db in sdb.get_all_domains():
             print db

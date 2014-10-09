@@ -22,14 +22,14 @@
 import urllib
 import xml.sax
 import threading
-import boto
-from boto import handler
-from boto.connection import AWSQueryConnection
-from boto.sdb.domain import Domain, DomainMetaData
-from boto.sdb.item import Item
-from boto.sdb.regioninfo import SDBRegionInfo
-from boto.exception import SDBResponseError
-from boto.resultset import ResultSet
+import boto1
+from boto1 import handler
+from boto1.connection import AWSQueryConnection
+from boto1.sdb.domain import Domain, DomainMetaData
+from boto1.sdb.item import Item
+from boto1.sdb.regioninfo import SDBRegionInfo
+from boto1.exception import SDBResponseError
+from boto1.resultset import ResultSet
 import warnings
 
 class ItemThread(threading.Thread):
@@ -162,7 +162,7 @@ class SDBConnection(AWSQueryConnection):
         :type domain_name: string
         :param domain_name: The name of the new domain
 
-        :rtype: :class:`boto.sdb.domain.Domain` object or None
+        :rtype: :class:`boto1.sdb.domain.Domain` object or None
         :return: The Domain object or None if the domain does not exist.
         """
         try:
@@ -186,7 +186,7 @@ class SDBConnection(AWSQueryConnection):
         :type domain_name: string
         :param domain_name: The name of the new domain
 
-        :rtype: :class:`boto.sdb.domain.Domain` object
+        :rtype: :class:`boto1.sdb.domain.Domain` object
         :return: The newly created domain
         """
         params = {'DomainName':domain_name}
@@ -204,7 +204,7 @@ class SDBConnection(AWSQueryConnection):
         """
         Delete a SimpleDB domain.
 
-        :type domain_or_name: string or :class:`boto.sdb.domain.Domain` object.
+        :type domain_or_name: string or :class:`boto1.sdb.domain.Domain` object.
         :param domain_or_name: Either the name of a domain or a Domain object
 
         :rtype: bool
@@ -220,10 +220,10 @@ class SDBConnection(AWSQueryConnection):
         """
         Get the Metadata for a SimpleDB domain.
 
-        :type domain_or_name: string or :class:`boto.sdb.domain.Domain` object.
+        :type domain_or_name: string or :class:`boto1.sdb.domain.Domain` object.
         :param domain_or_name: Either the name of a domain or a Domain object
 
-        :rtype: :class:`boto.sdb.domain.DomainMetaData` object
+        :rtype: :class:`boto1.sdb.domain.DomainMetaData` object
         :return: The newly created domain metadata object
         """
         domain, domain_name = self.get_domain_and_name(domain_or_name)
@@ -236,7 +236,7 @@ class SDBConnection(AWSQueryConnection):
         """
         Store attributes for a given item in a domain.
 
-        :type domain_or_name: string or :class:`boto.sdb.domain.Domain` object.
+        :type domain_or_name: string or :class:`boto1.sdb.domain.Domain` object.
         :param domain_or_name: Either the name of a domain or a Domain object
 
         :type item_name: string
@@ -263,7 +263,7 @@ class SDBConnection(AWSQueryConnection):
         """
         Store attributes for multiple items in a domain.
 
-        :type domain_or_name: string or :class:`boto.sdb.domain.Domain` object.
+        :type domain_or_name: string or :class:`boto1.sdb.domain.Domain` object.
         :param domain_or_name: Either the name of a domain or a Domain object
 
         :type items: dict or dict-like object
@@ -290,7 +290,7 @@ class SDBConnection(AWSQueryConnection):
         """
         Retrieve attributes for a given item in a domain.
 
-        :type domain_or_name: string or :class:`boto.sdb.domain.Domain` object.
+        :type domain_or_name: string or :class:`boto1.sdb.domain.Domain` object.
         :param domain_or_name: Either the name of a domain or a Domain object
 
         :type item_name: string
@@ -301,7 +301,7 @@ class SDBConnection(AWSQueryConnection):
                                 parameter is optional.  If not supplied, all attributes
                                 will be retrieved for the item.
 
-        :rtype: :class:`boto.sdb.item.Item`
+        :rtype: :class:`boto1.sdb.item.Item`
         :return: An Item mapping type containing the requested attribute name/values
         """
         domain, domain_name = self.get_domain_and_name(domain_or_name)
@@ -326,13 +326,13 @@ class SDBConnection(AWSQueryConnection):
         """
         Delete attributes from a given item in a domain.
 
-        :type domain_or_name: string or :class:`boto.sdb.domain.Domain` object.
+        :type domain_or_name: string or :class:`boto1.sdb.domain.Domain` object.
         :param domain_or_name: Either the name of a domain or a Domain object
 
         :type item_name: string
         :param item_name: The name of the item whose attributes are being deleted.
 
-        :type attributes: dict, list or :class:`boto.sdb.item.Item`
+        :type attributes: dict, list or :class:`boto1.sdb.item.Item`
         :param attributes: Either a list containing attribute names which will cause
                            all values associated with that attribute name to be deleted or
                            a dict or Item containing the attribute names and keys and list
@@ -356,7 +356,7 @@ class SDBConnection(AWSQueryConnection):
         """
         Returns a list of item names within domain_name that match the query.
         
-        :type domain_or_name: string or :class:`boto.sdb.domain.Domain` object.
+        :type domain_or_name: string or :class:`boto1.sdb.domain.Domain` object.
         :param domain_or_name: Either the name of a domain or a Domain object
 
         :type query: string
@@ -385,7 +385,7 @@ class SDBConnection(AWSQueryConnection):
         """
         Returns a set of Attributes for item names within domain_name that match the query.
         
-        :type domain_or_name: string or :class:`boto.sdb.domain.Domain` object.
+        :type domain_or_name: string or :class:`boto1.sdb.domain.Domain` object.
         :param domain_or_name: Either the name of a domain or a Domain object
 
         :type query: string
@@ -425,7 +425,7 @@ class SDBConnection(AWSQueryConnection):
         object must be passed into this method so the Item objects returned can
         point to the appropriate domain.
         
-        :type domain_or_name: string or :class:`boto.sdb.domain.Domain` object.
+        :type domain_or_name: string or :class:`boto1.sdb.domain.Domain` object.
         :param domain_or_name: Either the name of a domain or a Domain object
 
         :type query: string

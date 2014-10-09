@@ -19,9 +19,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from boto.exception import SDBPersistenceError
-from boto.sdb.persist import get_manager, object_lister
-from boto.sdb.persist.property import *
+from boto1.exception import SDBPersistenceError
+from boto1.sdb.persist import get_manager, object_lister
+from boto1.sdb.persist.property import *
 import uuid
 
 class SDBBase(type):

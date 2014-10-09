@@ -22,7 +22,7 @@
 """
 Represents an EC2 Availability Zone
 """
-from boto.ec2.ec2object import EC2Object
+from boto1.ec2.ec2object import EC2Object
 
 class Zone(EC2Object):
     

@@ -24,12 +24,12 @@
 #
 VERSION="0.1"
 
-import boto.pyami.config
-from boto.utils import fetch_file
+import boto1.pyami.config
+from boto1.utils import fetch_file
 import re, os
 import ConfigParser
 
-class Config(boto.pyami.config.Config):
+class Config(boto1.pyami.config.Config):
     """A special config class that also adds import abilities
     Directly in the config file. To have a config file import
     another config file, simply use "#import <path>" where <path>
@@ -79,9 +79,9 @@ if __name__ == "__main__":
         import readline
     except ImportError:
         pass
-    import boto
+    import boto1
     from optparse import OptionParser
-    from boto.mashups.iobject import IObject
+    from boto1.mashups.iobject import IObject
     parser = OptionParser(version=VERSION, usage="%prog [options] config_url")
     parser.add_option("-c", "--max-count", help="Maximum number of this type of instance to launch", dest="max_count", default="1")
     parser.add_option("--min-count", help="Minimum number of this type of instance to launch", dest="min_count", default="1")
@@ -100,7 +100,7 @@ if __name__ == "__main__":
         parser.print_help()
         sys.exit(1)
     file_url = os.path.expanduser(args[0])
-    ec2 = boto.connect_ec2()
+    ec2 = boto1.connect_ec2()
 
     cfg = Config()
     cfg.add_config(file_url)

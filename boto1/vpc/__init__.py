@@ -25,16 +25,16 @@ Represents a connection to the EC2 service.
 
 import urllib
 import base64
-import boto
-from boto import config
-from boto.ec2.connection import EC2Connection
-from boto.resultset import ResultSet
-from boto.vpc.vpc import VPC
-from boto.vpc.customergateway import CustomerGateway
-from boto.vpc.vpngateway import VpnGateway, Attachment
-from boto.vpc.dhcpoptions import DhcpOptions
-from boto.vpc.subnet import Subnet
-from boto.vpc.vpnconnection import VpnConnection
+import boto1
+from boto1 import config
+from boto1.ec2.connection import EC2Connection
+from boto1.resultset import ResultSet
+from boto1.vpc.vpc import VPC
+from boto1.vpc.customergateway import CustomerGateway
+from boto1.vpc.vpngateway import VpnGateway, Attachment
+from boto1.vpc.dhcpoptions import DhcpOptions
+from boto1.vpc.subnet import Subnet
+from boto1.vpc.vpnconnection import VpnConnection
 
 class VPCConnection(EC2Connection):
 
@@ -60,7 +60,7 @@ class VPCConnection(EC2Connection):
                         - *dhcpOptionsId*, the ID of a set of DHCP options
 
         :rtype: list
-        :return: A list of :class:`boto.vpc.vpc.VPC`
+        :return: A list of :class:`boto1.vpc.vpc.VPC`
         """
         params = {}
         if vpc_ids:
@@ -81,7 +81,7 @@ class VPCConnection(EC2Connection):
         :param cidr_block: A valid CIDR block
 
         :rtype: The newly created VPC
-        :return: A :class:`boto.vpc.vpc.VPC` object
+        :return: A :class:`boto1.vpc.vpc.VPC` object
         """
         params = {'CidrBlock' : cidr_block}
         return self.get_object('CreateVpc', params, VPC)
@@ -123,7 +123,7 @@ class VPCConnection(EC2Connection):
                            internet-routable external inteface
 
         :rtype: list
-        :return: A list of :class:`boto.vpc.customergateway.CustomerGateway`
+        :return: A list of :class:`boto1.vpc.customergateway.CustomerGateway`
         """
         params = {}
         if customer_gateway_ids:
@@ -152,7 +152,7 @@ class VPCConnection(EC2Connection):
                         Autonomous System Number (ASN)
 
         :rtype: The newly created CustomerGateway
-        :return: A :class:`boto.vpc.customergateway.CustomerGateway` object
+        :return: A :class:`boto1.vpc.customergateway.CustomerGateway` object
         """
         params = {'Type' : type,
                   'IpAddress' : ip_address,
@@ -196,7 +196,7 @@ class VPCConnection(EC2Connection):
                           VPN gateway is in.
 
         :rtype: list
-        :return: A list of :class:`boto.vpc.customergateway.VpnGateway`
+        :return: A list of :class:`boto1.vpc.customergateway.VpnGateway`
         """
         params = {}
         if vpn_gateway_ids:
@@ -220,7 +220,7 @@ class VPCConnection(EC2Connection):
         :param availability_zone: The Availability Zone where you want the VPN gateway.
 
         :rtype: The newly created VpnGateway
-        :return: A :class:`boto.vpc.vpngateway.VpnGateway` object
+        :return: A :class:`boto1.vpc.vpngateway.VpnGateway` object
         """
         params = {'Type' : type}
         if availability_zone:
@@ -251,7 +251,7 @@ class VPCConnection(EC2Connection):
         :param vpc_id: The ID of the VPC you want to attach the gateway to.
 
         :rtype: An attachment
-        :return: a :class:`boto.vpc.vpngateway.Attachment`
+        :return: a :class:`boto1.vpc.vpngateway.Attachment`
         """
         params = {'VpnGatewayId': vpn_gateway_id,
                   'VpcId' : vpc_id}
@@ -283,7 +283,7 @@ class VPCConnection(EC2Connection):
 
 
         :rtype: list
-        :return: A list of :class:`boto.vpc.subnet.Subnet`
+        :return: A list of :class:`boto1.vpc.subnet.Subnet`
         """
         params = {}
         if subnet_ids:
@@ -310,7 +310,7 @@ class VPCConnection(EC2Connection):
         :param availability_zone: The AZ you want the subnet in
 
         :rtype: The newly created Subnet
-        :return: A :class:`boto.vpc.customergateway.Subnet` object
+        :return: A :class:`boto1.vpc.customergateway.Subnet` object
         """
         params = {'VpcId' : vpc_id,
                   'CidrBlock' : cidr_block}
@@ -342,7 +342,7 @@ class VPCConnection(EC2Connection):
         :param dhcp_options_ids: A list of strings with the desired DhcpOption ID's
         
         :rtype: list
-        :return: A list of :class:`boto.vpc.dhcpoptions.DhcpOptions`
+        :return: A list of :class:`boto1.vpc.dhcpoptions.DhcpOptions`
         """
         params = {}
         if dhcp_options_ids:
@@ -363,7 +363,7 @@ class VPCConnection(EC2Connection):
         :param availability_zone: The AZ you want the subnet in
 
         :rtype: The newly created DhcpOption
-        :return: A :class:`boto.vpc.customergateway.DhcpOption` object
+        :return: A :class:`boto1.vpc.customergateway.DhcpOption` object
         """
         params = {'VpcId' : vpc_id,
                   'CidrBlock' : cidr_block}
@@ -427,7 +427,7 @@ class VPCConnection(EC2Connection):
                           with the VPN connection
 
         :rtype: list
-        :return: A list of :class:`boto.vpn_connection.vpnconnection.VpnConnection`
+        :return: A list of :class:`boto1.vpn_connection.vpnconnection.VpnConnection`
         """
         params = {}
         if vpn_connection_ids:
@@ -455,7 +455,7 @@ class VPCConnection(EC2Connection):
         :param vpn_gateway_id: The ID of the VPN gateway.
 
         :rtype: The newly created VpnConnection
-        :return: A :class:`boto.vpc.vpnconnection.VpnConnection` object
+        :return: A :class:`boto1.vpc.vpnconnection.VpnConnection` object
         """
         params = {'Type' : type,
                   'CustomerGatewayId' : customer_gateway_id,

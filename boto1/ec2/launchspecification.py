@@ -23,10 +23,10 @@
 Represents a launch specification for Spot instances.
 """
 
-from boto.ec2.ec2object import EC2Object
-from boto.resultset import ResultSet
-from boto.ec2.blockdevicemapping import BlockDeviceMapping
-from boto.ec2.instance import Group
+from boto1.ec2.ec2object import EC2Object
+from boto1.resultset import ResultSet
+from boto1.ec2.blockdevicemapping import BlockDeviceMapping
+from boto1.ec2.instance import Group
 
 class GroupList(list):
 

@@ -19,11 +19,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from boto.sdb.db.manager import get_manager
-from boto.sdb.db.property import *
-from boto.sdb.db.key import Key
-from boto.sdb.db.query import Query
-import boto
+from boto1.sdb.db.manager import get_manager
+from boto1.sdb.db.property import *
+from boto1.sdb.db.key import Key
+from boto1.sdb.db.query import Query
+import boto1
 
 class ModelMeta(type):
     "Metaclass for all Models"
@@ -138,7 +138,7 @@ class Model(object):
     @classmethod
     def get_xmlmanager(cls):
         if not hasattr(cls, '_xmlmanager'):
-            from boto.sdb.db.manager.xmlmanager import XMLManager
+            from boto1.sdb.db.manager.xmlmanager import XMLManager
             cls._xmlmanager = XMLManager(cls, None, None, None,
                                          None, None, None, None, False)
         return cls._xmlmanager
@@ -163,7 +163,7 @@ class Model(object):
                 try:
                     setattr(self, key, kw[key])
                 except Exception, e:
-                    boto.log.exception(e)
+                    boto1.log.exception(e)
 
     def __repr__(self):
         return '%s<%s>' % (self.__class__.__name__, self.id)

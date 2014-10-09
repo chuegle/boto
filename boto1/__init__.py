@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 #
-from boto.pyami.config import Config, BotoConfigLocations
+from boto1.pyami.config import Config, BotoConfigLocations
 import os, sys
 import logging
 import logging.config
@@ -78,10 +78,10 @@ def connect_sqs(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.sqs.connection.SQSConnection`
+    :rtype: :class:`boto1.sqs.connection.SQSConnection`
     :return: A connection to Amazon's SQS
     """
-    from boto.sqs.connection import SQSConnection
+    from boto1.sqs.connection import SQSConnection
     return SQSConnection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_s3(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -92,10 +92,10 @@ def connect_s3(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.s3.connection.S3Connection`
+    :rtype: :class:`boto1.s3.connection.S3Connection`
     :return: A connection to Amazon's S3
     """
-    from boto.s3.connection import S3Connection
+    from boto1.s3.connection import S3Connection
     return S3Connection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_ec2(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -106,10 +106,10 @@ def connect_ec2(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.ec2.connection.EC2Connection`
+    :rtype: :class:`boto1.ec2.connection.EC2Connection`
     :return: A connection to Amazon's EC2
     """
-    from boto.ec2.connection import EC2Connection
+    from boto1.ec2.connection import EC2Connection
     return EC2Connection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_elb(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -120,10 +120,10 @@ def connect_elb(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.ec2.elb.ELBConnection`
+    :rtype: :class:`boto1.ec2.elb.ELBConnection`
     :return: A connection to Amazon's Load Balancing Service
     """
-    from boto.ec2.elb import ELBConnection
+    from boto1.ec2.elb import ELBConnection
     return ELBConnection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_autoscale(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -134,10 +134,10 @@ def connect_autoscale(aws_access_key_id=None, aws_secret_access_key=None, **kwar
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.ec2.autoscale.AutoScaleConnection`
+    :rtype: :class:`boto1.ec2.autoscale.AutoScaleConnection`
     :return: A connection to Amazon's Auto Scaling Service
     """
-    from boto.ec2.autoscale import AutoScaleConnection
+    from boto1.ec2.autoscale import AutoScaleConnection
     return AutoScaleConnection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_cloudwatch(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -148,10 +148,10 @@ def connect_cloudwatch(aws_access_key_id=None, aws_secret_access_key=None, **kwa
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.ec2.cloudwatch.CloudWatchConnection`
+    :rtype: :class:`boto1.ec2.cloudwatch.CloudWatchConnection`
     :return: A connection to Amazon's EC2 Monitoring service
     """
-    from boto.ec2.cloudwatch import CloudWatchConnection
+    from boto1.ec2.cloudwatch import CloudWatchConnection
     return CloudWatchConnection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_sdb(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -162,10 +162,10 @@ def connect_sdb(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.sdb.connection.SDBConnection`
+    :rtype: :class:`boto1.sdb.connection.SDBConnection`
     :return: A connection to Amazon's SDB
     """
-    from boto.sdb.connection import SDBConnection
+    from boto1.sdb.connection import SDBConnection
     return SDBConnection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_fps(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -176,10 +176,10 @@ def connect_fps(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.fps.connection.FPSConnection`
+    :rtype: :class:`boto1.fps.connection.FPSConnection`
     :return: A connection to FPS
     """
-    from boto.fps.connection import FPSConnection
+    from boto1.fps.connection import FPSConnection
     return FPSConnection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_cloudfront(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -190,10 +190,10 @@ def connect_cloudfront(aws_access_key_id=None, aws_secret_access_key=None, **kwa
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.fps.connection.FPSConnection`
+    :rtype: :class:`boto1.fps.connection.FPSConnection`
     :return: A connection to FPS
     """
-    from boto.cloudfront import CloudFrontConnection
+    from boto1.cloudfront import CloudFrontConnection
     return CloudFrontConnection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_vpc(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -204,10 +204,10 @@ def connect_vpc(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.vpc.VPCConnection`
+    :rtype: :class:`boto1.vpc.VPCConnection`
     :return: A connection to VPC
     """
-    from boto.vpc import VPCConnection
+    from boto1.vpc import VPCConnection
     return VPCConnection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def connect_rds(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
@@ -218,10 +218,10 @@ def connect_rds(aws_access_key_id=None, aws_secret_access_key=None, **kwargs):
     :type aws_secret_access_key: string
     :param aws_secret_access_key: Your AWS Secret Access Key
 
-    :rtype: :class:`boto.rds.RDSConnection`
+    :rtype: :class:`boto1.rds.RDSConnection`
     :return: A connection to RDS
     """
-    from boto.rds import RDSConnection
+    from boto1.rds import RDSConnection
     return RDSConnection(aws_access_key_id, aws_secret_access_key, **kwargs)
 
 def check_extensions(module_name, module_path):

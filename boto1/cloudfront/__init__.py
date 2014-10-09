@@ -23,14 +23,14 @@
 import xml.sax
 import base64
 import time
-import boto.utils
-from boto.connection import AWSAuthConnection
-from boto import handler
-from boto.cloudfront.distribution import *
-from boto.cloudfront.identity import OriginAccessIdentity
-from boto.cloudfront.identity import OriginAccessIdentityConfig
-from boto.resultset import ResultSet
-from boto.cloudfront.exception import CloudFrontServerError
+import boto1.utils
+from boto1.connection import AWSAuthConnection
+from boto1 import handler
+from boto1.cloudfront.distribution import *
+from boto1.cloudfront.identity import OriginAccessIdentity
+from boto1.cloudfront.identity import OriginAccessIdentityConfig
+from boto1.resultset import ResultSet
+from boto1.cloudfront.exception import CloudFrontServerError
 
 class CloudFrontConnection(AWSAuthConnection):
 

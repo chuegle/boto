@@ -20,9 +20,9 @@
 # IN THE SOFTWARE.
 #
 
-import boto
+import boto1
 
-boto.check_extensions(__name__, __path__)
+boto1.check_extensions(__name__, __path__)
 
 from queue import Queue
 from message import Message, MHMessage, EncodedMHMessage
@@ -33,7 +33,7 @@ def regions():
     Get all available regions for the SQS service.
         
     :rtype: list
-    :return: A list of :class:`boto.ec2.regioninfo.RegionInfo`
+    :return: A list of :class:`boto1.ec2.regioninfo.RegionInfo`
     """
     return [SQSRegionInfo(name='us-east-1', endpoint='queue.amazonaws.com'),
             SQSRegionInfo(name='eu-west-1', endpoint='eu-west-1.queue.amazonaws.com'),

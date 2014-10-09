@@ -22,7 +22,7 @@
 """
 Represents an EC2 Elastic IP Volume
 """
-from boto.ec2.ec2object import EC2Object
+from boto1.ec2.ec2object import EC2Object
 
 class Volume(EC2Object):
     
@@ -186,7 +186,7 @@ class Volume(EC2Object):
         :param restorable_by: If present, only the snapshots that are restorable
                               by the specified account id will be returned.
 
-        :rtype: list of L{boto.ec2.snapshot.Snapshot}
+        :rtype: list of L{boto1.ec2.snapshot.Snapshot}
         :return: The requested Snapshot objects
         
         """

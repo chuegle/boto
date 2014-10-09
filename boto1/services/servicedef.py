@@ -19,9 +19,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from boto.pyami.config import Config
-from boto.services.message import ServiceMessage
-import boto
+from boto1.pyami.config import Config
+from boto1.services.message import ServiceMessage
+import boto1
 
 class ServiceDef(Config):
 
@@ -77,13 +77,13 @@ class ServiceDef(Config):
         if not val:
             return None
         if name.find('queue') >= 0:
-            obj = boto.lookup('sqs', val)
+            obj = boto1.lookup('sqs', val)
             if obj:
                 obj.set_message_class(ServiceMessage)
         elif name.find('bucket') >= 0:
-            obj = boto.lookup('s3', val)
+            obj = boto1.lookup('s3', val)
         elif name.find('domain') >= 0:
-            obj = boto.lookup('sdb', val)
+            obj = boto1.lookup('sdb', val)
         else:
             obj = None
         return obj

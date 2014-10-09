@@ -21,9 +21,9 @@
 # IN THE SOFTWARE.
 import sys
 from optparse import OptionParser
-from boto.mapreduce.partitiondb import PartitionDB, Partition, Version
-from boto.exception import SDBPersistenceError
-from boto.sdb.persist import get_manager, get_domain
+from boto1.mapreduce.partitiondb import PartitionDB, Partition, Version
+from boto1.exception import SDBPersistenceError
+from boto1.sdb.persist import get_manager, get_domain
 
 USAGE = """
   SYNOPSIS

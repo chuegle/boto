@@ -25,10 +25,10 @@ Represents an SQS Queue
 
 import xml.sax
 import urlparse
-from boto.exception import SQSError
-from boto.handler import XmlHandler
-from boto.sqs.message import Message
-from boto.resultset import ResultSet
+from boto1.exception import SQSError
+from boto1.handler import XmlHandler
+from boto1.sqs.message import Message
+from boto1.resultset import ResultSet
 
 class Queue:
 
@@ -68,7 +68,7 @@ class Queue:
     def set_message_class(self, message_class):
         """
         Set the message class that should be used when instantiating messages read
-        from the queue.  By default, the class boto.sqs.message.Message is used but
+        from the queue.  By default, the class boto1.sqs.message.Message is used but
         this can be overriden with any class that behaves like a message.
 
         :type message_class: Message-like class
@@ -179,7 +179,7 @@ class Queue:
         :type visibility_timeout: int
         :param visibility_timeout: The timeout for this message in seconds
 
-        :rtype: :class:`boto.sqs.message.Message`
+        :rtype: :class:`boto1.sqs.message.Message`
         :return: A single message or None if queue is empty
         """
         rs = self.get_messages(1, visibility_timeout)
@@ -195,8 +195,8 @@ class Queue:
         :type message: Message
         :param message: The message to be written to the queue
 
-        :rtype: :class:`boto.sqs.message.Message`
-        :return: The :class:`boto.sqs.message.Message` object that was written.
+        :rtype: :class:`boto1.sqs.message.Message`
+        :return: The :class:`boto1.sqs.message.Message` object that was written.
         """
         new_msg = self.connection.send_message(self, message.get_body_encoded())
         message.id = new_msg.id
@@ -210,7 +210,7 @@ class Queue:
         :type body: message body
         :param body: The body of the newly created message (optional).
 
-        :rtype: :class:`boto.sqs.message.Message`
+        :rtype: :class:`boto1.sqs.message.Message`
         :return: A new Message object
         """
         m = self.message_class(self, body)
@@ -238,7 +238,7 @@ class Queue:
                            ApproximateReceiveCount
                            ApproximateFirstReceiveTimestamp
         :rtype: list
-        :return: A list of :class:`boto.sqs.message.Message` objects.
+        :return: A list of :class:`boto1.sqs.message.Message` objects.
         """
         return self.connection.receive_message(self, number_messages=num_messages,
                                                visibility_timeout=visibility_timeout,
@@ -248,8 +248,8 @@ class Queue:
         """
         Delete a message from the queue.
 
-        :type message: :class:`boto.sqs.message.Message`
-        :param message: The :class:`boto.sqs.message.Message` object to delete.
+        :type message: :class:`boto1.sqs.message.Message`
+        :param message: The :class:`boto1.sqs.message.Message` object to delete.
 
         :rtype: bool
         :return: True if successful, False otherwise

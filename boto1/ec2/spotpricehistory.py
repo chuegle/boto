@@ -23,7 +23,7 @@
 Represents an EC2 Spot Instance Request
 """
 
-from boto.ec2.ec2object import EC2Object
+from boto1.ec2.ec2object import EC2Object
 
 class SpotPriceHistory(EC2Object):
     

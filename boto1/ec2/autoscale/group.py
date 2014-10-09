@@ -21,11 +21,11 @@
 
 import weakref
 
-from boto.ec2.zone import Zone
-from boto.ec2.elb.listelement import ListElement
-from boto.resultset import ResultSet
-from boto.ec2.autoscale.trigger import Trigger
-from boto.ec2.autoscale.request import Request
+from boto1.ec2.zone import Zone
+from boto1.ec2.elb.listelement import ListElement
+from boto1.resultset import ResultSet
+from boto1.ec2.autoscale.trigger import Trigger
+from boto1.ec2.autoscale.request import Request
 
 class Instance(object):
     def __init__(self, connection=None):

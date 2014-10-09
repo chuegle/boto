@@ -22,13 +22,13 @@
 import urllib
 import xml.sax
 import uuid
-import boto
-import boto.utils
+import boto1
+import boto1.utils
 import urllib
-from boto import handler
-from boto.connection import AWSQueryConnection
-from boto.resultset import ResultSet
-from boto.exception import FPSResponseError
+from boto1 import handler
+from boto1.connection import AWSQueryConnection
+from boto1.resultset import ResultSet
+from boto1.exception import FPSResponseError
 
 class FPSConnection(AWSQueryConnection):
 
@@ -78,9 +78,9 @@ class FPSConnection(AWSQueryConnection):
 			xml.sax.parseString(body, h)
 			caller_token = rs.TokenId
 			try:
-				boto.config.save_system_option("FPS", "caller_token", caller_token)
+				boto1.config.save_system_option("FPS", "caller_token", caller_token)
 			except(IOError):
-				boto.config.save_user_option("FPS", "caller_token", caller_token)
+				boto1.config.save_user_option("FPS", "caller_token", caller_token)
 			return caller_token
 		else:
 			raise FPSResponseError(response.status, respons.reason, body)
@@ -99,9 +99,9 @@ class FPSConnection(AWSQueryConnection):
 			xml.sax.parseString(body, h)
 			recipient_token = rs.TokenId
 			try:
-				boto.config.save_system_option("FPS", "recipient_token", recipient_token)
+				boto1.config.save_system_option("FPS", "recipient_token", recipient_token)
 			except(IOError):
-				boto.config.save_user_option("FPS", "recipient_token", recipient_token)
+				boto1.config.save_user_option("FPS", "recipient_token", recipient_token)
 
 			return recipient_token
 		else:
@@ -126,7 +126,7 @@ class FPSConnection(AWSQueryConnection):
 			url += "&%s=%s" % (k, urllib.quote_plus(str(params[k])))
 
 		url = "/cobranded-ui/actions/start?%s" % ( url[1:])
-		signature= boto.utils.encode(self.aws_secret_access_key, url, True)
+		signature= boto1.utils.encode(self.aws_secret_access_key, url, True)
 		return "https://authorize.payments-sandbox.amazon.com%s&awsSignature=%s" % (url, signature)
 
 	def make_payment(self, amount, sender_token, charge_fee_to="Recipient", reference=None, senderReference=None, recipientReference=None, senderDescription=None, recipientDescription=None, callerDescription=None, metadata=None, transactionDate=None):
@@ -135,8 +135,8 @@ class FPSConnection(AWSQueryConnection):
 		You must specify the amount and the sender token.
 		"""
 		params = {}
-		params['RecipientTokenId'] = boto.config.get("FPS", "recipient_token")
-		params['CallerTokenId'] = boto.config.get("FPS", "caller_token")
+		params['RecipientTokenId'] = boto1.config.get("FPS", "recipient_token")
+		params['CallerTokenId'] = boto1.config.get("FPS", "caller_token")
 		params['SenderTokenId'] = sender_token
 		params['TransactionAmount.Amount'] = str(amount)
 		params['TransactionAmount.CurrencyCode'] = "USD"

@@ -20,11 +20,11 @@
 # IN THE SOFTWARE.
 #
 import os, sys, traceback, StringIO
-import boto
-from boto.utils import find_class
-from boto import config
-from boto.pyami.scriptbase import ScriptBase
-from boto.utils import find_class
+import boto1
+from boto1.utils import find_class
+from boto1 import config
+from boto1.pyami.scriptbase import ScriptBase
+from boto1.utils import find_class
 
 class Startup(ScriptBase):
 
@@ -39,13 +39,13 @@ class Startup(ScriptBase):
                         mod_name = script[0:pos]
                         cls_name = script[pos+1:]
                         cls = find_class(mod_name, cls_name)
-                        boto.log.info('Running Script: %s' % script)
+                        boto1.log.info('Running Script: %s' % script)
                         s = cls()
                         s.main()
                     else:
-                        boto.log.warning('Trouble parsing script: %s' % script)
+                        boto1.log.warning('Trouble parsing script: %s' % script)
                 except Exception, e:
-                    boto.log.exception('Problem Running Script: %s' % script)
+                    boto1.log.exception('Problem Running Script: %s' % script)
 
     def main(self):
         self.run_scripts()
@@ -53,7 +53,7 @@ class Startup(ScriptBase):
 
 if __name__ == "__main__":
     if not config.has_section('loggers'):
-        boto.set_file_logger('startup', '/var/log/boto.log')
+        boto1.set_file_logger('startup', '/var/log/boto1.log')
     sys.path.append(config.get('Pyami', 'working_dir'))
     su = Startup()
     su.main()

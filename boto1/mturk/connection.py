@@ -22,12 +22,12 @@
 import xml.sax
 import datetime
 
-from boto import handler
-from boto.mturk.price import Price
-import boto.mturk.notification
-from boto.connection import AWSQueryConnection
-from boto.exception import EC2ResponseError
-from boto.resultset import ResultSet
+from boto1 import handler
+from boto1.mturk.price import Price
+import boto1.mturk.notification
+from boto1.connection import AWSQueryConnection
+from boto1.exception import EC2ResponseError
+from boto1.resultset import ResultSet
 
 class MTurkConnection(AWSQueryConnection):
     
@@ -96,7 +96,7 @@ class MTurkConnection(AWSQueryConnection):
         # notification specifications in the "inactive" status.
         notification_params = {'Destination': destination,
                                'Transport': transport,
-                               'Version': boto.mturk.notification.NotificationMessage.NOTIFICATION_VERSION,
+                               'Version': boto1.mturk.notification.NotificationMessage.NOTIFICATION_VERSION,
                                'Active': True,
                                }
 

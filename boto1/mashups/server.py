@@ -22,12 +22,12 @@
 """
 High-level abstraction of an EC2 server
 """
-import boto, boto.utils
-from boto.mashups.iobject import IObject
-from boto.pyami.config import Config, BotoConfigPath
-from boto.mashups.interactive import interactive_shell
-from boto.sdb.db.model import Model
-from boto.sdb.db.property import *
+import boto, boto1.utils
+from boto1.mashups.iobject import IObject
+from boto1.pyami.config import Config, BotoConfigPath
+from boto1.mashups.interactive import interactive_shell
+from boto1.sdb.db.model import Model
+from boto1.sdb.db.property import *
 import os
 import StringIO
 
@@ -57,7 +57,7 @@ class ServerSet(list):
 
 class Server(Model):
 
-    ec2 = boto.connect_ec2()
+    ec2 = boto1.connect_ec2()
 
     @classmethod
     def Inventory(cls):
@@ -204,7 +204,7 @@ class Server(Model):
 
     def start(self):
         self.stop()
-        ec2 = boto.connect_ec2()
+        ec2 = boto1.connect_ec2()
         ami = ec2.get_all_images(image_ids = [str(self.ami_id)])[0]
         groups = ec2.get_all_security_groups(groupnames=[str(self.security_group)])
         if not self._config:
@@ -352,7 +352,7 @@ class Server(Model):
         Attach an EBS volume to this server
 
         :param volume: EBS Volume to attach
-        :type volume: boto.ec2.volume.Volume
+        :type volume: boto1.ec2.volume.Volume
 
         :param device: Device to attach to (default to /dev/sdp)
         :type device: string
@@ -368,7 +368,7 @@ class Server(Model):
         Detach an EBS volume from this server
 
         :param volume: EBS Volume to detach
-        :type volume: boto.ec2.volume.Volume
+        :type volume: boto1.ec2.volume.Volume
         """
         if hasattr(volume, "id"):
             volume_id = volume.id

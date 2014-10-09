@@ -22,9 +22,9 @@
 
 import getopt, sys, os, time, mimetypes
 from datetime import datetime, timedelta
-from boto.services.servicedef import ServiceDef
-from boto.utils import parse_ts
-import boto
+from boto1.services.servicedef import ServiceDef
+from boto1.utils import parse_ts
+import boto1
 
 class ResultProcessor:
     
@@ -78,9 +78,9 @@ class ResultProcessor:
         self.calculate_stats(record)
         outputs = record['OutputKey'].split(',')
         if record.has_key('OutputBucket'):
-            bucket = boto.lookup('s3', record['OutputBucket'])
+            bucket = boto1.lookup('s3', record['OutputBucket'])
         else:
-            bucket = boto.lookup('s3', record['Bucket'])
+            bucket = boto1.lookup('s3', record['Bucket'])
         for output in outputs:
             if get_file:
                 key_name, type = output.split(';')

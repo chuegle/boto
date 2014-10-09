@@ -20,7 +20,7 @@
 # IN THE SOFTWARE.
 #
 
-import boto
+import boto1
 from regioninfo import SDBRegionInfo
 
 def regions():
@@ -28,7 +28,7 @@ def regions():
     Get all available regions for the SDB service.
         
     :rtype: list
-    :return: A list of :class:`boto.sdb.regioninfo.RegionInfo`
+    :return: A list of :class:`boto1.sdb.regioninfo.RegionInfo`
     """
     return [SDBRegionInfo(name='us-east-1', endpoint='sdb.amazonaws.com'),
             SDBRegionInfo(name='eu-west-1', endpoint='sdb.eu-west-1.amazonaws.com'),

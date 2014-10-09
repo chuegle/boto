@@ -6,14 +6,14 @@ An Introduction to boto's SQS interface
 
 This tutorial focuses on the boto interface to the Simple Queue Service
 from Amazon Web Services.  This tutorial assumes that you have already
-downloaded and installed boto.
+downloaded and installed boto1.
 
 Creating a Connection
 ---------------------
 The first step in accessing SQS is to create a connection to the service.
-There are two ways to do this in boto.  The first is:
+There are two ways to do this in boto1.  The first is:
 
->>> from boto.sqs.connection import SQSConnection
+>>> from boto1.sqs.connection import SQSConnection
 >>> conn = SQSConnection('<aws access key>', '<aws secret key>')
 
 At this point the variable conn will point to an SQSConnection object.  In
@@ -30,8 +30,8 @@ and then call the constructor without any arguments, like this:
 There is also a shortcut function in the boto package, called connect_sqs
 that may provide a slightly easier means of creating a connection:
 
->>> import boto
->>> conn = boto.connect_sqs()
+>>> import boto1
+>>> conn = boto1.connect_sqs()
 
 In either case, conn will point to an SQSConnection object which we will
 use throughout the remainder of this tutorial.
@@ -96,7 +96,7 @@ class.
 For this tutorial, let's just assume that we are using the boto Message
 class.  So, first we need to create a Message object:
 
->>> from boto.sqs.message import Message
+>>> from boto1.sqs.message import Message
 >>> m = Message()
 >>> m.set_body('This is my first message.')
 >>> status = q.write(m)

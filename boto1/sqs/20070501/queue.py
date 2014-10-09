@@ -25,10 +25,10 @@ Represents an SQS Queue
 
 import xml.sax
 import urlparse
-from boto.exception import SQSError
-from boto.handler import XmlHandler
-from boto.sqs.message import Message
-from boto.resultset import ResultSet
+from boto1.exception import SQSError
+from boto1.handler import XmlHandler
+from boto1.sqs.message import Message
+from boto1.resultset import ResultSet
 
 class Queue:
     
@@ -54,7 +54,7 @@ class Queue:
     def set_message_class(self, message_class):
         """
         Set the message class that should be used when instantiating messages read
-        from the queue.  By default, the class boto.sqs.message.Message is used but
+        from the queue.  By default, the class boto1.sqs.message.Message is used but
         this can be overriden with any class that behaves like a message.
         Inputs:
             message_class - The new message class

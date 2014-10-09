@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 #
-from boto.pyami.installers.ubuntu.installer import Installer
+from boto1.pyami.installers.ubuntu.installer import Installer
 
 class Apache(Installer):
     """

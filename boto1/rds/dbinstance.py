@@ -19,8 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from boto.rds.dbsecuritygroup import DBSecurityGroup
-from boto.rds.parametergroup import ParameterGroup
+from boto1.rds.dbsecuritygroup import DBSecurityGroup
+from boto1.rds.parametergroup import ParameterGroup
 
 class DBInstance(object):
     """
@@ -108,7 +108,7 @@ class DBInstance(object):
         :type identifier: string
         :param identifier: The identifier for the DBSnapshot
         
-        :rtype: :class:`boto.rds.dbsnapshot.DBSnapshot`
+        :rtype: :class:`boto1.rds.dbsnapshot.DBSnapshot`
         :return: The newly created DBSnapshot
         """
         return self.connection.create_dbsnapshot(snapshot_id, self.id)
@@ -128,7 +128,7 @@ class DBInstance(object):
         :param final_snapshot_id: If a final snapshot is requested, this
                                   is the identifier used for that snapshot.
 
-        :rtype: :class:`boto.rds.dbinstance.DBInstance`
+        :rtype: :class:`boto1.rds.dbinstance.DBInstance`
         :return: The deleted db instance.
         """
         return self.connection.delete_dbinstance(self.id,

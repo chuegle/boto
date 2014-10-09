@@ -4,51 +4,51 @@
 SQS 
 ====
 
-boto.sqs
+boto1.sqs
 --------
 
-.. automodule:: boto.sqs
+.. automodule:: boto1.sqs
    :members:   
    :undoc-members:
 
-boto.sqs.attributes
+boto1.sqs.attributes
 -------------------
 
-.. automodule:: boto.sqs.attributes
+.. automodule:: boto1.sqs.attributes
    :members:   
    :undoc-members:
 
-boto.sqs.connection
+boto1.sqs.connection
 -------------------
 
-.. automodule:: boto.sqs.connection
+.. automodule:: boto1.sqs.connection
    :members:   
    :undoc-members:
 
-boto.sqs.jsonmessage
+boto1.sqs.jsonmessage
 --------------------
 
-.. automodule:: boto.sqs.jsonmessage
+.. automodule:: boto1.sqs.jsonmessage
    :members:   
    :undoc-members:
 
-boto.sqs.message
+boto1.sqs.message
 ----------------
 
-.. automodule:: boto.sqs.message
+.. automodule:: boto1.sqs.message
    :members:   
    :undoc-members:
 
-boto.sqs.queue
+boto1.sqs.queue
 --------------
 
-.. automodule:: boto.sqs.queue
+.. automodule:: boto1.sqs.queue
    :members:   
    :undoc-members:
 
-boto.sqs.regioninfo
+boto1.sqs.regioninfo
 -------------------
 
-.. automodule:: boto.sqs.regioninfo
+.. automodule:: boto1.sqs.regioninfo
    :members:   
    :undoc-members:

@@ -23,17 +23,17 @@
 High-level abstraction of an EC2 server
 """
 from __future__ import with_statement
-import boto.ec2
-from boto.mashups.iobject import IObject
-from boto.pyami.config import BotoConfigPath, Config
-from boto.sdb.db.model import Model
-from boto.sdb.db.property import *
-from boto.manage import propget
-from boto.ec2.zone import Zone
-from boto.ec2.keypair import KeyPair
+import boto1.ec2
+from boto1.mashups.iobject import IObject
+from boto1.pyami.config import BotoConfigPath, Config
+from boto1.sdb.db.model import Model
+from boto1.sdb.db.property import *
+from boto1.manage import propget
+from boto1.ec2.zone import Zone
+from boto1.ec2.keypair import KeyPair
 import os, time, StringIO
 from contextlib import closing
-from boto.exception import EC2ResponseError
+from boto1.exception import EC2ResponseError
 
 InstanceTypes = ['m1.small', 'm1.large', 'm1.xlarge',
                  'c1.medium', 'c1.xlarge',
@@ -42,7 +42,7 @@ InstanceTypes = ['m1.small', 'm1.large', 'm1.xlarge',
 class Bundler(object):
 
     def __init__(self, server, uname='root'):
-        from boto.manage.cmdshell import SSHClient
+        from boto1.manage.cmdshell import SSHClient
         self.server = server
         self.uname = uname
         self.ssh_client = SSHClient(server, uname=uname)
@@ -103,7 +103,7 @@ class Bundler(object):
         self.copy_x509(key_file, cert_file)
         if not fp:
             fp = StringIO.StringIO()
-        fp.write('mv %s /mnt/boto.cfg; ' % BotoConfigPath)
+        fp.write('mv %s /mnt/boto1.cfg; ' % BotoConfigPath)
         fp.write('mv /root/.ssh/authorized_keys /mnt/authorized_keys; ')
         if clear_history:
             fp.write('history -c; ')
@@ -111,7 +111,7 @@ class Bundler(object):
         fp.write('; ')
         fp.write(self.upload_bundle(bucket, prefix, ssh_key))
         fp.write('; ')
-        fp.write('mv /mnt/boto.cfg %s; ' % BotoConfigPath)
+        fp.write('mv /mnt/boto1.cfg %s; ' % BotoConfigPath)
         fp.write('mv /mnt/authorized_keys /root/.ssh/authorized_keys\n')
         command = fp.getvalue()
         print 'running the following command on the remote server:'
@@ -137,11 +137,11 @@ class CommandLineGetter(object):
     def get_region(self, params):
         region = params.get('region', None)
         if isinstance(region, str) or isinstance(region, unicode):
-            region = boto.ec2.get_region(region)
+            region = boto1.ec2.get_region(region)
             params['region'] = region
         if not region:
             prop = self.cls.find_property('region_name')
-            params['region'] = propget.get(prop, choices=boto.ec2.regions)
+            params['region'] = propget.get(prop, choices=boto1.ec2.regions)
 
     def get_name(self, params):
         if not params.get('name', None):
@@ -341,7 +341,7 @@ class Server(Model):
     
     @classmethod
     def create_from_instance_id(cls, instance_id, name, description=''):
-        regions = boto.ec2.regions()
+        regions = boto1.ec2.regions()
         for region in regions:
             ec2 = region.connect()
             try:
@@ -366,7 +366,7 @@ class Server(Model):
     @classmethod
     def create_from_current_instances(cls):
         servers = []
-        regions = boto.ec2.regions()
+        regions = boto1.ec2.regions()
         for region in regions:
             ec2 = region.connect()
             rs = ec2.get_all_instances()
@@ -374,7 +374,7 @@ class Server(Model):
                 for instance in reservation.instances:
                     try:
                         Server.find(instance_id=instance.id).next()
-                        boto.log.info('Server for %s already exists' % instance.id)
+                        boto1.log.info('Server for %s already exists' % instance.id)
                     except StopIteration:
                         s = cls()
                         s.ec2 = ec2
@@ -400,7 +400,7 @@ class Server(Model):
             return
         if self.id:
             if self.region_name:
-                for region in boto.ec2.regions():
+                for region in boto1.ec2.regions():
                     if region.name == self.region_name:
                         self.ec2 = region.connect()
                         if self.instance_id and not self._instance:
@@ -531,7 +531,7 @@ class Server(Model):
         return Bundler(self, uname)
 
     def get_ssh_client(self, uname='root'):
-        from boto.manage.cmdshell import SSHClient
+        from boto1.manage.cmdshell import SSHClient
         ssh_key_file = self.get_ssh_key_file()
         return SSHClient(self, uname=uname)
 

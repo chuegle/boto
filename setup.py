@@ -26,9 +26,9 @@ try:
 except ImportError:
     from distutils.core import setup
 
-from boto import Version
+from boto1 import Version
 
-setup(name = "boto",
+setup(name = "boto1",
       version = Version,
       description = "Amazon Web Services Library",
       long_description="Python interface to Amazon's Web Services.",
@@ -36,12 +36,12 @@ setup(name = "boto",
       author_email = "mitch@garnaat.com",
       scripts = ["bin/sdbadmin", "bin/elbadmin", "bin/s3put", "bin/fetch_file", "bin/launch_instance", 'bin/list_instances', "bin/taskadmin"],
       url = "http://code.google.com/p/boto/",
-      packages = [ 'boto', 'boto.sqs', 'boto.s3',
-                   'boto.ec2', 'boto.ec2.cloudwatch', 'boto.ec2.autoscale', 'boto.ec2.elb',
-                   'boto.sdb', 'boto.sdb.persist', 'boto.sdb.db', 'boto.sdb.db.manager',
-                   'boto.mturk', 'boto.pyami', 'boto.mashups', 'boto.contrib', 'boto.manage',
-                   'boto.services', 'boto.tests', 'boto.cloudfront', 'boto.rds', 'boto.vpc',
-                   'boto.fps'],
+      packages = [ 'boto1', 'boto1.sqs', 'boto1.s3',
+                   'boto1.ec2', 'boto1.ec2.cloudwatch', 'boto1.ec2.autoscale', 'boto1.ec2.elb',
+                   'boto1.sdb', 'boto1.sdb.persist', 'boto1.sdb.db', 'boto1.sdb.db.manager',
+                   'boto1.mturk', 'boto1.pyami', 'boto1.mashups', 'boto1.contrib', 'boto1.manage',
+                   'boto1.services', 'boto1.tests', 'boto1.cloudfront', 'boto1.rds', 'boto1.vpc',
+                   'boto1.fps'],
       license = 'MIT',
       platforms = 'Posix; MacOS X; Windows',
       classifiers = [ 'Development Status :: 3 - Alpha',

@@ -65,8 +65,8 @@ in the format in which it would be stored in SQS.
 
 import base64
 import StringIO
-from boto.sqs.attributes import Attributes
-from boto.exception import SQSDecodeError
+from boto1.sqs.attributes import Attributes
+from boto1.exception import SQSDecodeError
 
 class RawMessage:
     """

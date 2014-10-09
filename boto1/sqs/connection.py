@@ -19,15 +19,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from boto.connection import AWSQueryConnection
+from boto1.connection import AWSQueryConnection
 import xml.sax
-from boto.sqs.regioninfo import SQSRegionInfo
-from boto.sqs.queue import Queue
-from boto.sqs.message import Message
-from boto.sqs.attributes import Attributes
-from boto import handler
-from boto.resultset import ResultSet
-from boto.exception import SQSError
+from boto1.sqs.regioninfo import SQSRegionInfo
+from boto1.sqs.queue import Queue
+from boto1.sqs.message import Message
+from boto1.sqs.attributes import Attributes
+from boto1 import handler
+from boto1.resultset import ResultSet
+from boto1.exception import SQSError
 
 class SQSConnection(AWSQueryConnection):
     """
@@ -62,13 +62,13 @@ class SQSConnection(AWSQueryConnection):
                            visibility_timeout is different than the value of the existing queue
                            of that name.  This is still an expensive operation, though, and not
                            the preferred way to check for the existence of a queue.  See the
-                           :func:`boto.sqs.connection.SQSConnection.lookup` method.
+                           :func:`boto1.sqs.connection.SQSConnection.lookup` method.
 
         :type visibility_timeout: int
         :param visibility_timeout: The default visibility timeout for all messages written in the
                                    queue.  This can be overridden on a per-message.
 
-        :rtype: :class:`boto.sqs.queue.Queue`
+        :rtype: :class:`boto1.sqs.queue.Queue`
         :return: The newly created queue.
 
         """
@@ -113,7 +113,7 @@ class SQSConnection(AWSQueryConnection):
                          LastModifiedTimestamp,
                          Policy
                          
-        :rtype: :class:`boto.sqs.attributes.Attributes`
+        :rtype: :class:`boto1.sqs.attributes.Attributes`
         :return: An Attributes object containing request value(s).
         """
         params = {'AttributeName' : attribute}
@@ -169,7 +169,7 @@ class SQSConnection(AWSQueryConnection):
         Extends the read lock timeout for the specified message from the specified queue
         to the specified value.
 
-        :type queue: A :class:`boto.sqs.queue.Queue` object
+        :type queue: A :class:`boto1.sqs.queue.Queue` object
         :param queue: The Queue from which messages are read.
         
         :type receipt_handle: str
@@ -207,7 +207,7 @@ class SQSConnection(AWSQueryConnection):
         """
         Add a permission to a queue.
 
-        :type queue: :class:`boto.sqs.queue.Queue`
+        :type queue: :class:`boto1.sqs.queue.Queue`
         :param queue: The queue object
 
         :type label: str or unicode
@@ -239,7 +239,7 @@ class SQSConnection(AWSQueryConnection):
         """
         Remove a permission from a queue.
 
-        :type queue: :class:`boto.sqs.queue.Queue`
+        :type queue: :class:`boto1.sqs.queue.Queue`
         :param queue: The queue object
 
         :type label: str or unicode

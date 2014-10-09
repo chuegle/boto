@@ -29,8 +29,8 @@ import unittest
 import time
 import os
 import urllib
-from boto.s3.connection import S3Connection
-from boto.exception import S3PermissionsError
+from boto1.s3.connection import S3Connection
+from boto1.exception import S3PermissionsError
 
 class S3ConnectionTest (unittest.TestCase):
 

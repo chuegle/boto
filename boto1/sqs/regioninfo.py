@@ -20,7 +20,7 @@
 # IN THE SOFTWARE.
 #
 
-from boto.ec2.regioninfo import RegionInfo
+from boto1.ec2.regioninfo import RegionInfo
 
 class SQSRegionInfo(RegionInfo):
 
@@ -32,9 +32,9 @@ class SQSRegionInfo(RegionInfo):
         object's constructor as keyword arguments and they will be
         passed along to the SQSConnection object.
         
-        :rtype: :class:`boto.sqs.connection.SQSConnection`
+        :rtype: :class:`boto1.sqs.connection.SQSConnection`
         :return: The connection to this regions endpoint
         """
-        from boto.sqs.connection import SQSConnection
+        from boto1.sqs.connection import SQSConnection
         return SQSConnection(region=self, **kw_params)
 

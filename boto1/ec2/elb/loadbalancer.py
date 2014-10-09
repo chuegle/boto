@@ -19,13 +19,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from boto.ec2.elb.healthcheck import HealthCheck
-from boto.ec2.elb.instancestate import InstanceState
-from boto.ec2.elb.listener import Listener
-from boto.ec2.elb.listelement import ListElement
-from boto.ec2.zone import Zone
-from boto.ec2.instanceinfo import InstanceInfo
-from boto.resultset import ResultSet
+from boto1.ec2.elb.healthcheck import HealthCheck
+from boto1.ec2.elb.instancestate import InstanceState
+from boto1.ec2.elb.listener import Listener
+from boto1.ec2.elb.listelement import ListElement
+from boto1.ec2.zone import Zone
+from boto1.ec2.instanceinfo import InstanceInfo
+from boto1.resultset import ResultSet
 
 class LoadBalancer(object):
     """

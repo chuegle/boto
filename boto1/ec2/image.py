@@ -19,8 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-from boto.ec2.ec2object import EC2Object
-from boto.ec2.blockdevicemapping import BlockDeviceMapping
+from boto1.ec2.ec2object import EC2Object
+from boto1.ec2.blockdevicemapping import BlockDeviceMapping
 
 class ProductCodes(list):
 
@@ -157,7 +157,7 @@ class Image(EC2Object):
         :param subnet_id: The subnet ID within which to launch the instances for VPC.
         
         :rtype: Reservation
-        :return: The :class:`boto.ec2.instance.Reservation` associated with the request for machines
+        :return: The :class:`boto1.ec2.instance.Reservation` associated with the request for machines
         """
         return self.connection.run_instances(self.id, min_count, max_count,
                                              key_name, security_groups,

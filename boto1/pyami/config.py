@@ -21,9 +21,9 @@
 #
 import StringIO, os, re
 import ConfigParser
-import boto
+import boto1
 
-BotoConfigPath = '/etc/boto.cfg'
+BotoConfigPath = '/etc/boto1.cfg'
 BotoConfigLocations = [BotoConfigPath]
 if 'HOME' in os.environ:
     UserConfigPath = os.path.expanduser('~/.boto')
@@ -172,7 +172,7 @@ class Config(ConfigParser.SafeConfigParser):
     
     def dump_to_sdb(self, domain_name, item_name):
         import simplejson
-        sdb = boto.connect_sdb()
+        sdb = boto1.connect_sdb()
         domain = sdb.lookup(domain_name)
         if not domain:
             domain = sdb.create_domain(domain_name)
@@ -187,7 +187,7 @@ class Config(ConfigParser.SafeConfigParser):
 
     def load_from_sdb(self, domain_name, item_name):
         import simplejson
-        sdb = boto.connect_sdb()
+        sdb = boto1.connect_sdb()
         domain = sdb.lookup(domain_name)
         item = domain.get_item(item_name)
         for section in item.keys():

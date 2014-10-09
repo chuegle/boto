@@ -21,8 +21,8 @@
 # IN THE SOFTWARE.
 #
 import getopt, sys, imp, time
-import boto
-from boto.utils import get_instance_userdata
+import boto1
+from boto1.utils import get_instance_userdata
 
 usage_string = """
 SYNOPSIS
@@ -131,7 +131,7 @@ def main():
         else:
             print 'Copying module %s to S3' % params['script_name']
         l = imp.find_module(params['script_name'])
-        c = boto.connect_s3()
+        c = boto1.connect_s3()
         bucket = c.get_bucket(params['script_bucket'])
         key = bucket.new_key(params['script_name']+'.py')
         key.set_contents_from_file(l[0])
@@ -141,7 +141,7 @@ def main():
     for k, v in params.items():
         if v:
             l.append('%s=%s' % (k, v))
-    c = boto.connect_ec2()
+    c = boto1.connect_ec2()
     l.append('aws_access_key_id=%s' % c.aws_access_key_id)
     l.append('aws_secret_access_key=%s' % c.aws_secret_access_key)
     for kv in args:

@@ -4,49 +4,49 @@
 sdb
 ===
 
-boto.sdb
+boto1.sdb
 --------
 
-.. automodule:: boto.sdb
+.. automodule:: boto1.sdb
    :members:   
    :undoc-members:
 
-boto.sdb.connection
+boto1.sdb.connection
 -------------------
 
-.. automodule:: boto.sdb.connection
+.. automodule:: boto1.sdb.connection
    :members:   
    :undoc-members:
 
-boto.sdb.db
+boto1.sdb.db
 -----------
 
-.. automodule:: boto.sdb.db
+.. automodule:: boto1.sdb.db
    :members:   
    :undoc-members:
 
-boto.sdb.db.blob
+boto1.sdb.db.blob
 ----------------
 
-.. automodule:: boto.sdb.db.blob
+.. automodule:: boto1.sdb.db.blob
    :members:   
    :undoc-members:
 
-boto.sdb.db.key
+boto1.sdb.db.key
 ---------------
 
-.. automodule:: boto.sdb.db.key
+.. automodule:: boto1.sdb.db.key
    :members:   
    :undoc-members:
 
-boto.sdb.db.manager
+boto1.sdb.db.manager
 -------------------
 
-.. automodule:: boto.sdb.db.manager
+.. automodule:: boto1.sdb.db.manager
    :members:   
    :undoc-members:
 
-boto.sdb.db.manager.pgmanager
+boto1.sdb.db.manager.pgmanager
 -----------------------------
 
 .. note::
@@ -55,90 +55,90 @@ boto.sdb.db.manager.pgmanager
    
    __ http://initd.org/
 
-.. automodule:: boto.sdb.db.manager.pgmanager
+.. automodule:: boto1.sdb.db.manager.pgmanager
    :members:   
    :undoc-members:
 
-boto.sdb.db.manager.sdbmanager
+boto1.sdb.db.manager.sdbmanager
 ------------------------------
 
-.. automodule:: boto.sdb.db.manager.sdbmanager
+.. automodule:: boto1.sdb.db.manager.sdbmanager
    :members:   
    :undoc-members:
 
-boto.sdb.db.manager.xmlmanager
+boto1.sdb.db.manager.xmlmanager
 ------------------------------
 
-.. automodule:: boto.sdb.db.manager.xmlmanager
+.. automodule:: boto1.sdb.db.manager.xmlmanager
    :members:   
    :undoc-members:
 
-boto.sdb.db.model
+boto1.sdb.db.model
 -----------------
 
-.. automodule:: boto.sdb.db.model
+.. automodule:: boto1.sdb.db.model
    :members:   
    :undoc-members:
 
-boto.sdb.db.property
+boto1.sdb.db.property
 --------------------
 
-.. automodule:: boto.sdb.db.property
+.. automodule:: boto1.sdb.db.property
    :members:   
    :undoc-members:
 
-boto.sdb.db.query
+boto1.sdb.db.query
 -----------------
 
-.. automodule:: boto.sdb.db.query
+.. automodule:: boto1.sdb.db.query
    :members:   
    :undoc-members:
 
-boto.sdb.domain
+boto1.sdb.domain
 ---------------
 
-.. automodule:: boto.sdb.domain
+.. automodule:: boto1.sdb.domain
    :members:   
    :undoc-members:
 
-boto.sdb.item
+boto1.sdb.item
 -------------
 
-.. automodule:: boto.sdb.item
+.. automodule:: boto1.sdb.item
    :members:   
    :undoc-members:
 
-boto.sdb.persist
+boto1.sdb.persist
 ----------------
 
-.. automodule:: boto.sdb.persist
+.. automodule:: boto1.sdb.persist
    :members:   
    :undoc-members:
 
-boto.sdb.persist.checker
+boto1.sdb.persist.checker
 ------------------------
 
-.. automodule:: boto.sdb.persist.checker
+.. automodule:: boto1.sdb.persist.checker
    :members:   
    :undoc-members:
 
-boto.sdb.persist.object
+boto1.sdb.persist.object
 -----------------------
 
-.. automodule:: boto.sdb.persist.object
+.. automodule:: boto1.sdb.persist.object
    :members:   
    :undoc-members:
 
-boto.sdb.persist.property
+boto1.sdb.persist.property
 -------------------------
 
-.. automodule:: boto.sdb.persist.property
+.. automodule:: boto1.sdb.persist.property
    :members:   
    :undoc-members:
 
-boto.sdb.queryresultset
+boto1.sdb.queryresultset
 -----------------------
 
-.. automodule:: boto.sdb.queryresultset
+.. automodule:: boto1.sdb.queryresultset
    :members:   
    :undoc-members:

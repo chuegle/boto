@@ -20,11 +20,11 @@
 # IN THE SOFTWARE.
 
 from __future__ import with_statement
-from boto.sdb.db.model import Model
-from boto.sdb.db.property import *
-from boto.manage.server import Server
-from boto.manage import propget
-import boto.ec2
+from boto1.sdb.db.model import Model
+from boto1.sdb.db.property import *
+from boto1.manage.server import Server
+from boto1.manage import propget
+import boto1.ec2
 import time, traceback
 from contextlib import closing
 import dateutil.parser
@@ -34,7 +34,7 @@ class CommandLineGetter(object):
     def get_region(self, params):
         if not params.get('region', None):
             prop = self.cls.find_property('region_name')
-            params['region'] = propget.get(prop, choices=boto.ec2.regions)
+            params['region'] = propget.get(prop, choices=boto1.ec2.regions)
 
     def get_zone(self, params):
         if not params.get('zone', None):
@@ -113,7 +113,7 @@ class Volume(Model):
     @classmethod
     def create_from_volume_id(cls, region_name, volume_id, name):
         vol = None
-        ec2 = boto.ec2.connect_to_region(region_name)
+        ec2 = boto1.ec2.connect_to_region(region_name)
         rs = ec2.get_all_volumes([volume_id])
         if len(rs) == 1:
             v = rs[0]
@@ -153,7 +153,7 @@ class Volume(Model):
         if self.server:
             return self.server.ec2
         if not hasattr(self, 'ec2') or self.ec2 == None:
-            self.ec2 = boto.ec2.connect_to_region(self.region_name)
+            self.ec2 = boto1.ec2.connect_to_region(self.region_name)
         return self.ec2
 
     def _volume_state(self):
@@ -236,7 +236,7 @@ class Volume(Model):
             # wait for the volume device to appear
             cmd = self.server.get_cmdshell()
             while not cmd.exists(self.device):
-                boto.log.info('%s still does not exist, waiting 10 seconds' % self.device)
+                boto1.log.info('%s still does not exist, waiting 10 seconds' % self.device)
                 time.sleep(10)
 
     def format(self):
@@ -245,22 +245,22 @@ class Volume(Model):
         status = None
         with closing(self.server.get_cmdshell()) as cmd:
             if not self.checkfs(cmd):
-                boto.log.info('make_fs...')
+                boto1.log.info('make_fs...')
                 status = cmd.run('mkfs -t xfs %s' % self.device)
         return status
 
     def mount(self):
         if self.server == None:
             raise ValueError, 'server attribute must be set to run this command'
-        boto.log.info('handle_mount_point')
+        boto1.log.info('handle_mount_point')
         with closing(self.server.get_cmdshell()) as cmd:
             cmd = self.server.get_cmdshell()
             if not cmd.isdir(self.mount_point):
-                boto.log.info('making directory')
+                boto1.log.info('making directory')
                 # mount directory doesn't exist so create it
                 cmd.run("mkdir %s" % self.mount_point)
             else:
-                boto.log.info('directory exists already')
+                boto1.log.info('directory exists already')
                 status = cmd.run('mount -l')
                 lines = status[1].split('\n')
                 for line in lines:
@@ -303,10 +303,10 @@ class Volume(Model):
                 snapshot = self.get_ec2_connection().create_snapshot(self.volume_id)
             else:
                 snapshot = self.server.ec2.create_snapshot(self.volume_id)
-            boto.log.info('Snapshot of Volume %s created: %s' %  (self.name, snapshot))
+            boto1.log.info('Snapshot of Volume %s created: %s' %  (self.name, snapshot))
         except Exception, e:
-            boto.log.info('Snapshot error')
-            boto.log.info(traceback.format_exc())
+            boto1.log.info('Snapshot error')
+            boto1.log.info(traceback.format_exc())
         finally:
             status = self.unfreeze()
             return status
@@ -390,7 +390,7 @@ class Volume(Model):
         if delete:
             for snap in snaps:
                 if not snap.keep:
-                    boto.log.info('Deleting %s(%s) for %s' % (snap, snap.date, self.name))
+                    boto1.log.info('Deleting %s(%s) for %s' % (snap, snap.date, self.name))
                     snap.delete()
         return snaps
                 

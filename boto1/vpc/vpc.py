@@ -23,7 +23,7 @@
 Represents a Virtual Private Cloud.
 """
 
-from boto.ec2.ec2object import EC2Object
+from boto1.ec2.ec2object import EC2Object
 
 class VPC(EC2Object):
 

@@ -6,14 +6,14 @@ An Introduction to boto's EC2 interface
 
 This tutorial focuses on the boto interface to the Elastic Compute Cloud
 from Amazon Web Services.  This tutorial assumes that you have already
-downloaded and installed boto.
+downloaded and installed boto1.
 
 Creating a Connection
 ---------------------
 The first step in accessing EC2 is to create a connection to the service.
-There are two ways to do this in boto.  The first is:
+There are two ways to do this in boto1.  The first is:
 
->>> from boto.ec2.connection import EC2Connection
+>>> from boto1.ec2.connection import EC2Connection
 >>> conn = EC2Connection('<aws access key>', '<aws secret key>')
 
 At this point the variable conn will point to an EC2Connection object.  In
@@ -30,8 +30,8 @@ and then call the constructor without any arguments, like this:
 There is also a shortcut function in the boto package, called connect_ec2
 that may provide a slightly easier means of creating a connection:
 
->>> import boto
->>> conn = boto.connect_ec2()
+>>> import boto1
+>>> conn = boto1.connect_ec2()
 
 In either case, conn will point to an EC2Connection object which we will
 use throughout the remainder of this tutorial.
@@ -43,7 +43,7 @@ A Region is geographically distinct and is completely isolated from
 other EC2 Regions.  At the time of the launch of the 2008-12-01 API
 there were two available regions, us-east-1 and eu-west-1.  Each
 Region has it's own service endpoint and therefore would require
-it's own EC2Connection object in boto.
+it's own EC2Connection object in boto1.
 
 The default behavior in boto, as shown above, is to connect you with
 the us-east-1 region which is exactly the same as the behavior prior
@@ -52,10 +52,10 @@ to the introduction of Regions.
 However, if you would like to connect to a region other than us-east-1,
 there are a couple of ways to accomplish that.  The first way, is to
 as EC2 to provide a list of currently supported regions.  You can do
-that using the regions function in the boto.ec2 module:
+that using the regions function in the boto1.ec2 module:
 
->>> import boto.ec2
->>> regions = boto.ec2.regions()
+>>> import boto1.ec2
+>>> regions = boto1.ec2.regions()
 >>> regions
 [RegionInfo:eu-west-1, RegionInfo:us-east-1]
 >>> 
@@ -76,7 +76,7 @@ method of the RegionInfo object:
 
 >>> conn_eu = eu.connect()
 >>> conn_eu
-<boto.ec2.connection.EC2Connection instance at 0xccaaa8>
+<boto1.ec2.connection.EC2Connection instance at 0xccaaa8>
 >>> 
 
 The variable conn_eu is now bound to an EC2Connection object connected
@@ -122,7 +122,7 @@ original security group will be copied as well.
 
 If you would like your default region to be something other than
 us-east-1, you can override that default in your boto config file
-(either ~/.boto for personal settings or /etc/boto.cfg for system-wide
+(either ~/.boto for personal settings or /etc/boto1.cfg for system-wide
 settings).  For example:
 
 [Boto]

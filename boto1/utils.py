@@ -44,7 +44,7 @@ import imp
 import subprocess, os, StringIO
 import time, datetime
 import logging.handlers
-import boto
+import boto1
 import tempfile
 import smtplib
 import datetime
@@ -150,9 +150,9 @@ def retry_url(url, retry_on_404=True):
                 return ''
         except:
             pass
-        boto.log.exception('Caught exception reading instance data')
+        boto1.log.exception('Caught exception reading instance data')
         time.sleep(2**i)
-    boto.log.error('Unable to read instance data, giving up')
+    boto1.log.error('Unable to read instance data, giving up')
     return ''
 
 def _get_instance_metadata(url):
@@ -243,14 +243,14 @@ def fetch_file(uri, file=None, username=None, password=None):
     retrieved is returned.
     The URI can be either an HTTP url, or "s3://bucket_name/key_name"
     """
-    boto.log.info('Fetching %s' % uri)
+    boto1.log.info('Fetching %s' % uri)
     if file == None:
         file = tempfile.NamedTemporaryFile()
     try:
-        working_dir = boto.config.get("General", "working_dir")
+        working_dir = boto1.config.get("General", "working_dir")
         if uri.startswith('s3://'):
             bucket_name, key_name = uri[len('s3://'):].split('/', 1)
-            c = boto.connect_s3()
+            c = boto1.connect_s3()
             bucket = c.get_bucket(bucket_name)
             key = bucket.get_key(key_name)
             key.get_contents_to_file(file)
@@ -266,7 +266,7 @@ def fetch_file(uri, file=None, username=None, password=None):
         file.seek(0)
     except:
         raise
-        boto.log.exception('Problem Retrieving file: %s' % uri)
+        boto1.log.exception('Problem Retrieving file: %s' % uri)
         file = None
     return file
 
@@ -280,7 +280,7 @@ class ShellCommand(object):
         self.run()
 
     def run(self):
-        boto.log.info('running:%s' % self.command)
+        boto1.log.info('running:%s' % self.command)
         self.process = subprocess.Popen(self.command, shell=True, stdin=subprocess.PIPE,
                                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if(self.wait):
@@ -289,7 +289,7 @@ class ShellCommand(object):
                 t = self.process.communicate()
                 self.log_fp.write(t[0])
                 self.log_fp.write(t[1])
-            boto.log.info(self.log_fp.getvalue())
+            boto1.log.info(self.log_fp.getvalue())
             self.exit_code = self.process.returncode
             return self.exit_code
 
@@ -314,7 +314,7 @@ class AuthSMTPHandler(logging.handlers.SMTPHandler):
     add something like this in your boto config file:
     
     [handler_hand07]
-    class=boto.utils.AuthSMTPHandler
+    class=boto1.utils.AuthSMTPHandler
     level=WARN
     formatter=form07
     args=('localhost', 'username', 'password', 'from@abc', ['user1@abc', 'user2@xyz'], 'Logger Subject')
@@ -512,12 +512,12 @@ class Password(object):
 
 def notify(subject, body=None, html_body=None, to_string=None, attachments=[], append_instance_id=True):
     if append_instance_id:
-        subject = "[%s] %s" % (boto.config.get_value("Instance", "instance-id"), subject)
+        subject = "[%s] %s" % (boto1.config.get_value("Instance", "instance-id"), subject)
     if not to_string:
-        to_string = boto.config.get_value('Notification', 'smtp_to', None)
+        to_string = boto1.config.get_value('Notification', 'smtp_to', None)
     if to_string:
         try:
-            from_string = boto.config.get_value('Notification', 'smtp_from', 'boto')
+            from_string = boto1.config.get_value('Notification', 'smtp_from', 'boto')
             msg = MIMEMultipart()
             msg['From'] = from_string
             msg['To'] = to_string
@@ -536,25 +536,25 @@ def notify(subject, body=None, html_body=None, to_string=None, attachments=[], a
             for part in attachments:
                 msg.attach(part)
 
-            smtp_host = boto.config.get_value('Notification', 'smtp_host', 'localhost')
+            smtp_host = boto1.config.get_value('Notification', 'smtp_host', 'localhost')
 
             # Alternate port support
-            if boto.config.get_value("Notification", "smtp_port"):
-                server = smtplib.SMTP(smtp_host, int(boto.config.get_value("Notification", "smtp_port")))
+            if boto1.config.get_value("Notification", "smtp_port"):
+                server = smtplib.SMTP(smtp_host, int(boto1.config.get_value("Notification", "smtp_port")))
             else:
                 server = smtplib.SMTP(smtp_host)
 
             # TLS support
-            if boto.config.getbool("Notification", "smtp_tls"):
+            if boto1.config.getbool("Notification", "smtp_tls"):
                 server.ehlo()
                 server.starttls()
                 server.ehlo()
-            smtp_user = boto.config.get_value('Notification', 'smtp_user', '')
-            smtp_pass = boto.config.get_value('Notification', 'smtp_pass', '')
+            smtp_user = boto1.config.get_value('Notification', 'smtp_user', '')
+            smtp_pass = boto1.config.get_value('Notification', 'smtp_pass', '')
             if smtp_user:
                 server.login(smtp_user, smtp_pass)
             server.sendmail(from_string, to_string, msg.as_string())
             server.quit()
         except:
-            boto.log.exception('notify failed')
+            boto1.log.exception('notify failed')
 

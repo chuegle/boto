@@ -180,7 +180,7 @@ htmlhelp_basename = 'botodoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'boto.tex', u'boto Documentation',
+  ('index', 'boto1.tex', u'boto Documentation',
    u'Mitch Garnaat', 'manual'),
 ]
 

@@ -20,11 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 from optparse import OptionParser
-from boto.services.servicedef import ServiceDef
-from boto.services.message import ServiceMessage
-from boto.services.submit import Submitter
-from boto.services.result import ResultProcessor
-import boto
+from boto1.services.servicedef import ServiceDef
+from boto1.services.message import ServiceMessage
+from boto1.services.submit import Submitter
+from boto1.services.result import ResultProcessor
+import boto1
 import sys, os, StringIO
 
 class BS(object):
@@ -107,7 +107,7 @@ class BS(object):
         security_group = self.sd.get('security_group', 'default')
         if not ami_id:
             self.parser.error('ami_id option is required when starting the service')
-        ec2 = boto.connect_ec2()
+        ec2 = boto1.connect_ec2()
         if not self.sd.has_section('Credentials'):
             self.sd.add_section('Credentials')
             self.sd.set('Credentials', 'aws_access_key_id', ec2.aws_access_key_id)

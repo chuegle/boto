@@ -20,7 +20,7 @@
 # IN THE SOFTWARE.
 
 import os
-from boto.sdb.db.property import *
+from boto1.sdb.db.property import *
 
 def get(prop, choices=None):
     prompt = prop.verbose_name

@@ -24,8 +24,8 @@ Represents an EC2 Keypair
 """
 
 import os
-from boto.ec2.ec2object import EC2Object
-from boto.exception import BotoClientError
+from boto1.ec2.ec2object import EC2Object
+from boto1.exception import BotoClientError
 
 class KeyPair(EC2Object):
     
@@ -94,10 +94,10 @@ class KeyPair(EC2Object):
         you will need to save the material associated with the
         new key pair (use the save method) to a local file.
 
-        :type region: :class:`boto.ec2.regioninfo.RegionInfo`
+        :type region: :class:`boto1.ec2.regioninfo.RegionInfo`
         :param region: The region to which this security group will be copied.
 
-        :rtype: :class:`boto.ec2.keypair.KeyPair`
+        :rtype: :class:`boto1.ec2.keypair.KeyPair`
         :return: The new key pair
         """
         if region.name == self.region:

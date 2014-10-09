@@ -19,12 +19,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-import boto
-from boto.utils import find_class
+import boto1
+from boto1.utils import find_class
 
 class Manager(object):
 
-    DefaultDomainName = boto.config.get('Persist', 'default_domain', None)
+    DefaultDomainName = boto1.config.get('Persist', 'default_domain', None)
 
     def __init__(self, domain_name=None, aws_access_key_id=None, aws_secret_access_key=None, debug=0):
         self.domain_name = domain_name
@@ -36,11 +36,11 @@ class Manager(object):
         if not self.domain_name:
             self.domain_name = self.DefaultDomainName
             if self.domain_name:
-                boto.log.info('No SimpleDB domain set, using default_domain: %s' % self.domain_name)
+                boto1.log.info('No SimpleDB domain set, using default_domain: %s' % self.domain_name)
             else:
-                boto.log.warning('No SimpleDB domain set, persistance is disabled')
+                boto1.log.warning('No SimpleDB domain set, persistance is disabled')
         if self.domain_name:
-            self.sdb = boto.connect_sdb(aws_access_key_id=self.aws_access_key_id,
+            self.sdb = boto1.connect_sdb(aws_access_key_id=self.aws_access_key_id,
                                         aws_secret_access_key=self.aws_secret_access_key,
                                         debug=debug)
             self.domain = self.sdb.lookup(self.domain_name)
@@ -49,7 +49,7 @@ class Manager(object):
 
     def get_s3_connection(self):
         if not self.s3:
-            self.s3 = boto.connect_s3(self.aws_access_key_id, self.aws_secret_access_key)
+            self.s3 = boto1.connect_s3(self.aws_access_key_id, self.aws_secret_access_key)
         return self.s3
 
 def get_manager(domain_name=None, aws_access_key_id=None, aws_secret_access_key=None, debug=0):

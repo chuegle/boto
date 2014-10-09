@@ -1,4 +1,4 @@
-from boto.mturk.connection import MTurkConnection
+from boto1.mturk.connection import MTurkConnection
 
 def cleanup():
     """Remove any boto test related HIT's"""

@@ -20,10 +20,10 @@
 # IN THE SOFTWARE.
 #
 import os, pwd
-import boto
-from boto.utils import get_instance_metadata, get_instance_userdata
-from boto.pyami.config import Config, BotoConfigPath
-from boto.pyami.scriptbase import ScriptBase
+import boto1
+from boto1.utils import get_instance_metadata, get_instance_userdata
+from boto1.pyami.config import Config, BotoConfigPath
+from boto1.pyami.scriptbase import ScriptBase
 
 class Bootstrap(ScriptBase):
     """
@@ -55,23 +55,23 @@ class Bootstrap(ScriptBase):
         # This file has the AWS credentials, should we lock it down?
         # os.chmod(BotoConfigPath, stat.S_IREAD | stat.S_IWRITE)
         # now that we have written the file, read it into a pyami Config object
-        boto.config = Config()
-        boto.init_logging()
+        boto1.config = Config()
+        boto1.init_logging()
 
     def create_working_dir(self):
-        boto.log.info('Working directory: %s' % self.working_dir)
+        boto1.log.info('Working directory: %s' % self.working_dir)
         if not os.path.exists(self.working_dir):
             os.mkdir(self.working_dir)
 
     def load_boto(self):
-        update = boto.config.get('Boto', 'boto_update', 'svn:HEAD')
+        update = boto1.config.get('Boto', 'boto_update', 'svn:HEAD')
         if update.startswith('svn'):
             if update.find(':') >= 0:
                 method, version = update.split(':')
                 version = '-r%s' % version
             else:
                 version = '-rHEAD'
-            location = boto.config.get('Boto', 'boto_location', '/usr/local/boto')
+            location = boto1.config.get('Boto', 'boto_location', '/usr/local/boto')
             self.run('svn update %s %s' % (version, location))
         else:
             # first remove the symlink needed when running from subversion
@@ -82,19 +82,19 @@ class Bootstrap(ScriptBase):
         try:
             if s3_file.startswith('s3:'):
                 bucket_name, key_name = s3_file[len('s3:'):].split('/')
-                c = boto.connect_s3()
+                c = boto1.connect_s3()
                 bucket = c.get_bucket(bucket_name)
                 key = bucket.get_key(key_name)
-                boto.log.info('Fetching %s/%s' % (bucket.name, key.name))
+                boto1.log.info('Fetching %s/%s' % (bucket.name, key.name))
                 path = os.path.join(self.working_dir, key.name)
                 key.get_contents_to_filename(path)
         except:
-            boto.log.exception('Problem Retrieving file: %s' % s3_file)
+            boto1.log.exception('Problem Retrieving file: %s' % s3_file)
             path = None
         return path
 
     def load_packages(self):
-        package_str = boto.config.get('Pyami', 'packages')
+        package_str = boto1.config.get('Pyami', 'packages')
         if package_str:
             packages = package_str.split(',')
             for package in packages:
@@ -111,11 +111,11 @@ class Bootstrap(ScriptBase):
         self.create_working_dir()
         self.load_boto()
         self.load_packages()
-        self.notify('Bootstrap Completed for %s' % boto.config.get_instance('instance-id'))
+        self.notify('Bootstrap Completed for %s' % boto1.config.get_instance('instance-id'))
 
 if __name__ == "__main__":
     # because bootstrap starts before any logging configuration can be loaded from
-    # the boto config files, we will manually enable logging to /var/log/boto.log
-    boto.set_file_logger('bootstrap', '/var/log/boto.log')
+    # the boto config files, we will manually enable logging to /var/log/boto1.log
+    boto1.set_file_logger('bootstrap', '/var/log/boto1.log')
     bs = Bootstrap()
     bs.main()

@@ -18,12 +18,12 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
-from boto.sdb.db.key import Key
-from boto.sdb.db.model import Model
+from boto1.sdb.db.key import Key
+from boto1.sdb.db.model import Model
 import psycopg2
 import psycopg2.extensions
 import uuid, sys, os, string
-from boto.exception import *
+from boto1.exception import *
 
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 

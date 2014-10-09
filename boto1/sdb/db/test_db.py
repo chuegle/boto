@@ -1,14 +1,14 @@
-from boto.sdb.db.model import Model
-from boto.sdb.db.property import *
-from boto.sdb.db.manager import get_manager
+from boto1.sdb.db.model import Model
+from boto1.sdb.db.property import *
+from boto1.sdb.db.manager import get_manager
 from datetime import datetime
 import time
-from boto.exception import SDBPersistenceError
+from boto1.exception import SDBPersistenceError
 
 _objects = {}
 
 #
-# This will eventually be moved to the boto.tests module and become a real unit test
+# This will eventually be moved to the boto1.tests module and become a real unit test
 # but for now it will live here.  It shows examples of each of the Property types in
 # use and tests the basic operations.
 #

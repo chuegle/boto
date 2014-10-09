@@ -1,11 +1,11 @@
-from boto.sdb.persist.object import SDBObject
-from boto.sdb.persist.property import *
-from boto.sdb.persist import Manager
+from boto1.sdb.persist.object import SDBObject
+from boto1.sdb.persist.property import *
+from boto1.sdb.persist import Manager
 from datetime import datetime
 import time
 
 #
-# This will eventually be moved to the boto.tests module and become a real unit test
+# This will eventually be moved to the boto1.tests module and become a real unit test
 # but for now it will live here.  It shows examples of each of the Property types in
 # use and tests the basic operations.
 #

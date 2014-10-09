@@ -20,9 +20,9 @@
 # IN THE SOFTWARE.
 #
 
-import boto
+import boto1
 
-boto.check_extensions(__name__, __path__)
+boto1.check_extensions(__name__, __path__)
 
 from connection import S3Connection as Connection
 from key import Key

@@ -18,16 +18,16 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
-import boto
+import boto1
 import re
-from boto.utils import find_class
+from boto1.utils import find_class
 import uuid
-from boto.sdb.db.key import Key
-from boto.sdb.db.model import Model
-from boto.sdb.db.blob import Blob
-from boto.sdb.db.property import ListProperty, MapProperty
+from boto1.sdb.db.key import Key
+from boto1.sdb.db.model import Model
+from boto1.sdb.db.blob import Blob
+from boto1.sdb.db.property import ListProperty, MapProperty
 from datetime import datetime
-from boto.exception import SDBPersistenceError
+from boto1.exception import SDBPersistenceError
 from tempfile import TemporaryFile
 
 ISO8601 = '%Y-%m-%dT%H:%M:%SZ'
@@ -293,7 +293,7 @@ class SDBManager(object):
         self._connect()
 
     def _connect(self):
-        self.sdb = boto.connect_sdb(aws_access_key_id=self.db_user,
+        self.sdb = boto1.connect_sdb(aws_access_key_id=self.db_user,
                                     aws_secret_access_key=self.db_passwd,
                                     is_secure=self.enable_ssl)
         # This assumes that the domain has already been created
@@ -322,7 +322,7 @@ class SDBManager(object):
 
     def get_s3_connection(self):
         if not self.s3:
-            self.s3 = boto.connect_s3(self.db_user, self.db_passwd)
+            self.s3 = boto1.connect_s3(self.db_user, self.db_passwd)
         return self.s3
 
     def get_blob_bucket(self, bucket_name=None):
@@ -364,7 +364,7 @@ class SDBManager(object):
                 obj._loaded = True
             else:
                 s = '(%s) class %s.%s not found' % (id, a['__module__'], a['__type__'])
-                boto.log.info('sdbmanager: %s' % s)
+                boto1.log.info('sdbmanager: %s' % s)
         return obj
         
     def get_object_from_id(self, id):

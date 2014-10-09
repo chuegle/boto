@@ -20,12 +20,12 @@
 # IN THE SOFTWARE.
 
 from datetime import datetime
-import boto
-from boto.s3.key import Key
-from boto.s3.bucket import Bucket
-from boto.sdb.persist import revive_object_from_id
-from boto.exception import SDBPersistenceError
-from boto.utils import Password
+import boto1
+from boto1.s3.key import Key
+from boto1.s3.bucket import Bucket
+from boto1.sdb.persist import revive_object_from_id
+from boto1.exception import SDBPersistenceError
+from boto1.utils import Password
 
 ISO8601 = '%Y-%m-%dT%H:%M:%SZ'
 

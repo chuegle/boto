@@ -23,7 +23,7 @@
 This module provides an interface to the Elastic Compute Cloud (EC2)
 service from AWS.
 """
-from boto.ec2.connection import EC2Connection
+from boto1.ec2.connection import EC2Connection
 
 def regions(**kw_params):
     """
@@ -33,7 +33,7 @@ def regions(**kw_params):
     passed along to the EC2Connection object.
         
     :rtype: list
-    :return: A list of :class:`boto.ec2.regioninfo.RegionInfo`
+    :return: A list of :class:`boto1.ec2.regioninfo.RegionInfo`
     """
     c = EC2Connection(**kw_params)
     return c.get_all_regions()

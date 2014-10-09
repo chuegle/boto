@@ -25,7 +25,7 @@ SQS Message class that supports YAML as the body of the message.
 
 This module requires the yaml module.
 """
-from boto.sqs.message import Message
+from boto1.sqs.message import Message
 import yaml
 
 class YAMLMessage(Message):

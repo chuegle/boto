@@ -23,10 +23,10 @@ import queuetools, os, signal, sys
 import subprocess
 import time
 from optparse import OptionParser
-from boto.mapreduce.partitiondb import PartitionDB, Partition, Version
+from boto1.mapreduce.partitiondb import PartitionDB, Partition, Version
 from lqs import LQSServer, LQSHandler
-from boto.exception import SDBPersistenceError
-from boto.sdb.persist import get_manager
+from boto1.exception import SDBPersistenceError
+from boto1.sdb.persist import get_manager
 
 USAGE = """
   SYNOPSIS

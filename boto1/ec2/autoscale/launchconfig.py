@@ -20,8 +20,8 @@
 # IN THE SOFTWARE.
 
 
-from boto.ec2.autoscale.request import Request
-from boto.ec2.elb.listelement import ListElement
+from boto1.ec2.autoscale.request import Request
+from boto1.ec2.elb.listelement import ListElement
 
 
 class LaunchConfiguration(object):

@@ -19,9 +19,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-import boto.ec2
-from boto.sdb.db.property import *
-from boto.manage import propget
+import boto1.ec2
+from boto1.sdb.db.property import *
+from boto1.manage import propget
 
 InstanceTypes = ['m1.small', 'm1.large', 'm1.xlarge', 'c1.medium', 'c1.xlarge']
 
@@ -30,8 +30,8 @@ class BuyReservation(object):
     def get_region(self, params):
         if not params.get('region', None):
             prop = StringProperty(name='region', verbose_name='EC2 Region',
-                                  choices=boto.ec2.regions)
-            params['region'] = propget.get(prop, choices=boto.ec2.regions)
+                                  choices=boto1.ec2.regions)
+            params['region'] = propget.get(prop, choices=boto1.ec2.regions)
 
     def get_instance_type(self, params):
         if not params.get('instance_type', None):

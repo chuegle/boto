@@ -21,8 +21,8 @@
 # IN THE SOFTWARE.
 #
 import getopt, sys, os
-import boto
-from boto.exception import S3ResponseError
+import boto1
+from boto1.exception import S3ResponseError
 
 usage_string = """
 SYNOPSIS
@@ -145,7 +145,7 @@ def main():
     path = os.path.expandvars(path)
     path = os.path.abspath(path)
     if bucket_name:
-        c = boto.connect_s3(aws_access_key_id=aws_access_key_id,
+        c = boto1.connect_s3(aws_access_key_id=aws_access_key_id,
                             aws_secret_access_key=aws_secret_access_key)
         c.debug = debug
         b = c.get_bucket(bucket_name)

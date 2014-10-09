@@ -4,58 +4,58 @@
 services
 ========
 
-boto.services
+boto1.services
 -------------
 
-.. automodule:: boto.services
+.. automodule:: boto1.services
    :members:   
    :undoc-members:
 
-boto.services.bs
+boto1.services.bs
 ----------------
 
-.. automodule:: boto.services.bs
+.. automodule:: boto1.services.bs
    :members:   
    :undoc-members:
 
-boto.services.message
+boto1.services.message
 ---------------------
 
-.. automodule:: boto.services.message
+.. automodule:: boto1.services.message
    :members:   
    :undoc-members:
 
-boto.services.result
+boto1.services.result
 --------------------
 
-.. automodule:: boto.services.result
+.. automodule:: boto1.services.result
    :members:   
    :undoc-members:
 
-boto.services.service
+boto1.services.service
 ---------------------
 
-.. automodule:: boto.services.service
+.. automodule:: boto1.services.service
    :members:   
    :undoc-members:
 
-boto.services.servicedef
+boto1.services.servicedef
 ------------------------
 
-.. automodule:: boto.services.servicedef
+.. automodule:: boto1.services.servicedef
    :members:   
    :undoc-members:
 
-boto.services.sonofmmm
+boto1.services.sonofmmm
 ----------------------
 
-.. automodule:: boto.services.sonofmmm
+.. automodule:: boto1.services.sonofmmm
    :members:   
    :undoc-members:
 
-boto.services.submit
+boto1.services.submit
 --------------------
 
-.. automodule:: boto.services.submit
+.. automodule:: boto1.services.submit
    :members:   
    :undoc-members:

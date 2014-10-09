@@ -23,19 +23,19 @@
 import xml.sax
 import base64
 import time
-import boto
-import boto.utils
+import boto1
+import boto1.utils
 import urllib
-from boto.connection import AWSQueryConnection
-from boto import handler
-from boto.resultset import ResultSet
-from boto.rds.dbinstance import DBInstance
-from boto.rds.dbsecuritygroup import DBSecurityGroup
-from boto.rds.parametergroup import ParameterGroup
-from boto.rds.dbsnapshot import DBSnapshot
-from boto.rds.event import Event
+from boto1.connection import AWSQueryConnection
+from boto1 import handler
+from boto1.resultset import ResultSet
+from boto1.rds.dbinstance import DBInstance
+from boto1.rds.dbsecuritygroup import DBSecurityGroup
+from boto1.rds.parametergroup import ParameterGroup
+from boto1.rds.dbsnapshot import DBSnapshot
+from boto1.rds.event import Event
 
-#boto.set_stream_logger('rds')
+#boto1.set_stream_logger('rds')
 
 class RDSConnection(AWSQueryConnection):
 
@@ -74,7 +74,7 @@ class RDSConnection(AWSQueryConnection):
         :param marker: The marker provided by a previous request. 
         
         :rtype: list
-        :return: A list of :class:`boto.rds.dbinstance.DBInstance`
+        :return: A list of :class:`boto1.rds.dbinstance.DBInstance`
         """
         params = {}
         if instance_id:
@@ -160,7 +160,7 @@ class RDSConnection(AWSQueryConnection):
                                         enabled).  Must be in h24:mi-hh24:mi
                                         format (UTC).
                                         
-        :rtype: :class:`boto.rds.dbinstance.DBInstance`
+        :rtype: :class:`boto1.rds.dbinstance.DBInstance`
         :return: The new db instance.
         """
         params = {'DBInstanceIdentifier' : id,
@@ -247,7 +247,7 @@ class RDSConnection(AWSQueryConnection):
                                         enabled).  Must be in h24:mi-hh24:mi
                                         format (UTC).
                                         
-        :rtype: :class:`boto.rds.dbinstance.DBInstance`
+        :rtype: :class:`boto1.rds.dbinstance.DBInstance`
         :return: The modified db instance.
         """
         params = {'DBInstanceIdentifier' : id}
@@ -295,7 +295,7 @@ class RDSConnection(AWSQueryConnection):
         :param final_snapshot_id: If a final snapshot is requested, this
                                   is the identifier used for that snapshot.
 
-        :rtype: :class:`boto.rds.dbinstance.DBInstance`
+        :rtype: :class:`boto1.rds.dbinstance.DBInstance`
         :return: The deleted db instance.
         """
         params = {'DBInstanceIdentifier' : id}
@@ -327,7 +327,7 @@ class RDSConnection(AWSQueryConnection):
         :param marker: The marker provided by a previous request. 
         
         :rtype: list
-        :return: A list of :class:`boto.ec2.parametergroup.ParameterGroup`
+        :return: A list of :class:`boto1.ec2.parametergroup.ParameterGroup`
         """
         params = {}
         if groupname:
@@ -361,7 +361,7 @@ class RDSConnection(AWSQueryConnection):
         :type marker: str
         :param marker: The marker provided by a previous request. 
         
-        :rtype: :class:`boto.ec2.parametergroup.ParameterGroup`
+        :rtype: :class:`boto1.ec2.parametergroup.ParameterGroup`
         :return: The ParameterGroup
         """
         params = {'DBParameterGroupName' : groupname}
@@ -388,7 +388,7 @@ class RDSConnection(AWSQueryConnection):
         :type description: string
         :param description: The description of the new security group
         
-        :rtype: :class:`boto.rds.dbsecuritygroup.DBSecurityGroup`
+        :rtype: :class:`boto1.rds.dbsecuritygroup.DBSecurityGroup`
         :return: The newly created DBSecurityGroup
         """
         params = {'DBParameterGroupName': name,
@@ -403,10 +403,10 @@ class RDSConnection(AWSQueryConnection):
         :type name: string
         :param name: The name of the new parameter group
         
-        :type parameters: list of :class:`boto.rds.parametergroup.Parameter`
+        :type parameters: list of :class:`boto1.rds.parametergroup.Parameter`
         :param parameters: The new parameters
 
-        :rtype: :class:`boto.rds.parametergroup.ParameterGroup`
+        :rtype: :class:`boto1.rds.parametergroup.ParameterGroup`
         :return: The newly created ParameterGroup
         """
         params = {'DBParameterGroupName': name}
@@ -423,7 +423,7 @@ class RDSConnection(AWSQueryConnection):
         :type key_name: string
         :param key_name: The name of the ParameterGroup to reset
 
-        :type parameters: list of :class:`boto.rds.parametergroup.Parameter`
+        :type parameters: list of :class:`boto1.rds.parametergroup.Parameter`
         :param parameters: The parameters to reset.  If not supplied, all parameters
                            will be reset.
         """
@@ -468,7 +468,7 @@ class RDSConnection(AWSQueryConnection):
         :param marker: The marker provided by a previous request. 
         
         :rtype: list
-        :return: A list of :class:`boto.rds.dbsecuritygroup.DBSecurityGroup`
+        :return: A list of :class:`boto1.rds.dbsecuritygroup.DBSecurityGroup`
         """
         params = {}
         if groupname:
@@ -492,7 +492,7 @@ class RDSConnection(AWSQueryConnection):
         :type description: string
         :param description: The description of the new security group
         
-        :rtype: :class:`boto.rds.dbsecuritygroup.DBSecurityGroup`
+        :rtype: :class:`boto1.rds.dbsecuritygroup.DBSecurityGroup`
         :return: The newly created DBSecurityGroup
         """
         params = {'DBSecurityGroupName':name}
@@ -611,7 +611,7 @@ class RDSConnection(AWSQueryConnection):
         :param marker: The marker provided by a previous request. 
         
         :rtype: list
-        :return: A list of :class:`boto.rds.dbsnapshot.DBSnapshot`
+        :return: A list of :class:`boto1.rds.dbsnapshot.DBSnapshot`
         """
         params = {}
         if snapshot_id:
@@ -636,7 +636,7 @@ class RDSConnection(AWSQueryConnection):
         :param dbinstance_id: The source identifier for the RDS instance from
                               which the snapshot is created.
         
-        :rtype: :class:`boto.rds.dbsnapshot.DBSnapshot`
+        :rtype: :class:`boto1.rds.dbsnapshot.DBSnapshot`
         :return: The newly created DBSnapshot
         """
         params = {'DBSnapshotIdentifier' : snapshot_id,
@@ -681,7 +681,7 @@ class RDSConnection(AWSQueryConnection):
         :param availability_zone: Name of the availability zone to place
                                   DBInstance into.
 
-        :rtype: :class:`boto.rds.dbinstance.DBInstance`
+        :rtype: :class:`boto1.rds.dbinstance.DBInstance`
         :return: The newly created DBInstance
         """
         params = {'DBSnapshotIdentifier' : identifier,
@@ -733,7 +733,7 @@ class RDSConnection(AWSQueryConnection):
         :param availability_zone: Name of the availability zone to place
                                   DBInstance into.
 
-        :rtype: :class:`boto.rds.dbinstance.DBInstance`
+        :rtype: :class:`boto1.rds.dbinstance.DBInstance`
         :return: The newly created DBInstance
         """
         params = {'SourceDBInstanceIdentifier' : source_instance_id,
@@ -794,7 +794,7 @@ class RDSConnection(AWSQueryConnection):
         :param marker: The marker provided by a previous request. 
         
         :rtype: list
-        :return: A list of class:`boto.rds.event.Event`
+        :return: A list of class:`boto1.rds.event.Event`
         """
         params = {}
         if source_identifier and source_type:

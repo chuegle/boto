@@ -26,35 +26,35 @@ Represents a connection to the EC2 service.
 import urllib
 import xml.sax
 import base64
-import boto
-from boto import config
-from boto.connection import AWSQueryConnection
-from boto.resultset import ResultSet
-from boto.ec2.image import Image, ImageAttribute
-from boto.ec2.instance import Reservation, Instance, ConsoleOutput, InstanceAttribute
-from boto.ec2.keypair import KeyPair
-from boto.ec2.address import Address
-from boto.ec2.volume import Volume
-from boto.ec2.snapshot import Snapshot
-from boto.ec2.snapshot import SnapshotAttribute
-from boto.ec2.zone import Zone
-from boto.ec2.securitygroup import SecurityGroup
-from boto.ec2.regioninfo import RegionInfo
-from boto.ec2.instanceinfo import InstanceInfo
-from boto.ec2.reservedinstance import ReservedInstancesOffering, ReservedInstance
-from boto.ec2.spotinstancerequest import SpotInstanceRequest
-from boto.ec2.spotpricehistory import SpotPriceHistory
-from boto.ec2.spotdatafeedsubscription import SpotDatafeedSubscription
-from boto.ec2.launchspecification import LaunchSpecification
-from boto.exception import EC2ResponseError
+import boto1
+from boto1 import config
+from boto1.connection import AWSQueryConnection
+from boto1.resultset import ResultSet
+from boto1.ec2.image import Image, ImageAttribute
+from boto1.ec2.instance import Reservation, Instance, ConsoleOutput, InstanceAttribute
+from boto1.ec2.keypair import KeyPair
+from boto1.ec2.address import Address
+from boto1.ec2.volume import Volume
+from boto1.ec2.snapshot import Snapshot
+from boto1.ec2.snapshot import SnapshotAttribute
+from boto1.ec2.zone import Zone
+from boto1.ec2.securitygroup import SecurityGroup
+from boto1.ec2.regioninfo import RegionInfo
+from boto1.ec2.instanceinfo import InstanceInfo
+from boto1.ec2.reservedinstance import ReservedInstancesOffering, ReservedInstance
+from boto1.ec2.spotinstancerequest import SpotInstanceRequest
+from boto1.ec2.spotpricehistory import SpotPriceHistory
+from boto1.ec2.spotdatafeedsubscription import SpotDatafeedSubscription
+from boto1.ec2.launchspecification import LaunchSpecification
+from boto1.exception import EC2ResponseError
 
-#boto.set_stream_logger('ec2')
+#boto1.set_stream_logger('ec2')
 
 class EC2Connection(AWSQueryConnection):
 
-    APIVersion = boto.config.get('Boto', 'ec2_version', '2009-11-30')
-    DefaultRegionName = boto.config.get('Boto', 'ec2_region_name', 'us-east-1')
-    DefaultRegionEndpoint = boto.config.get('Boto', 'ec2_region_endpoint',
+    APIVersion = boto1.config.get('Boto', 'ec2_version', '2009-11-30')
+    DefaultRegionName = boto1.config.get('Boto', 'ec2_region_name', 'us-east-1')
+    DefaultRegionEndpoint = boto1.config.get('Boto', 'ec2_region_endpoint',
                                             'ec2.amazonaws.com')
     SignatureVersion = '2'
     ResponseError = EC2ResponseError
@@ -107,7 +107,7 @@ class EC2Connection(AWSQueryConnection):
         :param executable_by:
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.image.Image`
+        :return: A list of :class:`boto1.ec2.image.Image`
         """
         params = {}
         if image_ids:
@@ -130,7 +130,7 @@ class EC2Connection(AWSQueryConnection):
         :param owners: A list of owner IDs
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.image.Image`
+        :return: A list of :class:`boto1.ec2.image.Image`
         """
         rs = self.get_all_images(kernel_ids, owners)
         kernels = []
@@ -152,7 +152,7 @@ class EC2Connection(AWSQueryConnection):
         :param owners: A list of owner IDs
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.image.Image`
+        :return: A list of :class:`boto1.ec2.image.Image`
         """
         rs = self.get_all_images(ramdisk_ids, owners)
         ramdisks = []
@@ -168,7 +168,7 @@ class EC2Connection(AWSQueryConnection):
         :type image_id: string
         :param image_id: the ID of the Image to retrieve
 
-        :rtype: :class:`boto.ec2.image.Image`
+        :rtype: :class:`boto1.ec2.image.Image`
         :return: The EC2 Image specified or None if the image is not found
         """
         try:
@@ -202,7 +202,7 @@ class EC2Connection(AWSQueryConnection):
         :type root_device_name: string
         :param root_device_name: The root device name (e.g. /dev/sdh)
 
-        :type block_device_map: :class:`boto.ec2.blockdevicemapping.BlockDeviceMapping`
+        :type block_device_map: :class:`boto1.ec2.blockdevicemapping.BlockDeviceMapping`
         :param block_device_map: A BlockDeviceMapping data structure
                                  describing the EBS volumes associated
                                  with the Image.
@@ -295,7 +295,7 @@ class EC2Connection(AWSQueryConnection):
                           * productCodes
                           * blockDeviceMapping
 
-        :rtype: :class:`boto.ec2.image.ImageAttribute`
+        :rtype: :class:`boto1.ec2.image.ImageAttribute`
         :return: An ImageAttribute object representing the value of the attribute requested
         """
         params = {'ImageId' : image_id,
@@ -368,7 +368,7 @@ class EC2Connection(AWSQueryConnection):
         :param instance_ids: A list of strings of instance IDs
 
         :rtype: list
-        :return: A list of  :class:`boto.ec2.instance.Reservation`
+        :return: A list of  :class:`boto1.ec2.instance.Reservation`
         """
         params = {}
         if instance_ids:
@@ -421,13 +421,13 @@ class EC2Connection(AWSQueryConnection):
         :type subnet_id: string
         :param subnet_id: The subnet ID within which to launch the instances for VPC.
 
-        :type block_device_map: :class:`boto.ec2.blockdevicemapping.BlockDeviceMapping`
+        :type block_device_map: :class:`boto1.ec2.blockdevicemapping.BlockDeviceMapping`
         :param block_device_map: A BlockDeviceMapping data structure
                                  describing the EBS volumes associated
                                  with the Image.
 
         :rtype: Reservation
-        :return: The :class:`boto.ec2.instance.Reservation` associated with the request for machines
+        :return: The :class:`boto1.ec2.instance.Reservation` associated with the request for machines
         """
         params = {'ImageId':image_id,
                   'MinCount':min_count,
@@ -515,7 +515,7 @@ class EC2Connection(AWSQueryConnection):
         :type instance_id: string
         :param instance_id: The instance ID of a running instance on the cloud.
 
-        :rtype: :class:`boto.ec2.instance.ConsoleOutput`
+        :rtype: :class:`boto1.ec2.instance.ConsoleOutput`
         :return: The console output as a ConsoleOutput object
         """
         params = {}
@@ -557,7 +557,7 @@ class EC2Connection(AWSQueryConnection):
                           instanceInitiatedShutdownBehavior|
                           rootDeviceName|blockDeviceMapping
 
-        :rtype: :class:`boto.ec2.image.ImageAttribute`
+        :rtype: :class:`boto1.ec2.image.ImageAttribute`
         :return: An ImageAttribute object representing the value of the attribute requested
         """
         params = {'InstanceId' : instance_id}
@@ -632,7 +632,7 @@ class EC2Connection(AWSQueryConnection):
         
         @rtype: list
         @return: A list of
-                 :class:`boto.ec2.spotinstancerequest.SpotInstanceRequest`
+                 :class:`boto1.ec2.spotinstancerequest.SpotInstanceRequest`
         """
         params = {}
         if request_ids:
@@ -740,13 +740,13 @@ class EC2Connection(AWSQueryConnection):
         :type subnet_id: string
         :param subnet_id: The subnet ID within which to launch the instances for VPC.
 
-        :type block_device_map: :class:`boto.ec2.blockdevicemapping.BlockDeviceMapping`
+        :type block_device_map: :class:`boto1.ec2.blockdevicemapping.BlockDeviceMapping`
         :param block_device_map: A BlockDeviceMapping data structure
                                  describing the EBS volumes associated
                                  with the Image.
 
         :rtype: Reservation
-        :return: The :class:`boto.ec2.instance.Reservation` associated with the request for machines
+        :return: The :class:`boto1.ec2.instance.Reservation` associated with the request for machines
         """
         params = {'LaunchSpecification.ImageId':image_id,
                   'SpotPrice' : price}
@@ -814,7 +814,7 @@ class EC2Connection(AWSQueryConnection):
         Return the current spot instance data feed subscription
         associated with this account, if any.
         
-        :rtype: :class:`boto.ec2.spotdatafeedsubscription.SpotDatafeedSubscription
+        :rtype: :class:`boto1.ec2.spotdatafeedsubscription.SpotDatafeedSubscription
         :return: The datafeed subscription object or None
         """
         return self.get_object('DescribeSpotDatafeedSubscription',
@@ -832,7 +832,7 @@ class EC2Connection(AWSQueryConnection):
         :param prefix: An optional prefix that will be pre-pended to all
                        data files written to the bucket.
                        
-        :rtype: :class:`boto.ec2.spotdatafeedsubscription.SpotDatafeedSubscription
+        :rtype: :class:`boto1.ec2.spotdatafeedsubscription.SpotDatafeedSubscription
         :return: The datafeed subscription object or None
         """
         params = {'Bucket' : bucket}
@@ -862,7 +862,7 @@ class EC2Connection(AWSQueryConnection):
                       only the Zones associated with these zone names
                       will be returned.
 
-        :rtype: list of L{boto.ec2.zone.Zone}
+        :rtype: list of L{boto1.ec2.zone.Zone}
         :return: The requested Zone objects
         """
         params = {}
@@ -881,7 +881,7 @@ class EC2Connection(AWSQueryConnection):
                            only the Addresses associated with these addresses
                            will be returned.
 
-        :rtype: list of L{boto.ec2.address.Address}
+        :rtype: list of L{boto1.ec2.address.Address}
         :return: The requested Address objects
         """
         params = {}
@@ -893,7 +893,7 @@ class EC2Connection(AWSQueryConnection):
         """
         Allocate a new Elastic IP address and associate it with your account.
 
-        :rtype: L{boto.ec2.address.Address}
+        :rtype: L{boto1.ec2.address.Address}
         :return: The newly allocated Address
         """
         return self.get_object('AllocateAddress', None, Address)
@@ -951,7 +951,7 @@ class EC2Connection(AWSQueryConnection):
                            only the volumes associated with these volume ids
                            will be returned.
 
-        :rtype: list of L{boto.ec2.volume.Volume}
+        :rtype: list of L{boto1.ec2.volume.Volume}
         :return: The requested Volume objects
         """
         params = {}
@@ -966,10 +966,10 @@ class EC2Connection(AWSQueryConnection):
         :type size: int
         :param size: The size of the new volume, in GiB
 
-        :type zone: string or L{boto.ec2.zone.Zone}
+        :type zone: string or L{boto1.ec2.zone.Zone}
         :param zone: The availability zone in which the Volume will be created.
 
-        :type snapshot: string or L{boto.ec2.snapshot.Snapshot}
+        :type snapshot: string or L{boto1.ec2.snapshot.Snapshot}
         :param snapshot: The snapshot from which the new Volume will be created.
         """
         if isinstance(zone, Zone):
@@ -1075,7 +1075,7 @@ class EC2Connection(AWSQueryConnection):
         :param restorable_by: If present, only the snapshots that are restorable
                               by the specified account id will be returned.
 
-        :rtype: list of L{boto.ec2.snapshot.Snapshot}
+        :rtype: list of L{boto1.ec2.snapshot.Snapshot}
         :return: The requested Snapshot objects
         """
         params = {}
@@ -1121,7 +1121,7 @@ class EC2Connection(AWSQueryConnection):
         :param attribute: The requested attribute.  Valid values are:
                           createVolumePermission
 
-        :rtype: list of L{boto.ec2.snapshotattribute.SnapshotAttribute}
+        :rtype: list of L{boto1.ec2.snapshotattribute.SnapshotAttribute}
         :return: The requested Snapshot attribute
         """
         params = {'Attribute' : attribute}
@@ -1190,7 +1190,7 @@ class EC2Connection(AWSQueryConnection):
                          If not provided, all key pairs will be returned.
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.keypair.KeyPair`
+        :return: A list of :class:`boto1.ec2.keypair.KeyPair`
         """
         params = {}
         if keynames:
@@ -1204,7 +1204,7 @@ class EC2Connection(AWSQueryConnection):
         :type image_id: string
         :param image_id: the ID of the Image to retrieve
 
-        :rtype: :class:`boto.ec2.keypair.KeyPair`
+        :rtype: :class:`boto1.ec2.keypair.KeyPair`
         :return: The KeyPair specified or None if it is not found
         """
         try:
@@ -1221,8 +1221,8 @@ class EC2Connection(AWSQueryConnection):
         :type key_name: string
         :param key_name: The name of the new keypair
 
-        :rtype: :class:`boto.ec2.keypair.KeyPair`
-        :return: The newly created :class:`boto.ec2.keypair.KeyPair`.
+        :rtype: :class:`boto1.ec2.keypair.KeyPair`
+        :return: The newly created :class:`boto1.ec2.keypair.KeyPair`.
                  The material attribute of the new KeyPair object
                  will contain the the unencrypted PEM encoded RSA private key.
         """
@@ -1250,7 +1250,7 @@ class EC2Connection(AWSQueryConnection):
                            If not provided, all security groups will be returned.
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.securitygroup.SecurityGroup`
+        :return: A list of :class:`boto1.ec2.securitygroup.SecurityGroup`
         """
         params = {}
         if groupnames:
@@ -1269,8 +1269,8 @@ class EC2Connection(AWSQueryConnection):
         :type description: string
         :param description: The description of the new security group
 
-        :rtype: :class:`boto.ec2.securitygroup.SecurityGroup`
-        :return: The newly created :class:`boto.ec2.keypair.KeyPair`.
+        :rtype: :class:`boto1.ec2.securitygroup.SecurityGroup`
+        :return: The newly created :class:`boto1.ec2.keypair.KeyPair`.
         """
         params = {'GroupName':name, 'GroupDescription':description}
         group = self.get_object('CreateSecurityGroup', params, SecurityGroup)
@@ -1405,7 +1405,7 @@ class EC2Connection(AWSQueryConnection):
         Get all available regions for the EC2 service.
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.regioninfo.RegionInfo`
+        :return: A list of :class:`boto1.ec2.regioninfo.RegionInfo`
         """
         return self.get_list('DescribeRegions', None, [('item', RegionInfo)])
 
@@ -1433,7 +1433,7 @@ class EC2Connection(AWSQueryConnection):
         :param product_description: Displays Reserved Instances with the specified product description.
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.reservedinstance.ReservedInstancesOffering`
+        :return: A list of :class:`boto1.ec2.reservedinstance.ReservedInstancesOffering`
         """
         params = {}
         if reserved_instances_id:
@@ -1457,7 +1457,7 @@ class EC2Connection(AWSQueryConnection):
                                       If not provided, all reserved instances will be returned.
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.reservedinstance.ReservedInstance`
+        :return: A list of :class:`boto1.ec2.reservedinstance.ReservedInstance`
         """
         params = {}
         if reserved_instances_id:
@@ -1481,7 +1481,7 @@ class EC2Connection(AWSQueryConnection):
         :param instance_count: The number of Reserved Instances to purchase.
                                Default value is 1.
 
-        :rtype: :class:`boto.ec2.reservedinstance.ReservedInstance`
+        :rtype: :class:`boto1.ec2.reservedinstance.ReservedInstance`
         :return: The newly created Reserved Instance
         """
         params = {'ReservedInstancesOfferingId' : reserved_instances_offering_id,
@@ -1500,7 +1500,7 @@ class EC2Connection(AWSQueryConnection):
         :param instance_id: The instance id
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.instanceinfo.InstanceInfo`
+        :return: A list of :class:`boto1.ec2.instanceinfo.InstanceInfo`
         """
         params = {'InstanceId' : instance_id}
         return self.get_list('MonitorInstances', params, [('item', InstanceInfo)])
@@ -1513,7 +1513,7 @@ class EC2Connection(AWSQueryConnection):
         :param instance_id: The instance id
 
         :rtype: list
-        :return: A list of :class:`boto.ec2.instanceinfo.InstanceInfo`
+        :return: A list of :class:`boto1.ec2.instanceinfo.InstanceInfo`
         """
         params = {'InstanceId' : instance_id}
         return self.get_list('UnmonitorInstances', params, [('item', InstanceInfo)])

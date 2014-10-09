@@ -33,8 +33,8 @@ EC2Connection object or call the monitor method on the Instance object.
 It takes a while for the monitoring data to start accumulating but once
 it does, you can do this:
 
->>> import boto
->>> c = boto.connect_cloudwatch()
+>>> import boto1
+>>> c = boto1.connect_cloudwatch()
 >>> metrics = c.list_metrics()
 >>> metrics
 [Metric:NetworkIn,
@@ -136,16 +136,16 @@ about that particular data point.
 
 My server obviously isn't very busy right now!
 """
-from boto.connection import AWSQueryConnection
-from boto.ec2.cloudwatch.metric import Metric
-from boto.ec2.cloudwatch.datapoint import Datapoint
-import boto
+from boto1.connection import AWSQueryConnection
+from boto1.ec2.cloudwatch.metric import Metric
+from boto1.ec2.cloudwatch.datapoint import Datapoint
+import boto1
 import datetime
 
 class CloudWatchConnection(AWSQueryConnection):
 
-    APIVersion = boto.config.get('Boto', 'cloudwatch_version', '2009-05-15')
-    Endpoint = boto.config.get('Boto', 'cloudwatch_endpoint', 'monitoring.amazonaws.com')
+    APIVersion = boto1.config.get('Boto', 'cloudwatch_version', '2009-05-15')
+    Endpoint = boto1.config.get('Boto', 'cloudwatch_endpoint', 'monitoring.amazonaws.com')
     SignatureVersion = '2'
 
     def __init__(self, aws_access_key_id=None, aws_secret_access_key=None,
@@ -177,7 +177,7 @@ class CloudWatchConnection(AWSQueryConnection):
                              DiskIO-ALL-write|DiskIO-ALL-read-bytes|DiskIO-ALL-write-bytes
         
         :rtype: list
-        :return: A list of :class:`boto.ec2.image.Image`
+        :return: A list of :class:`boto1.ec2.image.Image`
         """
         params = {'Period' : period,
                   'MeasureName' : measure_name,
